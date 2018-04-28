@@ -1,0 +1,168 @@
+
+.main_wrap {
+    padding-top: 50px;
+}
+
+#main_content .part1 .title{
+    font-size: 26px;
+    color: #000;
+    padding-bottom: 20px;
+}
+
+.part1 .dec {
+    font-size: 14px;
+    color: #757575;
+}
+
+.part1 .part1_con {
+    margin-top: 50px;
+    height: 470px;
+    overflow: hidden;
+    position: relative;
+}
+
+.part1_con .part1_left {
+    width: 50%;
+}
+
+.part1_con .part1_left li {
+    background: #f9f7f0;
+}
+
+
+.part1_con .part1_left .list_con {
+    padding: 22px 20px;
+    transition: 0.5s;
+}
+
+.part1_con .part1_left .list_title {
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 18px;
+    color: #fff;
+    background: #bb9205;
+    padding: 20px 27px 20px 33px;
+    /*text-decoration: underline red ;*/
+}
+
+.part1_left .dec {
+    display: inline-block;
+    width: 75%;
+    margin-left: 5%;
+}
+
+.part1_right {
+    width: 50%;
+}
+
+.part1_right li {
+    overflow: hidden;
+}
+
+.part1_right .rect-78 {
+    padding-bottom: 70%;
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+}
+
+.part1_right img {
+    width: 100%;
+}
+
+/***************手风琴菜单****************************/
+
+/*.part2 {*/
+    /*margin-top: 40px;*/
+    /*position: relative;*/
+    /*height: 360px;*/
+    /*overflow: hidden;*/
+    /*background: yellow;*/
+/*}*/
+
+.part2 {
+    /*width: 660px;*/
+    width: 100%;
+    height: 360px;
+    border: 1px solid #ccc;
+    margin: 50px auto 0;
+    overflow:hidden;
+}
+
+.part2 ul {
+    /*width: 3300px;*/
+    width: 300%;
+    height: 360px;
+}
+
+.part2 ul li {
+    width: 200px;
+    height: 360px;
+    float: left;
+    position: relative;
+    overflow:hidden;
+}
+
+.part2 .active {
+    /*width: 550px;*/
+    width: 800px;
+}
+
+.part2 ul span {
+    width: 159px;
+    height: 360px;
+    padding-top: 10px;
+    border-right: 1px solid #fff;
+    position: absolute;
+    top: 0px;
+    right: 0;
+    color: #ffffff;
+    font-size: 14px;
+    ext-align: center;
+    cursor: pointer;
+    padding: 20px;
+    background: #d5a93d;
+    z-index: 2;
+}
+
+
+.part2 ul img {
+    /*width: 550px;*/
+    width: 720px;
+    height: 360px;
+    transition: 1s;
+}
+
+.part2 ul img:hover {
+    transform: scale(1.1);
+}
+
+.part2 span h3 {
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 40px;
+}
+
+.part2 span p {
+    margin-top: 20px;
+}
+
+.part2 .pic_title {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    color: #000000;
+    font-size: 26px;
+}
+
+.part2 .pic_dec {
+    position: absolute;
+    left: 30px;
+    top: 80px;
+    color: #444;
+    width: 500px;
+}
+

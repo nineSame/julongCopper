@@ -1,0 +1,106 @@
+/*页面控制条*/
+
+#main_content .page_bar {
+    font-size: 13px;
+    color: #000;
+    text-align: center;
+    margin-top: 56px;
+}
+
+#main_content .page_bar a {
+    color: #000;
+    display: inline-block;
+    border: 1px solid #ededed;
+    padding: 8px 17px;
+    vertical-align: middle;
+    margin: 0 0 10px -1px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.6;
+    transition: 0.3s;
+}
+
+#main_content .page_bar a:hover {
+    background: #bb9205;
+    color: #f9f7f0;
+}
+#main_content .page_bar p {
+    display: inline-block;
+    margin: 0 20px;
+}
+#main_content .page_bar input {
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    border-style: none;
+    border: 1px solid #7D7D7D;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: unset;
+    border-color: #ededed;
+}
+
+/*****************下载列表******************/
+
+#main_content {
+    padding: 50px 0;
+}
+
+#main_content .download_item {
+    height: 105px;
+    line-height: 105px;
+    border-bottom: 1px solid #f1f1f1;
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+}
+
+#main_content .download_item:hover {
+    background: #f9f7f0;
+}
+
+.download_btn {
+    width: 8%;
+    height: 100%;
+    background: url(../img/pdf.png) center center no-repeat;
+}
+
+.download_title {
+    width: 74%;
+    font-size: 16px;
+    color: #555;
+}
+
+.el {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.download_date {
+    width: 12.5%;
+    height: 100%;
+    padding-right: 5%;
+    text-align: right;
+    color: #929292;
+}
+
+.download_date .center_box {
+    display: inline-block;
+    vertical-align: middle;
+    font-family: Arial;
+}
+
+.download_date .center_box span {
+    display: block;
+    padding-right: 3px;
+    font-size: 16px;
+    line-height: 14px;
+}
+
+.download_date .center_box strong {
+    display: block;
+    font-size: 32px;
+    line-height: 32px;
+    font-weight: normal;
+}
