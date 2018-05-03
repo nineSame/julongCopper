@@ -1,35 +1,8 @@
-/************************************底部友情链接***************************************/
-var oTopRignt = document.getElementsByClassName('top_right')[0];
-var oFreindList = document.getElementsByClassName('friend_link')[0];
-var friend_list_timer = null;
-
-oTopRignt.onmouseover = function () {
-    oFreindList.style.display = 'block';
-}
-
-oTopRignt.onmouseout = function () {
-
-    friend_list_timer = setTimeout(function () {
-        oFreindList.style.display = 'none';
-    },100);
-}
-
-oFreindList.onmouseover = function () {
-    clearTimeout(friend_list_timer);
-    this.style.display = 'block';
-
-}
-
-oFreindList.onmouseout = function () {
-    this.style.display = 'none';
-}
-
 /**************************header*****************************/
 var oHeader = document.getElementsByClassName('header')[0];
 var aNavItems = oHeader.getElementsByClassName('nav_item');
 var aHeaderDowns = oHeader.getElementsByClassName('header_down');
-var cur_header_nav = null;
-var cur_header_down = null;
+
 
 // $('.nav').mouseenter(function () {
 //
@@ -42,6 +15,15 @@ var cur_header_down = null;
 // })
 
 // alert(aNavItems.length) 取的到
+
+//共用部分添加链接
+$('.logo a').attr("href","./index.html");
+
+if($('.front')){
+    $('.front .path').find('span:first-child').find('a').attr("href","./index.html");
+}
+
+
 
 
 
@@ -81,4 +63,29 @@ for (var i = 0; i < aHeaderDowns.length; i++){
         // ev.preventDefault();
 
     }
+}
+
+/************************************底部友情链接***************************************/
+var oTopRignt = document.getElementsByClassName('top_right')[0];
+var oFreindList = document.getElementsByClassName('friend_link')[0];
+var friend_list_timer = null;
+oTopRignt.onmouseover = function () {
+    oFreindList.style.display = 'block';
+}
+
+oTopRignt.onmouseout = function () {
+
+    friend_list_timer = setTimeout(function () {
+        oFreindList.style.display = 'none';
+    },100);
+}
+
+oFreindList.onmouseover = function () {
+    clearTimeout(friend_list_timer);
+    this.style.display = 'block';
+
+}
+
+oFreindList.onmouseout = function () {
+    this.style.display = 'none';
 }
