@@ -1,0 +1,82 @@
+.main_wrap {
+    padding-top: 50px;
+}
+
+.part1 {
+    width: 100%;
+    position: relative;
+}
+
+#map_container {
+    width: 100%;
+    height: 500px;
+}
+
+#contact {
+    position: absolute;
+    top: 13%;
+    right: 3%;
+    background: rgba(222,186,40,0.8);
+}
+
+#contact .con {
+    padding: 40px 40px 0px 40px;
+    color: #fff;
+}
+
+#contact .con .title {
+    font-size: 26px;
+    color: #fff;
+    padding-bottom: 40px;
+}
+
+#contact .con .address, #contact .con .code, #contact .con .tel,#contact .con .res_people {
+    padding-bottom: 40px;
+}
+
+.part2 .title {
+    font-size: 31px;
+    color: #000;
+    text-align: center;
+    padding:50px 0 30px 0;
+}
+
+.bottom .row {
+    width: 102%;
+    transition: .2s width ease;
+}
+
+.bottom .row li {
+    background-color: #f9f7f0;
+    min-height: 200px;
+    margin-bottom: 10px;
+}
+
+.row>.span-3 {
+    width: 23%;
+}
+
+.row>[class*="span-"] {
+    float: left;
+    margin-right: 2%;
+}
+
+.part2 .bottom .row .box {
+    padding: 28px;
+}
+
+.part2 .bottom .row .s_title {
+    font-size: 18px;
+    color: #bb9205;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.part2 .bottom .row .dec {
+    font-size: 14px;
+    color: #888;
+}
+
+.part2 .bottom .row a:hover {
+    color: #bb9205;
+}
