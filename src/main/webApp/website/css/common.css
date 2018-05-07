@@ -5,10 +5,7 @@ body{
     line-height: 1.6;
     color: #555;
 }
-body *{
-    -webkit-text-size-adjust: 100%;
-    -webkit-user-select: none;
-}
+
 a,button,input{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }

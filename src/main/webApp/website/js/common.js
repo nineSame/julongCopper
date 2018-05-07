@@ -19,8 +19,18 @@ var aHeaderDowns = oHeader.getElementsByClassName('header_down');
 //共用部分添加链接
 $('.logo a').attr("href","./index.html");
 
+
+$('.down_ul').eq(0).find('li').eq(0).find('a').attr("href","./company_info.html");
+$('.down_ul').eq(0).find('li').eq(1).find('a').attr("href","./leaders.html");
+$('.down_ul').eq(0).find('li').eq(4).find('a').attr("href","./contact_us.html");
+
+$('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","./news_list.html");
+$('.down_ul').eq(2).find('li').eq(2).find('a').attr("href","./social_responsibility.html");
+$('.down_ul').eq(3).find('li').eq(0).find('a').attr("href","./announce_list.html");
+
 if($('.front')){
     $('.front .path').find('span:first-child').find('a').attr("href","./index.html");
+
 }
 
 

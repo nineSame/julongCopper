@@ -1,0 +1,117 @@
+.main_wrap {
+    padding: 50px 0;
+}
+
+.main_wrap .position {
+    font-size: 26px;
+    color: #000;
+    padding-bottom: 15px;
+}
+
+.main_wrap .position_content {
+    margin-bottom: 30px;
+}
+
+.position_content li {
+    cursor: pointer;
+}
+
+.position_content li.cur {
+    background: #bb9205;
+}
+
+.position_content li:hover {
+    background: #bb9205;
+    color: #fff;
+}
+
+.position_content li .top_con {
+    padding: 20px 0;
+    font-size: 14px;
+    color: #383838;
+}
+
+.position_content li.cur .top_con {
+    color: #fff;
+}
+
+
+.position_content li:hover .top_con {
+    color: #fff;
+}
+
+.position_content li .leader_name {
+    width: 10%;
+    font-size: 16px;
+    color: #bb9205;
+    position: relative;
+    padding-left: 15px;
+}
+
+.position_content li .leader_name:after {
+    content: "";
+    position: absolute;
+    right: 16%;
+    width: 2px;
+    height: 100%;
+    background: #ebebeb;
+}
+
+.position_content li.cur .leader_name {
+    color: #fff;
+    font-weight: bold;
+}
+
+.position_content li:hover .leader_name {
+    color: #fff;
+    font-weight: bold;
+}
+.position_content li .leader_position {
+    width: 26%;
+    position: relative;
+}
+
+.position_content li .school {
+    width: 55%;
+    margin-left: 2%;
+    height: 22px;
+}
+
+.ico {
+
+    white-space: nowrap;
+    letter-spacing: -1em;
+    text-indent: -99em;
+    color: transparent;
+    vertical-align: middle;
+}
+
+.position_content li .ico {
+    width: 5%;
+    background: url(../img/job_list_jj.png) no-repeat;
+    width: 17px;
+    height: 17px;
+    display: block;
+}
+
+.position_content li.cur .ico {
+    background-position: -17px 0;
+}
+
+.position_content li .bottom {
+    display: none;
+    transition: all .5s ease;
+    -webkit-transition: all .5s ease;
+}
+
+.position_content li.cur .bottom {
+    display: block;
+    background: #f9f7f0;
+    font-size: 14px;
+    color: #8a8a8a;
+    height: auto;
+}
+
+.position_content li .bottom_con {
+    padding: 55px 30px;
+}
