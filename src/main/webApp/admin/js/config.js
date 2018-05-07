@@ -90,7 +90,7 @@ var HomeMenu = [
         name: '信息要闻',
         icon: 'fa-list-alt',
         children: [
-            {name: '党建要闻',type: 'djyw'},
+            {name: '巨龙要闻',type: 'djyw'},
             {name: '党务公开',type: 'dwgk'},
             {name: '街道动态',type: 'jddt'}
         ]
@@ -100,7 +100,7 @@ var HomeMenu = [
         icon: 'fa-compass',
         children: [
             {name: '党务知识',type: 'dwzs'},
-            {name: '党建视频',type: 'djsp'},
+            {name: '巨龙视频',type: 'djsp'},
             {name: '爱心救助',type: 'axjz'},
             {name: '志愿活动',type: 'zyhd'}
         ]
