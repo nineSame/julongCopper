@@ -517,4 +517,9 @@ h2,h3,h4,p{
     line-height: 1.5;
 }
 
+.logo.left img{
+    height:60px;
+}
+
+
 
