@@ -1,9 +1,11 @@
 $(function () {
-    getUserInfo(1, 100)
+    getUserInfo(1, 100);
+    login();
 });
 
 function getUserInfo(pageno, pagesize) {
     $.post(ServerUrl + 'admin/account/list', {pageno: pageno, pagesize: pagesize}, function (json) {
+    //$.post(ServerUrl + 'login', {pageno: pageno, pagesize: pagesize}, function (json) {
         if(json.success){
             var data = json.data;
             var trHtml = '';
@@ -63,3 +65,25 @@ function getUserInfo(pageno, pagesize) {
         }
     }, 'json')
 }
+/*
+function login() {
+    var
+    $.post("login",
+        {username:phone,
+            poassword:email,},
+        function(result){
+            if(result=='ok'){
+                showMessage("操作成功！");
+                $("#phoneNumError").html("");
+                $("#emailError").html("");
+                $("#qqNumError").html("");
+                $("#houseNumError").html("");
+                if(result=="no"){
+                    showMessage("插入数据失败！");
+                }
+            }else{
+                showMessage(result);
+            }
+        }
+    );
+    }*/

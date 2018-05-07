@@ -5,25 +5,40 @@ import com.chiyun.julong.common.annotation.AccessRequired;
 import com.chiyun.julong.entity.UserEntity;
 import com.chiyun.julong.repository.UserRepository;
 import com.chiyun.julong.utils.Md5Util;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-@RestController
-@RequestMapping("/User")
+//@RestController
+@Controller
+//@RequestMapping("/User")
 public class UserController {
 
     @Resource
     private UserRepository userRepository;
+    @RequestMapping("/test")
+    public String test() {
+        return "test";
+    }
 
+    @RequestMapping("/index")
+    public String index() {
+        return "redirect:admin/html/login.html";
+    }
+
+    @ResponseBody
     @RequestMapping("/login")
     public ApiResult<Object> login(String username, String password, HttpSession httpSession) throws Exception {
-        if (username == null || password == null) {
+        if (username == null|| username.isEmpty() || password == null|| username.isEmpty()) {
             return ApiResult.FAILURE("用户名或密码不能为空");
         }
+        System.out.print("password:" + password);
         String pwd = Md5Util.getMD5(password);
+        System.out.print("password:" + pwd);
         UserEntity userEntity = userRepository.findByAccountAndPassword(username, pwd);
         if (userEntity == null) {
             return ApiResult.FAILURE("用户名或密码错误");

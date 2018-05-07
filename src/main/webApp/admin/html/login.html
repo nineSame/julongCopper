@@ -38,12 +38,12 @@
 	</div>
 	<div class="w3layouts-main" id="activeDiv" style="display: none">
 		<h2 style="color: #fff;">党建管理中心</h2>
-		<input type="text" value="" class="ggg"  placeholder="登录名称">
-		<input type="text" value="" class="ggg"  placeholder="身份证号">
-		<input type="password" value="" class="ggg"  placeholder="密码">
-		<input type="password" value="" class="ggg"  placeholder="确认密码">
+		<input type="text" value="" class="ggg" id="newUsername" placeholder="登录名称">
+		<input type="text" value="" class="ggg" id="IDnumber" placeholder="身份证号">
+		<input type="password" value="" class="ggg" id="newPassword" placeholder="密码">
+		<input type="password" value="" class="ggg" id="newPassword2" placeholder="确认密码">
 		<div class="clearfix"></div>
-		<input class="login-btn" type="submit" id="" value="激活" name="">
+		<input class="login-btn" type="submit" id="active" value="激活" name="active">
 		<p>已经激活账号?<a href="javascript:;" onclick="activeAccount('login')">登录</a></p>
 	</div>
 
@@ -63,6 +63,15 @@
                 login();
             }
         });
+        $('#active').off('click').on('click',function () {
+            create();
+        });
+        $('#activeDiv').on('keydown', function (e) {
+            if(e.keyCode == 13){
+                create();
+            }
+        });
+
     });
 
 	function activeAccount(type) {
@@ -73,7 +82,29 @@
 
 	function login() {
         $.ajax({
-            url: ServerUrl + 'admin/account/login',
+            url: ServerUrl + 'login',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val()
+            },
+            success: function (json) {
+                console.log(json);
+                if(json.resMsg="success"){
+                    localStorage.loginStatus = '1';
+                    localStorage.loginUserInfo = JSON.stringify(json.data);
+                    location.href = 'home.html';
+                }else{
+                    alert(json.msg);
+                }
+            }
+        });
+    }
+
+    function create() {
+        $.ajax({
+            url: ServerUrl + 'create',
             type: 'post',
             dataType: 'json',
             data: {

@@ -115,7 +115,8 @@ var HomeMenu = [
 
 var LoginUserInfo = JSON.parse(localStorage.getItem('loginUserInfo'));
 //服务器接口地址
-var ServerUrl = location.origin + '/djxt/';
+//var ServerUrl = location.origin + '/djxt/';
+var ServerUrl = location.origin + '/';
 //字典数据
 var DICT = {
     dylx: {
