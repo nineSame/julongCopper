@@ -59,6 +59,7 @@
                             <li class="down_item"><a>大事记</a></li>
                             <li class="down_item"><a>公司信息</a></li>
                             <li class="down_item"><a href="social_responsibility.html">社会责任</a></li>
+                            <li class="down_item"><a>专题活动</a></li>
                         </ul>
 
                         <img src="img/006MFKIrgy1fpoatqoxw3j30jg0huabj.jpg" class="_full">
@@ -416,7 +417,7 @@
                             <div class="cont">
                                 <div class="top clearfix">
                                     <div class="title left">
-                                        <a>专题活动</a>
+                                        <a href="activities.html">专题活动</a>
                                     </div>
                                     <a class="more right">查看更多 ></a>
                                 </div>
@@ -916,6 +917,7 @@
 
 
         var aLi2 = document.getElementsByClassName('ul2_li');
+        $('.ul2_li').find('a').attr("href","activities.html")
 
         for (var i = 0; i < aLi2.length; i++){
             aLi2[i].onmouseover = function () {
