@@ -18,6 +18,7 @@ var aHeaderDowns = oHeader.getElementsByClassName('header_down');
 
 //共用部分添加链接
 $('.logo a').attr("href","./index.html");
+$('.header .nav a.index').attr("href","./index.html");
 
 
 $('.down_ul').eq(0).find('li').eq(0).find('a').attr("href","./company_info.html");
