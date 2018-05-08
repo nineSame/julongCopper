@@ -91,12 +91,12 @@
             },
             success: function (json) {
                 console.log(json);
-                if(json.resMsg="success"){
+                if(json.resCode==200){
                     localStorage.loginStatus = '1';
                     localStorage.loginUserInfo = JSON.stringify(json.data);
-                    location.href = 'home.html';
+                    location.href = 'user.html';
                 }else{
-                    alert(json.msg);
+                    alert(json.resMsg);
                 }
             }
         });

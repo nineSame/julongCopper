@@ -3,7 +3,9 @@ package com.chiyun.julong.controller;
 import com.chiyun.julong.common.ApiResult;
 import com.chiyun.julong.common.annotation.AccessRequired;
 import com.chiyun.julong.entity.UserEntity;
+import com.chiyun.julong.entity.view_user;
 import com.chiyun.julong.repository.UserRepository;
+import com.chiyun.julong.repository.userDisplayRepository;
 import com.chiyun.julong.utils.Md5Util;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,14 +14,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 //@RestController
 @Controller
 //@RequestMapping("/User")
 public class UserController {
-
+     private List<view_user> listUser = new ArrayList();
+     private String name;
     @Resource
     private UserRepository userRepository;
+    private userDisplayRepository userDisplayRepository;
+
+
     @RequestMapping("/test")
     public String test() {
         return "test";
@@ -29,6 +37,23 @@ public class UserController {
     public String index() {
         return "redirect:admin/html/login.html";
     }
+
+
+    @ResponseBody
+    @RequestMapping("/display")
+    public ApiResult<Object> dislpay(HttpSession httpSession) throws Exception {
+
+        //listUser = (List<UserEntity>) userRepository.findAllUser();
+
+        listUser = (List<view_user>) userDisplayRepository.findAll();
+
+        if (listUser == null) {
+            return ApiResult.FAILURE("数据库错误");
+        }
+        //httpSession.setAttribute("id", userEntity.getId());
+        return ApiResult.SUCCESS(listUser);
+    }
+
 
     @ResponseBody
     @RequestMapping("/login")
@@ -102,12 +127,13 @@ public class UserController {
 
     @RequestMapping("/setrole")
     @AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> setrole(String id, String role, HttpSession httpSession) {
+    public ApiResult<Object> setrole(String id, int role, HttpSession httpSession) {
         String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
         }
-        if (id == null || role == null) {
+        //if (id == null || role == null) {
+            if (id == null) {
             return ApiResult.FAILURE("参数错误");
         }
         UserEntity userEntity = userRepository.findById(id);

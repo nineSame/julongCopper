@@ -12,8 +12,13 @@ public class UserEntity {
     private String name;
     private String password;
     private String account;
-    private String role;
+    private int role;
     private Integer valid;
+    private String gender;
+    private String jobtitle;
+    private String idcard;
+    private String birthdate;
+    private String description;
 
     public UserEntity() {
     }
@@ -67,11 +72,11 @@ public class UserEntity {
 
     @Basic
     @Column(name = "ROLE")
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
@@ -85,6 +90,56 @@ public class UserEntity {
         this.valid = valid;
     }
 
+    @Basic
+    @Column(name = "gender")
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    @Basic
+    @Column(name = "jobtitle")
+    public String getJobtitle() {
+        return jobtitle;
+    }
+
+    public void setJobtitle(String jobtitle) {
+        this.jobtitle = jobtitle;
+    }
+
+    @Basic
+    @Column(name = "idcard")
+    public String getIdcard() {
+        return idcard;
+    }
+
+    public void setIdcard(String idcard) {
+        this.idcard = idcard;
+    }
+
+    @Basic
+    @Column(name = "birthdate")
+    public String getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(String birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    @Basic
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -95,12 +150,16 @@ public class UserEntity {
                 Objects.equals(password, that.password) &&
                 Objects.equals(account, that.account) &&
                 Objects.equals(role, that.role) &&
-                Objects.equals(valid, that.valid);
+                Objects.equals(gender, that.gender) &&
+                Objects.equals(jobtitle, that.jobtitle) &&
+                Objects.equals(idcard, that.idcard) &&
+                Objects.equals(birthdate, that.birthdate) &&
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, password, account, role, valid);
+        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, birthdate, description);
     }
 }
