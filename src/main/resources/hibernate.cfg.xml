@@ -4,10 +4,13 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
-    <property name="connection.url">jdbc:mysql://localhost:3306/julong</property>
+    <property name="connection.url">jdbc:mysql://120.79.140.221:3306/julong?:3306/db</property>
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-      <mapping class="com.chiyun.julong.entity.UserEntity"/>
-      <!-- <property name="connection.username"/> -->
+    <mapping class="com.chiyun.julong.entity.UserEntity"/>
+      <mapping class="com.chiyun.julong.entity.view_user"/>
+    <mapping class="com.chiyun.julong.entity.UserDisplay"/>
+
+    <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->
 
     <!-- DB schema will be updated if needed -->

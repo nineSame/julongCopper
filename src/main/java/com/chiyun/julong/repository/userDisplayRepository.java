@@ -1,8 +1,9 @@
 package com.chiyun.julong.repository;
 
-import com.chiyun.julong.entity.view_user;
+import com.chiyun.julong.entity.UserDisplay;
+
 import org.springframework.data.repository.CrudRepository;
 
-public interface userDisplayRepository  extends CrudRepository<view_user, Long> {
+public interface userDisplayRepository  extends CrudRepository<UserDisplay, Long> {
     
 }

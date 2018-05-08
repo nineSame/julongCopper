@@ -2,8 +2,8 @@ package com.chiyun.julong.controller;
 
 import com.chiyun.julong.common.ApiResult;
 import com.chiyun.julong.common.annotation.AccessRequired;
+import com.chiyun.julong.entity.UserDisplay;
 import com.chiyun.julong.entity.UserEntity;
-import com.chiyun.julong.entity.view_user;
 import com.chiyun.julong.repository.UserRepository;
 import com.chiyun.julong.repository.userDisplayRepository;
 import com.chiyun.julong.utils.Md5Util;
@@ -21,11 +21,11 @@ import java.util.List;
 @Controller
 //@RequestMapping("/User")
 public class UserController {
-     private List<view_user> listUser = new ArrayList();
-     private String name;
+     private List<UserDisplay> listUser = new ArrayList();
+     //private String name;
     @Resource
-    private UserRepository userRepository;
     private userDisplayRepository userDisplayRepository;
+    private UserRepository userRepository;
 
 
     @RequestMapping("/test")
@@ -45,7 +45,9 @@ public class UserController {
 
         //listUser = (List<UserEntity>) userRepository.findAllUser();
 
-        listUser = (List<view_user>) userDisplayRepository.findAll();
+        listUser = (List<UserDisplay>) userDisplayRepository.findAll();
+        System.out.print("listUser:" + listUser.size());
+        System.out.print("_____________________listUser:" + listUser);
 
         if (listUser == null) {
             return ApiResult.FAILURE("数据库错误");
