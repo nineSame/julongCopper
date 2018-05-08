@@ -145,7 +145,6 @@ h2,h3,h4,p{
     text-align: center;
     height: 335px;
     margin-top: 60px;
-
     width: 100%;
     height: 335px;
     background-image: url("../img/bg4.jpg");
@@ -405,13 +404,29 @@ h2,h3,h4,p{
     height: 100%;
     width: 60%;
     vertical-align: center;
-    margin-left: 300px;
+    margin-left: 380px;
     /*background: orange;*/
     position: relative;
 }
 
+.nav a.index {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 60px;
+    text-align: center;
+    color: #000;
+    width: 8%;
+    padding: 0 3%;
+    margin-left: 20px;
+
+}
+
+.nav a.index:hover {
+    color: #bb9205;
+}
+
 .header .nav .header_ul {
-    width: 100%;
+    width: 80%;
 }
 
 .header .nav li {
