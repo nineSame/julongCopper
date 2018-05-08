@@ -93,7 +93,8 @@
                 console.log(json);
                 if(json.resCode==200){
                     localStorage.loginStatus = '1';
-                    localStorage.loginUserInfo = JSON.stringify(json.data);
+                    //localStorage.loginUserInfo = JSON.stringify(json.data);
+                    localStorage.loginUserInfo = JSON.stringify({loginname:'admin',username:'管理员'});
                     location.href = 'user.html';
                 }else{
                     alert(json.resMsg);
