@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接口调试</title>
+    <style>
+        .main{
+            width:800px;
+            margin:10px;
+            padding: 25px;
+            border-radius: 2px;
+            box-shadow: 0 0 10px #cccccc;
+            min-height:400px;
+        }
+        .main h3{
+            text-align: center;
+        }
+        .main .item{
+            margin: 10px;
+
+        }
+        .main .item .pro{
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+        }
+        .main .item .val{
+            width: 500px;
+            height: 25px;
+            font-size: 14px;
+            outline: none;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .main .item .val-param{
+            width: 240px;
+        }
+        .main .btn-area{
+            text-align: center;
+        }
+        .main .btn-area .btn{
+            width:120px;
+            height:30px;
+            line-height: 30px;
+            cursor: pointer;
+            border-radius: 3px;
+            color:#fff;
+            background-color: deepskyblue;
+        }
+        .msg{
+            font-size: 12px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <h3>接口调试</h3>
+        <div class="item">
+            <span class="pro">url: </span>
+            <input class="val" id="url" type="text" value="http://localhost:8080/">
+        </div>
+        <div class="item">
+            <span class="pro">type: </span>
+            <select id="type" value="post" class="val">
+                <option value="post">post</option>
+                <option value="get">get</option>
+            </select>
+        </div>
+        <div class="item">
+            <span class="pro">dataType: </span>
+            <input class="val" id="dataType" value="json">
+        </div>
+        <div class="item">
+            <div>
+                <span class="pro">data:</span>
+                <input id="addParam" type="button" value="添加参数">
+            </div>
+        </div>
+        <div id="dataArea">
+            <div class="item data-item">
+                <span class="pro"></span>
+                <input class="val val-param data-pro">:<input class="val val-param data-val">
+            </div>
+            <div class="item data-item">
+                <span class="pro"></span>
+                <input class="val val-param data-pro">:<input class="val val-param data-val">
+            </div>
+        </div>
+        <div class="btn-area">
+            <button id="submit" class="btn">提交</button>
+        </div>
+        <div id="msg" class="msg" ></div>
+    </div>
+</body>
+<script src="../assets/bootstrap/jquery2.0.3.min.js"></script>
+<script>
+    $('#addParam').click(function () {
+        var paramHtml = '<div class="item data-item">\n' +
+            '                <span class="pro"></span>\n' +
+            '                <input class="val val-param data-pro">:<input class="val val-param data-val">\n' +
+            '            </div>';
+        $('#dataArea').append(paramHtml);
+
+    });
+    $('#submit').click(function () {
+        var param = {};
+        $('#dataArea .data-item').each(function () {
+            var pro = $(this).find('.data-pro').val();
+            var val = $(this).find('.data-val').val();
+            if(pro){
+                param[pro] = val;
+            }
+        });
+        console.log(param);
+        $.ajax({
+            url: $('#url').val() ,
+            type: $('#type').val(),
+            dataType: $('#dataType').val(),
+            data: param,
+            //crossDomain: true,
+            success: function (data) {
+                console.log(data);
+                $('#msg').text(JSON.stringify(data));
+            },
+            error:function (err,status,msg) {
+                console.log(err,msg,status);
+                $('#msg').text(err.status + '~~' + status + '~~' + msg + '|' + err.responseText);
+            }
+        })
+    });
+</script>
+</html>
