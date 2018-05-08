@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<head>
+    <title>后台管理-西藏巨龙铜业有限公司</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
+    <link rel="icon" href="../images/favicon.ico">
+    <!-- bootstrap-css -->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap-datetimepicker.min.css">
+    <!-- Custom CSS -->
+    <link href="../assets/css/style.css" rel='stylesheet' type='text/css'/>
+    <link href="../assets/css/style-responsive.css" rel="stylesheet"/>
+    <!-- font-awesome icons -->
+    <link rel="stylesheet" href="../assets/css/font.css" type="text/css"/>
+    <link href="../assets/css/font-awesome.css" rel="stylesheet">
+    <!-- self -->
+    <link rel="stylesheet" href="../css/common.css?v=1.0">
+    <link rel="stylesheet" href="../css/sjtj.css?v=1.0">
+</head>
+<body style="background:#f9f9f9;">
+<section id="container">
+    <!--顶部-->
+    <header class="header fixed-top clearfix" id="commonHeader"></header>
+    <!--左边菜单-->
+    <aside>
+        <div id="sidebar" class="nav-collapse">
+            <div class="leftside-navigation">
+                <ul class="sidebar-menu" id="nav-accordion"></ul>
+            </div>
+        </div>
+    </aside>
+    <!--右边内容-->
+    <section id="main-content">
+        <section class="wrapper" id="wrapper">
+            <h3 class="main-title" id="mainTitle">网站首页管理</h3>
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label for="webName" class="col-sm-2 control-label">网站名称</label>
+                    <div class="col-sm-4">
+                        <input type="text" class="form-control" id="webName" placeholder="网站名称">
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Remember me
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Sign in</button>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </section>
+</section>
+
+<!-- 用户模态框 -->
+<div class="modal fade bs-example-modal-lg" id="dataModal" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document" style="width: 600px;">
+        <form class="modal-content" id="dataForm">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalTitle">用户信息</h4>
+            </div>
+            <div class="modal-body">
+                <div  class="form-horizontal">
+                    <div class="form-group clearfix modal-form">
+                        <div class="form-item1 pull-left">
+                            <span class="pre">用户名</span>
+                            <input type="text" style="width:416px;" name="username" id="username">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">姓名</span>
+                            <input type="text" style="width:160px;" name="name" id="name">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">性别</span>
+                            <input type="text" style="width:160px;" name="sex" id="sex">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">职务</span>
+                            <input type="text" style="width:416px;">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">活动地点</span>
+                            <input type="text" style="width:416px;">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">人员描述</span>
+                            <textarea type="text" style="width:416px;height:60px;resize: none;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDataBtn">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+</div>
+<div id="footer"></div>
+</body>
+<script src="../assets/bootstrap/jquery2.0.3.min.js"></script>
+<script src="../js/config.js?v=1.0"></script>
+<script src="../js/function.js?v=1.0"></script>
+<script src="../js/common.js?v=1.0"></script>
+<script src="../assets/bootstrap/bootstrap.js"></script>
+<script src="../assets/bootstrap/bootstrap-datetimepicker.js"></script>
+<script src="../assets/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../assets/bootstrap/jquery.dcjqaccordion.2.7.js"></script>
+<script src="../assets/bootstrap/jquery.scrollTo.js"></script>
+<script src="../assets/bootstrap/scripts.js"></script>
+<script src="../assets/bootstrap/jquery.slimscroll.js"></script>
+<script src="../assets/bootstrap/jquery.nicescroll.js"></script>
+<script src="../assets/bootstrap/raphael-min.js"></script>
+<script src="../assets/bootstrap/morris.js"></script>
+<script>
+    $(function(){
+        getData();//获取数据
+        operateData();//操作数据
+
+    });
+    function operateData() {
+        $('#addDataBtn').off('click').on('click',function () {
+            $('#dataModal').modal('show');
+        });
+        $('#saveDataBtn').off('click').on('click',function () {
+            var formData = new FormData($("#dataForm")[0]);
+            $.ajax({
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: '1.html',
+                type: 'post',
+                data: formData,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+                    $('#dataModal').modal('hide');
+                },
+                error: function () {
+                    alert('err');
+                }
+            });
+
+        });
+    }
+
+
+    function getData() {
+
+    }
+</script>
+</html>

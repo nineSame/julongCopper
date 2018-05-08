@@ -95,7 +95,7 @@
                     localStorage.loginStatus = '1';
                     //localStorage.loginUserInfo = JSON.stringify(json.data);
                     localStorage.loginUserInfo = JSON.stringify({loginname:'admin',username:'管理员'});
-                    location.href = 'user.html';
+                    location.href = 'home.html?pageType=home';
                 }else{
                     alert(json.resMsg);
                 }
