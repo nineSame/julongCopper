@@ -2,23 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>巨龙首页</title>
-
-    <link rel="stylesheet" type="text/css" href="lib/201612141506/css/style.css">
+    <title>西藏巨龙铜业有限公司</title>
+    <link rel="stylesheet" type="text/css" href="lib/banner/css/style.css">
     <script src="js/jquery-3.2.1.min.js"></script>
     <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="./Font-Awesome-3.2.1/css/font-awesome.min.css">
-
-
+    <link rel="icon" href="img/favicon.ico">
 
 </head>
 <body>
 
     <div class="header">
         <div class="header_content">
-            <div class="logo left"><a><img src="img/logo-bg.png"></a></div>
+            <div class="logo left">
+                <a>
+                    <img src="img/logo-left.png">
+                </a>
+            </div>
             <div class="nav">
+                <a class="left index">公司首页</a>
                 <ul class="header_ul left clearfix">
                     <li class="left nav_item"><a>关于我们</a></li>
                     <li class="left nav_item"><a>全景巨龙</a></li>
@@ -59,6 +62,7 @@
                             <li class="down_item"><a>大事记</a></li>
                             <li class="down_item"><a>公司信息</a></li>
                             <li class="down_item"><a href="social_responsibility.html">社会责任</a></li>
+                            <li class="down_item"><a>专题活动</a></li>
                         </ul>
 
                         <img src="img/006MFKIrgy1fpoatqoxw3j30jg0huabj.jpg" class="_full">
@@ -116,7 +120,7 @@
                                     <a class="first_tab_wrap clearfix">
                                         <div class="img_wrap left">
                                         <span class="rect-64">
-                                        <img src="img/eye-3221498_640.jpg">
+                                        <img src="img/child-817371_640.jpg">
                                         </span>
                                         </div>
 
@@ -416,7 +420,7 @@
                             <div class="cont">
                                 <div class="top clearfix">
                                     <div class="title left">
-                                        <a>专题活动</a>
+                                        <a href="activities.html">专题活动</a>
                                     </div>
                                     <a class="more right">查看更多 ></a>
                                 </div>
@@ -643,8 +647,8 @@
 
     </div>
     <script type="text/javascript" src="js/common.js"></script>
-<script type="text/javascript" src="lib/201612141506/dist/jquery.terseBanner.min.js"></script>
-<script type="text/javascript" src="lib/201612141506/lib/script.js"></script>
+<script type="text/javascript" src="lib/banner/dist/jquery.terseBanner.min.js"></script>
+<script type="text/javascript" src="lib/banner/lib/script.js"></script>
     <script>
         $('.index_banner').terseBanner({btn:true});
 
@@ -916,6 +920,7 @@
 
 
         var aLi2 = document.getElementsByClassName('ul2_li');
+        $('.ul2_li').find('a').attr("href","activities.html")
 
         for (var i = 0; i < aLi2.length; i++){
             aLi2[i].onmouseover = function () {
