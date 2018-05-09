@@ -1,0 +1,10 @@
+{
+  "resCode": 200,
+  "resMsg": "success",
+  "data": [
+    {"id":"dsad","title": "标题1","src":"1ef55c7892664d619d9a73c93abe2532.jpg"},
+    {"id":"dsadwqe","title": "标题2","src":"banner_2.png"},
+    {"id":"123213","title": "标题3","src":"951f54876288437fb1e1cb42d167a9ee.jpg"},
+    {"id":"dsad1","title": "标题3","src":"banner_4.png"}
+  ]
+}
