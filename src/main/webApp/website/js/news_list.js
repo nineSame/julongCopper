@@ -5,12 +5,45 @@
 
 $(function() {
     setFrontLinks(); //设置导航链接
+    setList();
     setSearchBox(); //设置模拟搜索框
     $('body').click(function(){bodyClicked();}); //添加点击其他位置收起搜索选项
-    initBannerData();
+    setBannerData();  //设置banner的数据
+    initBannerData(); //设置banner的初始数据
     setBannerHover();//设置banner的hover效果
-    setNewsListHover();//设置新闻列表的hover效果
 });
+
+function setList() {
+    $.ajax({
+        url: ServerUrl + 'website/json/news_list.json',
+        type: 'get',
+        dataType: 'json',
+        success: function (json) {
+            //var data = json.data;
+            console.log(1111,json);
+            if(json.resCode == 200){
+
+                var data = json.data;
+                var liHtml = '';
+                for(var i=0;i<data.length;i++){
+                    var item = data[i];
+                    // liHtml += '<li><img src="'+ ServerUrl +'website/img/' +item.src+'"></li>'
+                    liHtml +=  '<li><div class="list_wrap"><div class="time left"><span class="day">'+item.day+'</span><span class="month_and_year">'+item.monthAndYear+'</span></div><div class="list_text left"><h3><a>'+item.title+'</a></h3><div class="info_bar"><span><i class="icon-eye-open"></i>'+'点击数：'+item.click+'</span><a class="share"><i class="icon-share-alt"></i>分享</a></div><p><a>'+item.news+'</a></p></div><a class="news_pic_wrap right"><img src="'+ ServerUrl +'website/img/' +item.src+'" /></a></div></li>'
+                }
+                // console.log(liHtml);
+                $('#news_list').append(liHtml);
+                // $('#animation').terseBanner({btn:true});
+                setNewsListHover();//设置新闻列表的hover效果
+            }else{
+                alert(json.resMsg);
+            }
+        },
+        error: function () {
+            alert('err')
+        }
+    });
+}
+
 
 /*****************************此部分js模拟sselect下拉列表的实现***************************/
 var aSelShow = document.getElementsByClassName('sel-show');
@@ -18,7 +51,6 @@ var aSelOption = document.getElementsByClassName('sel-option');
 var bd = document.getElementsByTagName('body')[0];
 var oI = document.getElementsByClassName('second_search')[0].getElementsByTagName('i');
 // var flag = false;  //用于判断是否打开下拉列表
-
 //隐藏所有的下拉选项
 function hideAll() {
     for (var i = 0; i < aSelOption.length; i++ ){
@@ -62,9 +94,21 @@ function setSearchBox() {
                     flagFalse();
                 }
             }
-        };
+
+        }
     }
+    $('#search_btn').click(function(){
+        // alert(parseInt(aSelShow[0].innerText))
+        var search = document.getElementById('keyword');
+        if (search.value === ''){
+            alert("请输入搜索内容");
+        }else {
+            alert(search.value);
+        }
+    })
+
 }
+
 
 /*点击屏幕其他位置，收器下拉选项*/
 function bodyClicked(ev) {
@@ -86,14 +130,14 @@ function bodyClicked(ev) {
 
 
     //设置导航链接
-    function setFrontLinks() {
+function setFrontLinks() {
         $('.guide_list li').eq(1).find('a').attr('href',"news_list.html");
         $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
         $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
-    }
+}
 
 
-/**************************************banner滑动**********************************/
+/**************************************banner**********************************/
 function getStyle(obj, attr){
     return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
 };
@@ -119,6 +163,42 @@ function move(obj, attr, distance, step, frequency, endFn) {
     }, frequency)
 }
 
+function setBannerData() {
+    $.ajax({
+        url: ServerUrl + 'website/json/news_list.json',
+        type: 'get',
+        dataType: 'json',
+        success: function (json) {
+            //var data = json.data;
+            // console.log(1111,json);
+            if(json.resCode == 200){
+
+                var data = json.data;
+                var liHtml = '';
+                for(var i=0;i<data.length;i++){
+                    var item = data[i];
+                    arrImg.push('img/' + item.src);
+                    arrTitle.push(item.title);
+                    arrNews.push(item.news);
+                    var monthAndYear = item.monthAndYear.split("-");  //此处结果是数组  [月份 ， 年]
+                    arrTimes.push(monthAndYear[1]+'-'+monthAndYear[0]+'-'+item.day); //调整发布时间格式  年-月-日
+                    arrRead.push(item.click);
+                }
+                // console.log(arrImg);
+                // console.log(arrTitle);
+                // console.log(arrNews);
+                // console.log(arrTimes);
+                // console.log(arrRead);
+            }else{
+                alert(json.resMsg);
+            }
+        },
+        error: function () {
+            alert('err')
+        }
+    });
+}
+
 //初始化banner数据
 function initBannerData(){
     //初始化banner数据
@@ -140,11 +220,11 @@ var oWrap = document.getElementsByClassName("banner_wrap")[0],
     aLi = $(".banner_wrap li");
 
     //模拟banner数据
-    arrImg = ['img/news1.png', 'img/news2.jpg','img/news3.jpg'];
-    arrTitle = ['这是标题1','这是标题2','这是标题3'];
-    arrNews = ['这是新闻内容1这是新闻内容1这是新闻内容1这是新闻内容1这是新闻内容1这是新闻内容1这是新闻内容1这是新闻内容1这是新闻内容1这是新闻内容1','这是新闻内容2这是新闻内容2这是新闻内容2这是新闻内容2这是新闻内容2',"这是新闻内容3这是新闻内容3这是新闻内容3这是新闻内容3这是新闻内容3"];
-    arrTimes = ['发布时间1','发布时间2','发布时间3'];
-    arrRead = ['阅读次数1','阅读次数2','阅读次数3'];
+    arrImg = [];
+    arrTitle = [];
+    arrNews = [];
+    arrTimes = [];
+    arrRead = [];
     timer = null;
     num = 0;
 
@@ -239,16 +319,11 @@ function setBannerHover() {
     }
 }
 
-
-
-
-
-
-
 /******************************新闻列表的hover*******************************/
 
 function setNewsListHover() {
-    var oNews_ul = document.getElementsByClassName('news_list')[0];
+    // var oNews_ul = document.getElementsByClassName('news_list')[0];
+    var oNews_ul = document.getElementById('news_list');
     var aNewsLi = oNews_ul.getElementsByTagName('li');
 
     for (var i = 0; i < aNewsLi.length; i ++){
@@ -260,13 +335,9 @@ function setNewsListHover() {
             var oNews = this.getElementsByTagName('p')[0].getElementsByTagName('a')[0];
             var oImg = this.getElementsByTagName('img')[0];
 
-
             oTitle.style.color = "#bb9205";
             oNews.style.color = "#bb9205";
-
             oImg.style.transform = "scale(1.1)";
-
-
         };
 
         aNewsLi[i].onmouseout = function () {
@@ -280,5 +351,9 @@ function setNewsListHover() {
         }
     }
 }
+
+
+
+setBannerData();
 
 
