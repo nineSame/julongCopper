@@ -19,13 +19,24 @@ public class UserEntity {
     private String idcard;
     private String birthdate;
     private String description;
+    private String photo;
+    private int jobtitlenum;
 
-    public UserEntity() {
+    public UserEntity(String account, String jobtitle, String name, String gender, String photo, String description) {
+        this.account = account;
+        this.jobtitle = jobtitle;
+        this.name = name;
+        this.gender = gender;
+        this.photo = photo;
+        this.description = description;
     }
 
     public UserEntity(String password, String account) {
         this.password = password;
         this.account = account;
+    }
+
+    public UserEntity() {
     }
 
     @Id
@@ -140,6 +151,24 @@ public class UserEntity {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "photo")
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+    @Basic
+    @Column(name = "jobtitlenum")
+    public int getJobtitlenum() {
+        return jobtitlenum;
+    }
+
+    public void setJobtitlenum(int jobtitlenum) {
+        this.jobtitlenum = jobtitlenum;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -154,12 +183,14 @@ public class UserEntity {
                 Objects.equals(jobtitle, that.jobtitle) &&
                 Objects.equals(idcard, that.idcard) &&
                 Objects.equals(birthdate, that.birthdate) &&
-                Objects.equals(description, that.description);
+                Objects.equals(description, that.description)&&
+                Objects.equals(photo, that.photo)&&
+                Objects.equals(jobtitlenum, that.jobtitlenum);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, birthdate, description);
+        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, birthdate, description ,photo, jobtitlenum);
     }
 }

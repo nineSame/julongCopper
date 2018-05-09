@@ -11,8 +11,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +28,7 @@ public class UserController {
      //private String name;
     @Resource
     private userDisplayRepository userDisplayRepository;
+    @Resource
     private UserRepository userRepository;
 
 
@@ -74,19 +78,32 @@ public class UserController {
         return ApiResult.SUCCESS("登录成功");
     }
 
+    @ResponseBody
     @RequestMapping("/create")
-    @AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String username, String password, HttpSession httpSession) throws Exception {
-        String personid = (String) httpSession.getAttribute("id");
-        if (personid.isEmpty()) {
-            return ApiResult.UNKNOWN();
-        }
-        String pwd = Md5Util.getMD5(password);
-        UserEntity userEntity = new UserEntity(pwd, username);
+    //@AccessRequired(menue = 0, action = 1)
+    public ApiResult<Object> create(String username, String name, String sex, String zhiwu, HttpServletRequest httpServletRequest, String ryms, HttpSession httpSession) throws Exception {
+//        String personid = (String) httpSession.getAttribute("id");
+//        if (personid.isEmpty()) {
+//            return ApiResult.UNKNOWN();
+//        }
+        //String pwd = Md5Util.getMD5(password);
+        //UserEntity userEntity = new UserEntity(pwd, username);
+      if(name==null){
+        return ApiResult.FAILURE("姓名为空");
+      }
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) httpServletRequest;
+        MultipartFile file = multipartRequest.getFile("zpfile");
+
+//        System.out.print("1111111111111111111");
+  //      System.out.print("username:" + username + "--------name:"+ name+ "-------sex:"+sex);
+        String zpfile = file.getOriginalFilename();
+        UserEntity userEntity = new UserEntity(username,zhiwu,name,sex,zpfile,ryms);
         UserEntity entity = userRepository.save(userEntity);
-        if (entity == null) {
+        System.out.print("----------entity:" + entity + "userEntity"+ userEntity);
+       if (entity == null) {
             return ApiResult.FAILURE("新建成员失败");
         }
+
         return ApiResult.SUCCESS("新建成员成功");
     }
 
@@ -110,6 +127,22 @@ public class UserController {
         }
         return ApiResult.SUCCESS("修改成功");
     }
+
+
+    @ResponseBody
+    @RequestMapping("/del")
+    public ApiResult<Object> login(String id, HttpSession httpSession) throws Exception {
+        //判断是否为管理员
+
+        //通过id实行删除操作
+        UserEntity userEntity = userRepository.delete(id);
+        if (userEntity == null) {
+            return ApiResult.FAILURE("用户名或密码错误");
+        }
+        httpSession.setAttribute("id", userEntity.getId());
+        return ApiResult.SUCCESS("登录成功");
+    }
+
 
     @RequestMapping("/valid")
     @AccessRequired(menue = 0, action = 1)
