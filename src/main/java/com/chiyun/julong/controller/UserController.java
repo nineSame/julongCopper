@@ -137,8 +137,16 @@ public class UserController {
         //判断是否为管理员
 
         //通过id实行删除操作
-
-        return ApiResult.SUCCESS("登录成功");
+        //System.out.print("id:"+ id);
+        if (id == "" || id==null) {
+            return ApiResult.FAILURE("参数错误");
+        }
+        int isdel = userRepository.deleteOrderById(id);
+       // System.out.print("-------------isdel:"+ isdel);
+        if (isdel == 0) {
+            return ApiResult.FAILURE("删除失败");
+        }
+        return ApiResult.SUCCESS("删除成功");
     }
 
 
