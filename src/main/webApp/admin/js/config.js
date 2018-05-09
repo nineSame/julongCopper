@@ -6,17 +6,11 @@ var ServerUrl = location.origin + '/';
 //左侧菜单
 var HomeMenu = [
     {
-        name: '用户管理',
-        icon: 'fa-home' ,
-        type: 'user',
-        children: []
-    },
-    {
         name: '首页管理',
         icon: 'fa-home' ,
         children: [
             {name: '首页信息',type: 'home'},
-            {name: '首页banner',type: 'debug'}
+            {name: '首页banner',type: 'banner'}
         ]
     },
     {
@@ -50,7 +44,13 @@ var HomeMenu = [
             {name: '企业文化',type: 'debug'},
             {name: '联系方式',type: 'debug'},
         ]
-    }
+    },
+    {
+        name: '人员管理',
+        icon: 'fa-home' ,
+        type: 'user',
+        children: []
+    },
 
 ];
 
