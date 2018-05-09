@@ -10,11 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" data-no-instant="">
     <meta name="format-detection" content="telephone=no">
     <meta name="author" content="">
-    <!--<link rel="stylesheet" type="text/css" href="./css/common.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="./css/news_list.css" />-->
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 
-    <!--<link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">-->
+
     <link rel="stylesheet" href="./Font-Awesome-3.2.1/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/common.css" />
     <link rel="stylesheet" type="text/css" href="./css/activities.css" />
@@ -340,20 +337,15 @@
 
 <div id="to_top">TOP</div>
 
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="./js/function.js"></script>
 <script src="js/common.js"></script>
-
-
 
 <script>
 
     $('.guide_list li').eq(1).find('a').attr('href',"news_list.html");
     $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
     $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
-
-
-
-
-
 
     /******************************活动列表的hover*******************************/
 
@@ -375,7 +367,7 @@
 
             oImg.style.transform = "scale(1.1)";
 
-        }
+        };
 
         aNewsLi[i].onmouseout = function () {
             var oTitle = this.getElementsByTagName('h3')[0];

@@ -10,9 +10,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" data-no-instant="">
     <meta name="format-detection" content="telephone=no">
     <meta name="author" content="">
-    <!--<link rel="stylesheet" type="text/css" href="./css/common.css" />-->
-    <!--<link rel="stylesheet" type="text/css" href="./css/news_list.css" />-->
-    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+
+
 
     <!--<link rel="stylesheet" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="./Font-Awesome-3.2.1/css/font-awesome.min.css">
@@ -181,12 +180,12 @@
                             </li>
                             <li>
                                 <div class="rect-78" style="display: none">
-                                    <img src="img/child-817371_640.jpg" />
+                                    <img src="img/006MFKIrgy1fpoatqoxw3j30jg0huabj.jpg" />
                                 </div>
                             </li>
                             <li>
                                 <div class="rect-78" style="display: none">
-                                    <img src="img/child-817371_640.jpg" />
+                                    <img src="img/6e232a81ly1ffmegw0rsqj20dv0aa3z4.jpg" />
                                 </div>
                             </li>
                         </ul>
@@ -288,160 +287,163 @@
 
 </div>
 
-<script>
-    //设置导航链接
-    $('.guide_list li').eq(1).find('a').attr('href',"news_list.html");
-    $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
-    $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script src="./js/function.js"></script>
+<script src="./js/common.js"></script>
+<script src="./js/social_responsibility.js"></script>
+<!--<script>-->
+    <!--//设置导航链接-->
+    <!--$('.guide_list li').eq(1).find('a').attr('href',"news_list.html");-->
+    <!--$('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");-->
+    <!--$('.guide_list li').eq(3).find('a').attr('href',"activities.html");-->
 
-    var oPart1 = document.getElementsByClassName('part1')[0];
-    var oLeft = oPart1.getElementsByClassName('part1_left')[0];
-    var aLeftLi = oLeft.getElementsByTagName('li');
-    var oRight = document.getElementsByClassName('part1_right')[0];
-    var aImg = oRight.getElementsByTagName('div');
-
-
-    function hideImg() {
-        for (var i = 0 ; i < aImg.length ; i++){
-            aImg[i].style.display = 'none';
-        }
-    }
+    <!--var oPart1 = document.getElementsByClassName('part1')[0];-->
+    <!--var oLeft = oPart1.getElementsByClassName('part1_left')[0];-->
+    <!--var aLeftLi = oLeft.getElementsByTagName('li');-->
+    <!--var oRight = document.getElementsByClassName('part1_right')[0];-->
+    <!--var aImg = oRight.getElementsByTagName('div');-->
 
 
-
-    for (var i = 0 ; i  < aLeftLi.length; i++){
-
-        aLeftLi[i].index = i;
-
-        aLeftLi[i].onmouseover = function () {
-            var oContent = this.getElementsByClassName('list_con')[0];
-            var oTitle = oContent.getElementsByClassName('list_title')[0];
-            var oDec = oContent.getElementsByClassName('dec')[0];
-
-
-            oContent.style.background = "#bb9205";
-            oTitle.style.color = "#bb9205";
-            oTitle.style.background = "#fff";
-            oDec.style.color = "#fff";
-            hideImg();
-            aImg[this.index].style.display = "block";
+    <!--function hideImg() {-->
+        <!--for (var i = 0 ; i < aImg.length ; i++){-->
+            <!--aImg[i].style.display = 'none';-->
+        <!--}-->
+    <!--}-->
 
 
 
-        }
+    <!--for (var i = 0 ; i  < aLeftLi.length; i++){-->
 
-        aLeftLi[i].onmouseout = function () {
-            var oContent = this.getElementsByClassName('list_con')[0];
-            var oTitle = oContent.getElementsByClassName('list_title')[0];
-            var oDec = oContent.getElementsByClassName('dec')[0];
+        <!--aLeftLi[i].index = i;-->
 
-            oContent.style.background = "#f9f7f0";
-            oTitle.style.color = "#fff";
-            oTitle.style.background = "#bb9205";
-            oDec.style.color = "#555";
-        }
-
-    }
-
-    /************************************手风琴效果******************************************/
-
-    function createAccordion(id)
-    {
-        var oDiv=document.getElementById(id);
-        var iMinWidth=9999999;
-
-        var aLi=oDiv.getElementsByTagName('li');
-        var aSpan=oDiv.getElementsByTagName('span');
-
-        var i=0;
-
-        oDiv.timer=null;
-
-        for(i=0;i<aSpan.length;i++)
-        {
-            aSpan[i].index=i;
-            aSpan[i].onmouseover=function ()
-            {
-                gotoImg(oDiv, this.index, iMinWidth);
-            };
-
-            iMinWidth=Math.min(iMinWidth, aLi[i].offsetWidth);
-        }
-    };
-
-    function gotoImg(oDiv, iIndex, iMinWidth)
-    {
-        if(oDiv.timer)
-        {
-            clearInterval(oDiv.timer);
-        }
-        oDiv.timer=setInterval
-        (
-            function ()
-            {
-                changeWidthInner(oDiv, iIndex, iMinWidth);
-            }, 30
-        );
-    }
-
-    function changeWidthInner(oDiv, iIndex, iMinWidth)
-    {
-        var aLi=oDiv.getElementsByTagName('li');
-        var aSpan=oDiv.getElementsByTagName('span');
-        var iWidth=oDiv.offsetWidth;
-        var w=0;
-        var bEnd=true;
-        var i=0;
-
-        for(i=0;i<aLi.length;i++)
-        {
-            if(i==iIndex)
-            {
-                continue;
-            }
-
-            if(iMinWidth==aLi[i].offsetWidth)
-            {
-                iWidth-=iMinWidth;
-                continue;
-            }
-
-            bEnd=false;
-
-            speed=Math.ceil((aLi[i].offsetWidth-iMinWidth)/5);
-
-            w=aLi[i].offsetWidth-speed;
-
-            if(w<=iMinWidth)
-            {
-                w=iMinWidth;
-            }
-
-            aLi[i].style.width=w+'px';
-
-            iWidth-=w;
-        }
-
-        aLi[iIndex].style.width=iWidth+'px';
-
-        if(bEnd)
-        {
-            clearInterval(oDiv.timer);
-            oDiv.timer=null;
-        }
-    }
-
-    createAccordion('show1');
-
-    var aSpans = $("#show1").find('span');
-
-    aSpans.eq(0).css("background","#ddc58c");
-    aSpans.eq(1).css("background","#caa860");
-    aSpans.eq(2).css("background","#b98923");
+        <!--aLeftLi[i].onmouseover = function () {-->
+            <!--var oContent = this.getElementsByClassName('list_con')[0];-->
+            <!--var oTitle = oContent.getElementsByClassName('list_title')[0];-->
+            <!--var oDec = oContent.getElementsByClassName('dec')[0];-->
 
 
-</script>
-<script src="js/common.js"></script>
+            <!--oContent.style.background = "#bb9205";-->
+            <!--oTitle.style.color = "#bb9205";-->
+            <!--oTitle.style.background = "#fff";-->
+            <!--oDec.style.color = "#fff";-->
+            <!--hideImg();-->
+            <!--aImg[this.index].style.display = "block";-->
+
+
+
+        <!--}-->
+
+        <!--aLeftLi[i].onmouseout = function () {-->
+            <!--var oContent = this.getElementsByClassName('list_con')[0];-->
+            <!--var oTitle = oContent.getElementsByClassName('list_title')[0];-->
+            <!--var oDec = oContent.getElementsByClassName('dec')[0];-->
+
+            <!--oContent.style.background = "#f9f7f0";-->
+            <!--oTitle.style.color = "#fff";-->
+            <!--oTitle.style.background = "#bb9205";-->
+            <!--oDec.style.color = "#555";-->
+        <!--}-->
+
+    <!--}-->
+
+    <!--/************************************手风琴效果******************************************/-->
+
+    <!--function createAccordion(id)-->
+    <!--{-->
+        <!--var oDiv=document.getElementById(id);-->
+        <!--var iMinWidth=9999999;-->
+
+        <!--var aLi=oDiv.getElementsByTagName('li');-->
+        <!--var aSpan=oDiv.getElementsByTagName('span');-->
+
+        <!--var i=0;-->
+
+        <!--oDiv.timer=null;-->
+
+        <!--for(i=0;i<aSpan.length;i++)-->
+        <!--{-->
+            <!--aSpan[i].index=i;-->
+            <!--aSpan[i].onmouseover=function ()-->
+            <!--{-->
+                <!--gotoImg(oDiv, this.index, iMinWidth);-->
+            <!--};-->
+
+            <!--iMinWidth=Math.min(iMinWidth, aLi[i].offsetWidth);-->
+        <!--}-->
+    <!--};-->
+
+    <!--function gotoImg(oDiv, iIndex, iMinWidth)-->
+    <!--{-->
+        <!--if(oDiv.timer)-->
+        <!--{-->
+            <!--clearInterval(oDiv.timer);-->
+        <!--}-->
+        <!--oDiv.timer=setInterval-->
+        <!--(-->
+            <!--function ()-->
+            <!--{-->
+                <!--changeWidthInner(oDiv, iIndex, iMinWidth);-->
+            <!--}, 30-->
+        <!--);-->
+    <!--}-->
+
+    <!--function changeWidthInner(oDiv, iIndex, iMinWidth)-->
+    <!--{-->
+        <!--var aLi=oDiv.getElementsByTagName('li');-->
+        <!--var aSpan=oDiv.getElementsByTagName('span');-->
+        <!--var iWidth=oDiv.offsetWidth;-->
+        <!--var w=0;-->
+        <!--var bEnd=true;-->
+        <!--var i=0;-->
+
+        <!--for(i=0;i<aLi.length;i++)-->
+        <!--{-->
+            <!--if(i==iIndex)-->
+            <!--{-->
+                <!--continue;-->
+            <!--}-->
+
+            <!--if(iMinWidth==aLi[i].offsetWidth)-->
+            <!--{-->
+                <!--iWidth-=iMinWidth;-->
+                <!--continue;-->
+            <!--}-->
+
+            <!--bEnd=false;-->
+
+            <!--speed=Math.ceil((aLi[i].offsetWidth-iMinWidth)/5);-->
+
+            <!--w=aLi[i].offsetWidth-speed;-->
+
+            <!--if(w<=iMinWidth)-->
+            <!--{-->
+                <!--w=iMinWidth;-->
+            <!--}-->
+
+            <!--aLi[i].style.width=w+'px';-->
+
+            <!--iWidth-=w;-->
+        <!--}-->
+
+        <!--aLi[iIndex].style.width=iWidth+'px';-->
+
+        <!--if(bEnd)-->
+        <!--{-->
+            <!--clearInterval(oDiv.timer);-->
+            <!--oDiv.timer=null;-->
+        <!--}-->
+    <!--}-->
+
+    <!--createAccordion('show1');-->
+
+    <!--var aSpans = $("#show1").find('span');-->
+
+    <!--aSpans.eq(0).css("background","#ddc58c");-->
+    <!--aSpans.eq(1).css("background","#caa860");-->
+    <!--aSpans.eq(2).css("background","#b98923");-->
+
+
+<!--</script>-->
 
 </body>
 </html>
