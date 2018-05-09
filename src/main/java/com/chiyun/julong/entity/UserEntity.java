@@ -22,6 +22,16 @@ public class UserEntity {
     private String photo;
     private int jobtitlenum;
 
+    public UserEntity() {
+    }
+
+
+    public UserEntity(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
+
     public UserEntity(String account, String jobtitle, String name, String gender, String photo, String description) {
         this.account = account;
         this.jobtitle = jobtitle;
@@ -29,14 +39,6 @@ public class UserEntity {
         this.gender = gender;
         this.photo = photo;
         this.description = description;
-    }
-
-    public UserEntity(String password, String account) {
-        this.password = password;
-        this.account = account;
-    }
-
-    public UserEntity() {
     }
 
     @Id

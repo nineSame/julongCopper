@@ -135,11 +135,11 @@ public class UserController {
         //判断是否为管理员
 
         //通过id实行删除操作
-        UserEntity userEntity = userRepository.delete(id);
+       /*UserEntity userEntity = userRepository.delete(id);
         if (userEntity == null) {
             return ApiResult.FAILURE("用户名或密码错误");
         }
-        httpSession.setAttribute("id", userEntity.getId());
+        httpSession.setAttribute("id", userEntity.getId());*/
         return ApiResult.SUCCESS("登录成功");
     }
 
