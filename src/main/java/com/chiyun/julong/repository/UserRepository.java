@@ -13,4 +13,6 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
    @Query("select name,account,role,gender,jobtitle,idcard,birthdate,description from UserEntity")
     List<UserEntity> findAllUser();
+
+    UserEntity delete(String id);
 }
