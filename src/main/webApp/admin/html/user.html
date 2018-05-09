@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../css/common.css?v=1.0">
     <link rel="stylesheet" href="../css/sjtj.css?v=1.0">
 </head>
-<body style="background:#f9f9f9;">
+<body style="background:#f9f9f9;" onload="getData()">
 <section id="container">
     <!--顶部-->
     <header class="header fixed-top clearfix" id="commonHeader"></header>
@@ -121,12 +121,12 @@
                             <input type="text" style="width:416px;">
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">活动地点</span>
-                            <input type="text" style="width:416px;">
+                            <span class="pre">照片</span>
+                            <input type="file" style="width:416px;display: inline" name="zpfile" id="zpfile">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">人员描述</span>
-                            <textarea type="text" style="width:416px;height:60px;resize: none;"></textarea>
+                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="ryms" id="ryms"></textarea>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                url: '1.html',
+                url: '/create',
                 type: 'post',
                 data: formData,
                 dataType: 'json',
@@ -179,7 +179,7 @@
                     $('#dataModal').modal('hide');
                 },
                 error: function () {
-                    alert('err');
+                    alert(json.data);
                 }
             });
 
@@ -188,7 +188,21 @@
 
 
     function getData() {
-
+        $.ajax({
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: '/display',
+            type: 'post',
+            dataType: 'rows',
+            success: function (rows) {
+                console.log(rows);
+                $('#dataModal').modal('hide');
+            },
+            error: function () {
+                alert("err");
+            }
+        });
     }
 </script>
 </html>

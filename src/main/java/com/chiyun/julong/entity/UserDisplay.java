@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user_Display", schema = "julong", catalog = "")
+@Table(name = "user_display", schema = "julong", catalog = "")
 public class UserDisplay {
     private String name;
     private String account;
@@ -16,7 +16,7 @@ public class UserDisplay {
     private String idcard;
     private Timestamp birthdate;
     private String description;
-    private String phone;
+    private String photo;
     private Integer jobtitlenum;
     private String id;
 
@@ -111,13 +111,13 @@ public class UserDisplay {
     }
 
     @Basic
-    @Column(name = "phone")
-    public String getPhone() {
-        return phone;
+    @Column(name = "photo")
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoto(String phone) {
+        this.photo = photo;
     }
 
     @Basic
@@ -154,7 +154,7 @@ public class UserDisplay {
                 Objects.equals(idcard, that.idcard) &&
                 Objects.equals(birthdate, that.birthdate) &&
                 Objects.equals(description, that.description) &&
-                Objects.equals(phone, that.phone) &&
+                Objects.equals(photo, that.photo) &&
                 Objects.equals(jobtitlenum, that.jobtitlenum) &&
                 Objects.equals(id, that.id);
     }
@@ -162,6 +162,6 @@ public class UserDisplay {
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, birthdate, description, phone, jobtitlenum, id);
+        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, birthdate, description, photo, jobtitlenum, id);
     }
 }
