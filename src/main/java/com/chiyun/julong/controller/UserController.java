@@ -44,14 +44,14 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping("/display")
+    @RequestMapping("/user/display")
     public ApiResult<Object> dislpay(HttpSession httpSession) throws Exception {
 
         //listUser = (List<UserEntity>) userRepository.findAllUser();
 
         listUser = (List<UserDisplay>) userDisplayRepository.findAll();
         System.out.print("listUser:" + listUser.size());
-        System.out.print("_____________________listUser:" + listUser);
+        System.out.print("-------------listUser:" + listUser);
 
         if (listUser == null) {
             return ApiResult.FAILURE("数据库错误");
@@ -79,7 +79,7 @@ public class UserController {
     }
 
     @ResponseBody
-    @RequestMapping("/create")
+    @RequestMapping("/user/create")
     //@AccessRequired(menue = 0, action = 1)
     public ApiResult<Object> create(String username, String name, String sex, String zhiwu, HttpServletRequest httpServletRequest, String ryms, HttpSession httpSession) throws Exception {
 //        String personid = (String) httpSession.getAttribute("id");
@@ -104,7 +104,7 @@ public class UserController {
         return ApiResult.SUCCESS("新建成员成功");
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("/user/update")
     @AccessRequired(menue = 0, action = 1)
     public ApiResult<Object> update(UserEntity userEntity, HttpSession httpSession) throws Exception {
         String personid = (String) httpSession.getAttribute("id");
@@ -127,7 +127,7 @@ public class UserController {
 
 
     @ResponseBody
-    @RequestMapping("/del")
+    @RequestMapping("/user/del")
     public ApiResult<Object> login(String id, HttpSession httpSession) throws Exception {
        /*UserEntity userEntity = userRepository.delete(id);
         if (userEntity == null) {
