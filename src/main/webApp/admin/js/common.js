@@ -7,6 +7,9 @@ $(function () {
     dictInit('lx',DICT.dylx);
     dictInit('sex',DICT.sex);
     dictInit('xl',DICT.xl);
+    initDataTable();//初始化Table插件
+
+
 });
 
 
