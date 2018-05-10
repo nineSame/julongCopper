@@ -9,7 +9,6 @@ $(function() {
     setSearchBox(); //设置模拟搜索框
     $('body').click(function(){bodyClicked();}); //添加点击其他位置收起搜索选项
     setBannerData();  //设置banner的数据
-    initBannerData(); //设置banner的初始数据
     setBannerHover();//设置banner的hover效果
 });
 
@@ -33,6 +32,7 @@ function setList() {
                 // console.log(liHtml);
                 $('#news_list').append(liHtml);
                 // $('#animation').terseBanner({btn:true});
+                initBannerData(); //设置banner的初始数据
                 setNewsListHover();//设置新闻列表的hover效果
             }else{
                 alert(json.resMsg);
@@ -70,8 +70,8 @@ function setSearchBox() {
     for (var i = 0; i < aSelShow.length;i++){
         aSelShow[i].index = i;
         this.flag = false;  //true表示显示
-        aSelShow[i].onclick = function () {
 
+        aSelShow[i].onclick = function (ev) {
             hideAll();
 
             this.flag = !this.flag;
@@ -94,7 +94,8 @@ function setSearchBox() {
                     flagFalse();
                 }
             }
-
+            //阻止向下冒泡
+            ev.stopPropagation();
         }
     }
     $('#search_btn').click(function(){
@@ -121,11 +122,11 @@ function bodyClicked(ev) {
         } else {
             return false;
         }
-        if (e && e.stopPropagation) {//阻止冒泡
-            e.stopPropagation();
-        } else {
-            window.event.cancelBubble = true;
-        }
+        // if (e && e.stopPropagation) {//阻止冒泡
+        //     e.stopPropagation();
+        // } else {
+        //     window.event.cancelBubble = true;
+        // }
     };
 
 
