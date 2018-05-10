@@ -19,6 +19,7 @@ public class UserDisplay {
     private String photo;
     private Integer jobtitlenum;
     private String id;
+    private String updatedate;
 
     @Basic
     @Column(name = "NAME")
@@ -140,6 +141,16 @@ public class UserDisplay {
         this.id = id;
     }
 
+    @Basic
+    @Column(name = "updatedate")
+    public String getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(String updatedate) {
+        this.updatedate =  updatedate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -156,12 +167,13 @@ public class UserDisplay {
                 Objects.equals(description, that.description) &&
                 Objects.equals(photo, that.photo) &&
                 Objects.equals(jobtitlenum, that.jobtitlenum) &&
-                Objects.equals(id, that.id);
+                Objects.equals(id, that.id)&&
+                Objects.equals(updatedate, that.updatedate);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, birthdate, description, photo, jobtitlenum, id);
+        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, birthdate, description, photo, jobtitlenum, id,updatedate);
     }
 }

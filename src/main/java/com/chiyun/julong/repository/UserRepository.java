@@ -13,8 +13,8 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
 
     UserEntity findByAccountAndPassword(String username, String password);
 
-   @Query("select name,account,role,gender,jobtitle,idcard,birthdate,description from UserEntity")
-    List<UserEntity> findAllUser();
+/*   @Query("select name,account,role,gender,jobtitle,idcard,birthdate,description from UserEntity order by updatedate desc")
+    List<UserEntity> findAllUser();*/
 
    //使用原生sql通过id删除用户
     @Query(value = "delete from user where id=? ", nativeQuery = true)

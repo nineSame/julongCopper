@@ -1,5 +1,6 @@
 package com.chiyun.julong.controller;
 
+import com.chiyun.julong.common.ApiPageResult;
 import com.chiyun.julong.common.ApiResult;
 import com.chiyun.julong.common.annotation.AccessRequired;
 import com.chiyun.julong.entity.UserDisplay;
@@ -49,15 +50,18 @@ public class UserController {
 
         //listUser = (List<UserEntity>) userRepository.findAllUser();
 
-        listUser = (List<UserDisplay>) userDisplayRepository.findAll();
-        System.out.print("listUser:" + listUser.size());
+        listUser = userDisplayRepository.findAlldesc();
+        long total = userDisplayRepository.count();
+        System.out.print("total:" + total);
         System.out.print("-------------listUser:" + listUser);
-
+        // listUser.add((total);
         if (listUser == null) {
             return ApiResult.FAILURE("数据库错误");
         }
         //httpSession.setAttribute("id", userEntity.getId());
-        return ApiResult.SUCCESS(listUser);
+        //ApiPageResult ApiPageResult = new
+        return ApiPageResult.SUCCESS(listUser,total);
+
     }
 
 

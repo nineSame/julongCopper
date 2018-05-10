@@ -21,6 +21,7 @@ public class UserEntity {
     private String description;
     private String photo;
     private int jobtitlenum;
+    private String updatedate;
 
     public UserEntity() {
     }
@@ -162,6 +163,7 @@ public class UserEntity {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
+
     @Basic
     @Column(name = "jobtitlenum")
     public int getJobtitlenum() {
@@ -171,6 +173,18 @@ public class UserEntity {
     public void setJobtitlenum(int jobtitlenum) {
         this.jobtitlenum = jobtitlenum;
     }
+
+    @Basic
+    @Column(name = "updatedate")
+    public String getUpdatedate() {
+        return updatedate;
+    }
+
+    public void setUpdatedate(String updatedate) {
+        this.updatedate =  updatedate;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -187,12 +201,13 @@ public class UserEntity {
                 Objects.equals(birthdate, that.birthdate) &&
                 Objects.equals(description, that.description)&&
                 Objects.equals(photo, that.photo)&&
-                Objects.equals(jobtitlenum, that.jobtitlenum);
+                Objects.equals(jobtitlenum, that.jobtitlenum)&&
+                Objects.equals(updatedate, that.updatedate);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, birthdate, description ,photo, jobtitlenum);
+        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, birthdate, description ,photo, jobtitlenum,updatedate);
     }
 }
