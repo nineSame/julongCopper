@@ -20,6 +20,6 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     @Query(value = "delete from user where id=? ", nativeQuery = true)
     @Modifying
     @Transactional
-    public int deleteOrderById(String id);
+     int deleteOrderById(String id);
     //UserEntity delete(String id);
 }
