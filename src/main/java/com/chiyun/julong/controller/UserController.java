@@ -111,10 +111,10 @@ public class UserController {
     @RequestMapping("/user/update")
     @AccessRequired(menue = 0, action = 1)
     public ApiResult<Object> update(UserEntity userEntity, HttpSession httpSession) throws Exception {
-        String personid = (String) httpSession.getAttribute("id");
-        if (personid.isEmpty()) {
+        //String personid = (String) httpSession.getAttribute("id");
+        /*if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
-        }
+        }*/
         if (userEntity == null) {
             return ApiResult.FAILURE("参数错误");
         }

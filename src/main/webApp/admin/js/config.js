@@ -1,8 +1,7 @@
 
 var LoginUserInfo = JSON.parse(localStorage.getItem('loginUserInfo'));
 //服务器接口地址
-//var ServerUrl = location.origin + '/djxt/';
-var ServerUrl = location.origin + '/';
+var ServerUrl = location.origin;
 //左侧菜单
 var HomeMenu = [
     {
@@ -57,15 +56,7 @@ var HomeMenu = [
 
 //字典数据
 var DICT = {
-    dylx: {
-        1: '入党积极分子',
-        2: '党员发展对象',
-        3: '预备党员',
-        4: '预备转正党员',
-        5: '正式党员',
-        6: '流动党员',
-        7: '注销党员'
-    },
     sex:{1:'男',2:'女',3:'未知'},
-    xl: {1:'小学',2:'初中',3:'高中',4:'大专',5:'本科',6:'硕士',7:'博士'}
+    xl: {1:'小学',2:'初中',3:'高中',4:'大专',5:'本科',6:'硕士',7:'博士'},
+    zwjb: {1:'董事长',2:'总经理',3: '普通职员'}
 };
