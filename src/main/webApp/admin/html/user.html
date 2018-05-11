@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../css/common.css?v=1.0">
     <link rel="stylesheet" href="../css/sjtj.css?v=1.0">
 </head>
-<body style="background:#f9f9f9;" onload="getData()">
+<body style="background:#f9f9f9;">
 <section id="container">
     <!--顶部-->
     <header class="header fixed-top clearfix" id="commonHeader"></header>
@@ -156,7 +156,7 @@
 <script src="../assets/bootstrap/morris.js"></script>
 <script>
     $(function(){
-        getData();//获取数据
+
         operateData();//操作数据
 
     });
@@ -170,7 +170,7 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                url: '/create',
+                url: '/user/create',
                 type: 'post',
                 data: formData,
                 dataType: 'json',
@@ -187,22 +187,6 @@
     }
 
 
-    function getData() {
-        $.ajax({
-            cache: false,
-            contentType: false,
-            processData: false,
-            url: '/display',
-            type: 'post',
-            dataType: 'rows',
-            success: function (rows) {
-                console.log(rows);
-                $('#dataModal').modal('hide');
-            },
-            error: function () {
-                alert("err");
-            }
-        });
-    }
+
 </script>
 </html>

@@ -8,24 +8,29 @@ import com.chiyun.julong.entity.UserEntity;
 import com.chiyun.julong.repository.UserRepository;
 import com.chiyun.julong.repository.userDisplayRepository;
 import com.chiyun.julong.utils.Md5Util;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 //@RestController
 @Controller
 //@RequestMapping("/User")
 public class UserController {
-     private List<UserDisplay> listUser = new ArrayList();
+     private List<UserDisplay> listUser;
+     private List<UserDisplay> ListUserPage;
      //private String name;
     @Resource
     private userDisplayRepository userDisplayRepository;
@@ -85,7 +90,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/user/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String username, String name, String sex, String zhiwu, HttpServletRequest httpServletRequest, String ryms, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(String username, String name, int sex, String zhiwu, HttpServletRequest httpServletRequest, String ryms, HttpSession httpSession) throws Exception {
 //        String personid = (String) httpSession.getAttribute("id");
 //        if (personid.isEmpty()) {
 //            return ApiResult.UNKNOWN();
@@ -95,10 +100,17 @@ public class UserController {
       if(name.isEmpty()){
         return ApiResult.FAILURE("姓名为空");
       }
+      //处理图片文件格式
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) httpServletRequest;
         MultipartFile file = multipartRequest.getFile("zpfile");
         String zpfile = file.getOriginalFilename();
+
+        //保存当前时间到数据库
+       /* Date time=new Date(new java.util.Date().getTime());
+        System.out.print("----------time:" + time);*/
+
         UserEntity userEntity = new UserEntity(username,zhiwu,name,sex,zpfile,ryms);
+        userEntity.setUpdatedate(new Date());
         UserEntity entity = userRepository.save(userEntity);
         System.out.print("----------entity:" + entity + "userEntity"+ userEntity);
            if (entity == null) {
@@ -108,20 +120,26 @@ public class UserController {
         return ApiResult.SUCCESS("新建成员成功");
     }
 
+    @ResponseBody
     @RequestMapping("/user/update")
     @AccessRequired(menue = 0, action = 1)
     public ApiResult<Object> update(UserEntity userEntity, HttpSession httpSession) throws Exception {
-        String personid = (String) httpSession.getAttribute("id");
+      /*  String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
-        }
+        }*/
         if (userEntity == null) {
             return ApiResult.FAILURE("参数错误");
         }
         UserEntity userEntity1 = userRepository.findById(userEntity.getId());
-        if (!userEntity1.getName().equals(userEntity.getName())) {
-            userEntity1.setName(userEntity.getName());
+        if(userEntity1==null){
+            return ApiResult.FAILURE("未找到该用户");
         }
+       /* if (userEntity1.getName()==null||userEntity1.getName().isEmpty()){
+
+        }else if (!userEntity1.getName().equals(userEntity.getName())) {
+            userEntity1.setName(userEntity.getName());
+        }*/
         UserEntity entity = userRepository.save(userEntity1);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
@@ -209,5 +227,37 @@ public class UserController {
         userEntity.setPassword(Md5Util.getMD5(newpwd));
         userRepository.save(userEntity);
         return ApiResult.SUCCESS("密码修改成功");
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping("/user/seaarchById")
+    public ApiResult<Object> searchById(String id,HttpSession httpSession) throws Exception {
+
+        UserDisplay oneUser = userDisplayRepository.findById(id);
+        if (oneUser == null) {
+            return ApiResult.FAILURE("未找到该用户");
+        }
+        //httpSession.setAttribute("id", userEntity.getId());
+        //ApiPageResult ApiPageResult = new
+        return ApiResult.SUCCESS(oneUser);
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping("/user/page")
+    public ApiResult<Object> page(int page, int size, HttpSession httpSession){
+
+
+        Page<UserDisplay> list = userDisplayRepository.findAllBy( PageRequest.of(page,size, Sort.unsorted()));
+        if (list == null) {
+            return ApiResult.FAILURE("没有数据");
+        }
+        //httpSession.setAttribute("id", userEntity.getId());
+        //ApiPageResult ApiPageResult = new
+        return ApiResult.SUCCESS(list);
+
     }
 }

@@ -3,6 +3,7 @@ package com.chiyun.julong.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -14,17 +15,13 @@ public class UserEntity {
     private String account;
     private int role;
     private Integer valid;
-    private String gender;
+    private int gender;
     private String jobtitle;
     private String idcard;
-    private String birthdate;
     private String description;
     private String photo;
     private int jobtitlenum;
-    private String updatedate;
-
-    public UserEntity() {
-    }
+    private Date updatedate;
 
 
     public UserEntity(String account, String password) {
@@ -33,13 +30,16 @@ public class UserEntity {
     }
 
 
-    public UserEntity(String account, String jobtitle, String name, String gender, String photo, String description) {
+    public UserEntity(String account, String jobtitle, String name, int gender, String photo, String description) {
         this.account = account;
         this.jobtitle = jobtitle;
         this.name = name;
         this.gender = gender;
         this.photo = photo;
         this.description = description;
+    }
+
+    public UserEntity() {
     }
 
     @Id
@@ -106,11 +106,11 @@ public class UserEntity {
 
     @Basic
     @Column(name = "gender")
-    public String getGender() {
+    public int getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
         this.gender = gender;
     }
 
@@ -132,16 +132,6 @@ public class UserEntity {
 
     public void setIdcard(String idcard) {
         this.idcard = idcard;
-    }
-
-    @Basic
-    @Column(name = "birthdate")
-    public String getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
     }
 
     @Basic
@@ -176,11 +166,11 @@ public class UserEntity {
 
     @Basic
     @Column(name = "updatedate")
-    public String getUpdatedate() {
+    public Date getUpdatedate() {
         return updatedate;
     }
 
-    public void setUpdatedate(String updatedate) {
+    public void setUpdatedate(Date updatedate) {
         this.updatedate =  updatedate;
     }
 
@@ -198,7 +188,6 @@ public class UserEntity {
                 Objects.equals(gender, that.gender) &&
                 Objects.equals(jobtitle, that.jobtitle) &&
                 Objects.equals(idcard, that.idcard) &&
-                Objects.equals(birthdate, that.birthdate) &&
                 Objects.equals(description, that.description)&&
                 Objects.equals(photo, that.photo)&&
                 Objects.equals(jobtitlenum, that.jobtitlenum)&&
@@ -208,6 +197,6 @@ public class UserEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, birthdate, description ,photo, jobtitlenum,updatedate);
+        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, description ,photo, jobtitlenum,updatedate);
     }
 }

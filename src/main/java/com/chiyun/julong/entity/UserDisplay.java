@@ -14,7 +14,6 @@ public class UserDisplay {
     private String gender;
     private String jobtitle;
     private String idcard;
-    private Timestamp birthdate;
     private String description;
     private String photo;
     private Integer jobtitlenum;
@@ -92,16 +91,6 @@ public class UserDisplay {
     }
 
     @Basic
-    @Column(name = "birthdate")
-    public Timestamp getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Timestamp birthdate) {
-        this.birthdate = birthdate;
-    }
-
-    @Basic
     @Column(name = "description")
     public String getDescription() {
         return description;
@@ -163,7 +152,6 @@ public class UserDisplay {
                 Objects.equals(gender, that.gender) &&
                 Objects.equals(jobtitle, that.jobtitle) &&
                 Objects.equals(idcard, that.idcard) &&
-                Objects.equals(birthdate, that.birthdate) &&
                 Objects.equals(description, that.description) &&
                 Objects.equals(photo, that.photo) &&
                 Objects.equals(jobtitlenum, that.jobtitlenum) &&
@@ -174,6 +162,6 @@ public class UserDisplay {
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, birthdate, description, photo, jobtitlenum, id,updatedate);
+        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, description, photo, jobtitlenum, id,updatedate);
     }
 }

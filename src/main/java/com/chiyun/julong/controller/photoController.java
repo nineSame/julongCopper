@@ -85,7 +85,7 @@ public class photoController {
     @ResponseBody
     @RequestMapping("/photo/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String title, HttpServletRequest httpServletRequest, String description, String place,HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(String title, HttpServletRequest httpServletRequest, String description, HttpSession httpSession) throws Exception {
         //判断是否为管理员
 
         //判断数据中的必填项是否为空
@@ -95,7 +95,7 @@ public class photoController {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) httpServletRequest;
         MultipartFile file = multipartRequest.getFile("photofile");
         String photofile = file.getOriginalFilename();
-        photoEntity photoEntity = new photoEntity(title, photofile,description,place);
+        photoEntity photoEntity = new photoEntity(title, photofile,description);
         photoEntity entity = photoRepository.save(photoEntity);
         System.out.print("----------entity:" + entity + "photoEntity"+ photoEntity);
         if (entity == null) {

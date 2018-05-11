@@ -12,16 +12,14 @@ public class photoEntity {
     private String title;
     private String src;
     private String description;
-    private String place;
 
     public photoEntity() {
     }
 
-    public photoEntity(String title, String src, String description, String place) {
+    public photoEntity(String title, String src, String description) {
         this.title = title;
         this.src = src;
         this.description = description;
-        this.place = place;
     }
 
 
@@ -67,16 +65,6 @@ public class photoEntity {
         this.description = description;
     }
 
-    @Basic
-    @Column(name = "place")
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
 
     @Override
     public boolean equals(Object o) {
@@ -86,14 +74,13 @@ public class photoEntity {
         return Objects.equals(id, that.id) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(src, that.src) &&
-                Objects.equals(description, that.description)&&
-                Objects.equals(place, that.place);
+                Objects.equals(description, that.description);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, title, src, description ,place);
+        return Objects.hash(id, title, src, description);
     }
 }
 
