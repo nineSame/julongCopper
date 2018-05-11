@@ -51,8 +51,8 @@ function getUrlParam() {
 function initDataTable() {
     $.fn.dataTable = function(options) {
         var defaultOptions = {
-            url: ServerUrl + '/website/json/test.json',
-            method: 'get',      //请求方式（*）
+            url: urlConfig.displayUrl,
+            method: 'post',      //请求方式（*）
             cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
             striped: true,  //表格显示条纹，默认为false
             pagination: true, // 在表格底部显示分页组件，默认false
@@ -67,14 +67,21 @@ function initDataTable() {
             onLoadError: function(){  //加载失败时执行
                 console.info("加载数据失败");
             },
-            /*queryParamsType : "undefined",
-            queryParams: function queryParams(params) {   //设置查询参数
+            //queryParamsType : "undefined",
+
+            /*queryParams: function queryParams(params) {   //设置查询参数
                 return {
                     pageNumber: params.pageNumber,
                     pageSize: params.pageSize,
                     orderNum : $("#orderNum").val()
                 }
             },*/
+            responseHandler: function(res) {
+                return {
+                    "total": res.total,//总页数
+                    "rows": res.data   //数据
+                };
+            },
         };
         var opt = $.extend({},defaultOptions,options);
         this.bootstrapTable(opt);
@@ -82,7 +89,7 @@ function initDataTable() {
 }
 
 //新增,保存表单数据
-function operateData(opt) {
+function operateData() {
     //点击新增
     $('#addDataBtn').off('click').on('click',function () {
         $('#modalTitle').text('新增');
@@ -94,26 +101,28 @@ function operateData(opt) {
     $('#saveDataBtn').off('click').on('click',function () {
         var formData = new FormData($("#dataForm")[0]);
         var dataId = $('#editId').val();
+        var url = urlConfig.addUrl;
         //编辑保存
         if(dataId){
-
+            url = urlConfig.updateUrl;
         }
-        //新增保存
-        else{
-
-        }
-
         $.ajax({
             cache: false,
             contentType: false,
             processData: false,
-            url: '1.html',
+            url: url,
             type: 'post',
             data: formData,
             dataType: 'json',
             success: function (json) {
                 console.log(json);
-                $('#dataModal').modal('hide');
+                if(json.resCode == 200){
+                    $('#dataModal').modal('hide');
+                    $("#dataTable").bootstrapTable('refresh',{});
+                }else{
+                    alert(json.resMsg);
+                }
+
             },
             error: function () {
                 alert('err');
@@ -124,24 +133,36 @@ function operateData(opt) {
 }
 
 //表格操作按钮
-function tableBtn(id,type) {
-    $('#dataTable').dataTable('refresh');
+function tableBtn(dataId,type) {
     //删除
     if(type == 'del'){
-        $('#delId').val(id);
+        $('#delId').val(dataId);
         $('#delModal').modal('show');
         $('#delConfirm').off('click').on('click',function () {
-            var delId = $('#delId').val();
-            alert(delId);
-            $('#delModal').modal('hide');
+            $.post(urlConfig.delUrl, {id:dataId},function (res) {
+                if(res.resCode == 200){
+                    $("#dataTable").bootstrapTable('refresh',{});
+                    $('#delModal').modal('hide');
+                }else{
+                    alert(res.resMsg);
+                }
+            },'json');
         });
     }
     //编辑
     else if(type == 'edit'){
         $("#dataForm")[0].reset();
         $('#modalTitle').text('编辑');
-        $('#editId').val('id');
+        $('#editId').val(dataId);
         $('#dataModal').modal('show');
+        /*$.post(urlConfig.edit, {id:dataId},function (res) {
+            if(res.resCode == 200){
+                $("#dataTable").bootstrapTable('refresh',{});
+                $('#delModal').modal('hide');
+            }else{
+                alert(res.resMsg);
+            }
+        },'json');*/
     }
 }
 

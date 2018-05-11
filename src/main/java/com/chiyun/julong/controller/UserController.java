@@ -100,7 +100,6 @@ public class UserController {
       if(name.isEmpty()){
         return ApiResult.FAILURE("姓名为空");
       }
-      //处理图片文件格式
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) httpServletRequest;
         MultipartFile file = multipartRequest.getFile("zpfile");
         String zpfile = file.getOriginalFilename();

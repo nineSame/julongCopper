@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="../css/sjtj.css?v=1.0">
 </head>
 <body style="background:#f9f9f9;">
+<body>
 <section id="container">
     <!--顶部-->
     <header class="header fixed-top clearfix" id="commonHeader"></header>
@@ -182,11 +183,59 @@
                     alert(json.data);
                 }
             });
+        dictInit('gender',DICT.sex);
+        dictInit('jobtitlenum',DICT.zwjb);
+        getData();//获取数据
+        operateData();
 
         });
     }
 
 
 
+    });
+    function getData() {
+        $("#dataTable").dataTable({ // 对应table标签的id
+            //表头信息添加
+            columns: [
+                {
+                    field: 'name',
+                    title: '姓名',
+                    align: 'center'
+                },
+                {
+                    field: 'gender',
+                    title: '性别',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return DICT.sex[value];
+                    }
+                },
+                {
+                    field: 'account',
+                    title: '账号',
+                    align: 'center'
+                },
+                {
+                    field: 'password',
+                    title: '密码',
+                    align: 'center'
+                },
+                {
+                    title: "操作",
+                    align: 'center',
+                    width: 160, // 定义列的宽度，单位为像素px
+                    formatter: function (value, row, index) {
+                        var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
+                        btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
+                        if(row.account == 'admin'){
+                            btn = '';
+                        }
+                        return btn;
+                    }
+                }
+            ]
+        });
+    }
 </script>
 </html>
