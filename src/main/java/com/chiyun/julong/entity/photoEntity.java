@@ -3,6 +3,7 @@ package com.chiyun.julong.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -12,6 +13,7 @@ public class photoEntity {
     private String title;
     private String src;
     private String description;
+    private Date updatetime;
 
     public photoEntity() {
     }
@@ -65,6 +67,16 @@ public class photoEntity {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "updatetime")
+    public Date getUpdatetime() {
+        return updatetime;
+    }
+
+    public void setUpdatetime(Date description) {
+        this.updatetime = updatetime;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -74,13 +86,14 @@ public class photoEntity {
         return Objects.equals(id, that.id) &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(src, that.src) &&
-                Objects.equals(description, that.description);
+                Objects.equals(description, that.description)&&
+                Objects.equals(updatetime, that.updatetime);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, title, src, description);
+        return Objects.hash(id, title, src, description,updatetime);
     }
 }
 

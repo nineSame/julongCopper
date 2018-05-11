@@ -18,7 +18,7 @@ public class UserDisplay {
     private String photo;
     private Integer jobtitlenum;
     private String id;
-    private String updatedate;
+    private String updatetime;
 
     @Basic
     @Column(name = "NAME")
@@ -131,13 +131,13 @@ public class UserDisplay {
     }
 
     @Basic
-    @Column(name = "updatedate")
-    public String getUpdatedate() {
-        return updatedate;
+    @Column(name = "updatetime")
+    public String getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdatedate(String updatedate) {
-        this.updatedate =  updatedate;
+    public void setUpdatetime(String updatetime) {
+        this.updatetime =  updatetime;
     }
 
     @Override
@@ -156,12 +156,12 @@ public class UserDisplay {
                 Objects.equals(photo, that.photo) &&
                 Objects.equals(jobtitlenum, that.jobtitlenum) &&
                 Objects.equals(id, that.id)&&
-                Objects.equals(updatedate, that.updatedate);
+                Objects.equals(updatetime, that.updatetime);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, description, photo, jobtitlenum, id,updatedate);
+        return Objects.hash(name, account, role, valid, gender, jobtitle, idcard, description, photo, jobtitlenum, id,updatetime);
     }
 }

@@ -72,14 +72,14 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/login")
-    public ApiResult<Object> login(String username, String password, HttpSession httpSession) throws Exception {
-        if (username == null|| username.isEmpty() || password == null|| username.isEmpty()) {
+    public ApiResult<Object> login(String zh, String mm, HttpSession httpSession) throws Exception {
+        if (zh == null|| zh.isEmpty() || mm == null|| zh.isEmpty()) {
             return ApiResult.FAILURE("用户名或密码不能为空");
         }
-        System.out.print("password:" + password);
-        String pwd = Md5Util.getMD5(password);
+        System.out.print("password:" + mm);
+        String pwd = Md5Util.getMD5(mm);
         System.out.print("password:" + pwd);
-        UserEntity userEntity = userRepository.findByAccountAndPassword(username, pwd);
+        UserEntity userEntity = userRepository.findByAccountAndPassword(zh, pwd);
         if (userEntity == null) {
             return ApiResult.FAILURE("用户名或密码错误");
         }
@@ -90,17 +90,17 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/user/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String username, String name, int sex, String zhiwu, HttpServletRequest httpServletRequest, String ryms, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(String xm, String mm, String zh, int js, int sfyx, int xb, String zw, String sfz, String ms, HttpServletRequest zp, int zwdjpx, HttpSession httpSession) throws Exception {
 //        String personid = (String) httpSession.getAttribute("id");
 //        if (personid.isEmpty()) {
 //            return ApiResult.UNKNOWN();
 //        }
         //String pwd = Md5Util.getMD5(password);
-        //UserEntity userEntity = new UserEntity(pwd, username);
-      if(name.isEmpty()){
+        //UserEntity userEntity = new UserEntity(pwd, zh);
+      if(xm.isEmpty()){
         return ApiResult.FAILURE("姓名为空");
       }
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) httpServletRequest;
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) zp;
         MultipartFile file = multipartRequest.getFile("zpfile");
         String zpfile = file.getOriginalFilename();
 
@@ -108,8 +108,8 @@ public class UserController {
        /* Date time=new Date(new java.util.Date().getTime());
         System.out.print("----------time:" + time);*/
 
-        UserEntity userEntity = new UserEntity(username,zhiwu,name,sex,zpfile,ryms);
-        userEntity.setUpdatedate(new Date());
+        UserEntity userEntity = new UserEntity(zh,zw,xm,xb,zpfile,ms,mm,js,sfyx,sfz,zwdjpx);
+        userEntity.setUpdatetime(new Date());
         UserEntity entity = userRepository.save(userEntity);
         System.out.print("----------entity:" + entity + "userEntity"+ userEntity);
            if (entity == null) {
@@ -139,6 +139,7 @@ public class UserController {
         }else if (!userEntity1.getName().equals(userEntity.getName())) {
             userEntity1.setName(userEntity.getName());
         }*/
+        userEntity1.setUpdatetime(new Date());
         UserEntity entity = userRepository.save(userEntity1);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
@@ -173,7 +174,7 @@ public class UserController {
 
     @RequestMapping("/valid")
     @AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> valid(String id, int valid, HttpSession httpSession) {
+    public ApiResult<Object> valid(String id, int sfyx, HttpSession httpSession) {
         String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
@@ -182,14 +183,14 @@ public class UserController {
         if (userEntity == null) {
             return ApiResult.FAILURE("不存在的用户");
         }
-        userEntity.setValid(valid);
+        userEntity.setValid(sfyx);
         userRepository.save(userEntity);
         return ApiResult.SUCCESS();
     }
 
     @RequestMapping("/setrole")
     @AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> setrole(String id, int role, HttpSession httpSession) {
+    public ApiResult<Object> setrole(String id, int js, HttpSession httpSession) {
         String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
@@ -202,7 +203,7 @@ public class UserController {
         if (userEntity == null) {
             return ApiResult.FAILURE("不存在的用户");
         }
-        userEntity.setRole(role);
+        userEntity.setRole(js);
         userRepository.save(userEntity);
         return ApiResult.SUCCESS();
     }
@@ -247,10 +248,12 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/user/page")
-    public ApiResult<Object> page(int page, int size, HttpSession httpSession){
+    public ApiResult<Object> page(String zh,int page, int size, HttpSession httpSession){
 
-
-        Page<UserDisplay> list = userDisplayRepository.findAllBy( PageRequest.of(page,size, Sort.unsorted()));
+if(zh==null){
+    zh="%%";
+}
+        Page<UserDisplay> list = userDisplayRepository.findAllByAccountLike(zh,PageRequest.of(page,size, Sort.unsorted()));
         if (list == null) {
             return ApiResult.FAILURE("没有数据");
         }

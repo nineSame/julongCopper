@@ -21,7 +21,7 @@ public class UserEntity {
     private String description;
     private String photo;
     private int jobtitlenum;
-    private Date updatedate;
+    private Date updatetime;
 
 
     public UserEntity(String account, String password) {
@@ -29,17 +29,18 @@ public class UserEntity {
         this.password = password;
     }
 
-
-    public UserEntity(String account, String jobtitle, String name, int gender, String photo, String description) {
+    public UserEntity(String account, String jobtitle, String name, int gender, String photo, String description, String password, int role, int valid, String idcard, int jobtitlenum) {
         this.account = account;
         this.jobtitle = jobtitle;
         this.name = name;
         this.gender = gender;
         this.photo = photo;
         this.description = description;
-    }
-
-    public UserEntity() {
+        this.password = password;
+        this.role = role;
+        this.valid = valid;
+        this.idcard = idcard;
+        this.jobtitlenum = jobtitlenum;
     }
 
     @Id
@@ -165,13 +166,13 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "updatedate")
-    public Date getUpdatedate() {
-        return updatedate;
+    @Column(name = "updatetime")
+    public Date getUpdatetime() {
+        return updatetime;
     }
 
-    public void setUpdatedate(Date updatedate) {
-        this.updatedate =  updatedate;
+    public void setUpdatetime(Date updatetime) {
+        this.updatetime =  updatetime;
     }
 
 
@@ -191,12 +192,12 @@ public class UserEntity {
                 Objects.equals(description, that.description)&&
                 Objects.equals(photo, that.photo)&&
                 Objects.equals(jobtitlenum, that.jobtitlenum)&&
-                Objects.equals(updatedate, that.updatedate);
+                Objects.equals(updatetime, that.updatetime);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, description ,photo, jobtitlenum,updatedate);
+        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, description ,photo, jobtitlenum,updatetime);
     }
 }

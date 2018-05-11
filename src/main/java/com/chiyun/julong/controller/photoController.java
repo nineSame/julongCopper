@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -25,8 +26,8 @@ public class photoController {
 
     @ResponseBody
     @RequestMapping("/photo/display")
-    public ApiResult<Object> lb(String place, HttpSession httpSession) throws Exception {
-        ListPhoto = photoRepository.findByPlace(place);
+    public ApiResult<Object> lb(HttpSession httpSession) throws Exception {
+        ListPhoto = (List<photoEntity>) photoRepository.findAll();
 
         if (ListPhoto == null) {
             return ApiResult.FAILURE("数据库错误");
@@ -68,12 +69,17 @@ public class photoController {
         if (photoEntity == null) {
             return ApiResult.FAILURE("参数错误");
         }
-        //查询是否有该图片
+        photoEntity photoEntity1 = photoRepository.findById(photoEntity.getId());
+        if(photoEntity1==null){
+            return ApiResult.FAILURE("未找到该用户");
+        }
+       /* //查询是否有该图片
         photoEntity photoEntity1 = photoRepository.findById(photoEntity.getId());
         if (!photoEntity1.getTitle().equals(photoEntity.getTitle())) {
             photoEntity1.setTitle(photoEntity.getTitle());
-        }
-        //执行删除操作
+        }*/
+        //执行保存操作
+        photoEntity1.setUpdatetime(new Date());
         photoEntity entity = photoRepository.save(photoEntity1);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
@@ -85,17 +91,18 @@ public class photoController {
     @ResponseBody
     @RequestMapping("/photo/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String title, HttpServletRequest httpServletRequest, String description, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(String tpbt, HttpServletRequest tplj, String tpms, HttpSession httpSession) throws Exception {
         //判断是否为管理员
 
         //判断数据中的必填项是否为空
         /*if(name.isEmpty()){
             return ApiResult.FAILURE("姓名为空");
         }*/
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) httpServletRequest;
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tplj;
         MultipartFile file = multipartRequest.getFile("photofile");
         String photofile = file.getOriginalFilename();
-        photoEntity photoEntity = new photoEntity(title, photofile,description);
+        photoEntity photoEntity = new photoEntity(tpbt, photofile,tpms);
+        photoEntity.setUpdatetime(new Date());
         photoEntity entity = photoRepository.save(photoEntity);
         System.out.print("----------entity:" + entity + "photoEntity"+ photoEntity);
         if (entity == null) {
