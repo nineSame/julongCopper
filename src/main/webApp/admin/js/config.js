@@ -49,7 +49,11 @@ var HomeMenu = [
         icon: 'fa-home' ,
         type: 'user',
         children: []
-    },
+    },{
+        name: '网站首页',
+        icon: 'fa-home' ,
+        type: 'index'
+    }
 
 ];
 

@@ -51,6 +51,7 @@ function getUrlParam() {
 function initDataTable() {
     $.fn.dataTable = function(options) {
         var defaultOptions = {
+            contentType: 'application/x-www-form-urlencoded',
             url: urlConfig.displayUrl,
             method: 'post',      //请求方式（*）
             cache: false, // 设置为 false 禁用 AJAX 数据缓存， 默认为true
@@ -62,26 +63,24 @@ function initDataTable() {
             sidePagination: 'server', // 设置为服务器端分页
             columns: [],
             onLoadSuccess: function(){  //加载成功时执行
-                console.info("加载成功");
+                //console.info("加载成功");
             },
             onLoadError: function(){  //加载失败时执行
                 console.info("加载数据失败");
             },
             queryParamsType : "undefined",
-
             queryParams: function(params) {   //设置查询参数
-                console.log(111,params)
                 return {
                     page: params.pageNumber,
-                    size: params.pageSize,
+                    size: params.pageSize
                 }
             },
             responseHandler: function(res) {
                 return {
-                    "total": res.total,//总页数
-                    "rows": res.data   //数据
+                    "total": res.data.totalElements,//总页数
+                    "rows": res.data.content,//数据
                 };
-            },
+            }
         };
         var opt = $.extend({},defaultOptions,options);
         this.bootstrapTable(opt);
@@ -155,14 +154,15 @@ function tableBtn(dataId,type) {
         $('#modalTitle').text('编辑');
         $('#editId').val(dataId);
         $('#dataModal').modal('show');
-        /*$.post(urlConfig.edit, {id:dataId},function (res) {
-            if(res.resCode == 200){
-                $("#dataTable").bootstrapTable('refresh',{});
-                $('#delModal').modal('hide');
+        $.post(urlConfig.getByIdUrl, {id:dataId},function (json) {
+            if(json.resCode == 200){
+                console.log(json);
+                //$("#dataTable").bootstrapTable('refresh',{});
+                //$('#delModal').modal('hide');
             }else{
                 alert(res.resMsg);
             }
-        },'json');*/
+        },'json');
     }
 }
 

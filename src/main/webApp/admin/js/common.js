@@ -33,7 +33,7 @@ function createHomeMenu() {
     $('#commonHeader').load('header.html',function () {
         setUserInfo();
     });
-    $('#footer').load('footer.html');
+    $('#footer').load('footer.html?v='+Math.random());
     var menuHtml = '';
     for (var i = 0; i < HomeMenu.length; i++) {
         var menuItem = HomeMenu[i];
