@@ -7,21 +7,22 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "photo", schema = "julong")
-public class photoEntity {
+@Table(name = "news", schema = "julong")
+public class newsEntity {
     private String id;
-    private String tpbt;//图片标题
+    private String xwbt;//新闻标题
     private String tplj;//图片路径
-    private String tpms;//图片描述
+    private String xwnr;//新闻内容
+    private Date cjsj;//c创建时间时间
     private Date gxsj;//更新时间
 
-    public photoEntity() {
+    public newsEntity() {
     }
 
-    public photoEntity(String tpbt, String tplj, String tpms) {
-        this.tpbt = tpbt;
+    public newsEntity(String xwbt, String tplj, String xwnr) {
+        this.xwbt = xwbt;
         this.tplj = tplj;
-        this.tpms = tpms;
+        this.xwnr = xwnr;
     }
 
 
@@ -39,16 +40,16 @@ public class photoEntity {
 
     @Basic
     @Column(name = "title")
-    public String getTpbt() {
-        return tpbt;
+    public String getXwbt() {
+        return xwbt;
     }
 
-    public void setTpbt(String tpbt) {
-        this.tpbt = tpbt;
+    public void setXwbt(String xwbt) {
+        this.xwbt = xwbt;
     }
 
     @Basic
-    @Column(name = "src")
+    @Column(name = "photosrc")
     public String getTplj() {
         return tplj;
     }
@@ -58,13 +59,23 @@ public class photoEntity {
     }
 
     @Basic
-    @Column(name = "description")
-    public String getTpms() {
-        return tpms;
+    @Column(name = "content")
+    public String getXwnr() {
+        return xwnr;
     }
 
-    public void setTpms(String tpms) {
-        this.tpms = tpms;
+    public void setXwnr(String xwnr) {
+        this.xwnr = xwnr;
+    }
+
+    @Basic
+    @Column(name = "createtime")
+    public Date getCjsj() {
+        return cjsj;
+    }
+
+    public void setCjsj(Date cjsj) {
+        this.cjsj = cjsj;
     }
 
     @Basic
@@ -82,18 +93,19 @@ public class photoEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        photoEntity that = (photoEntity) o;
+        newsEntity that = (newsEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(tpbt, that.tpbt) &&
+                Objects.equals(xwbt, that.xwbt) &&
                 Objects.equals(tplj, that.tplj) &&
-                Objects.equals(tpms, that.tpms)&&
-                Objects.equals(gxsj, that.gxsj);
+                Objects.equals(xwnr, that.xwnr)&&
+                Objects.equals(gxsj, that.gxsj)&&
+                Objects.equals(cjsj, that.cjsj);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, tpbt, tplj, tpms,gxsj);
+        return Objects.hash(id, xwbt, tplj, xwnr,gxsj, cjsj);
     }
 }
 

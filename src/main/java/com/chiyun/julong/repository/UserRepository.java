@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
     UserEntity findById(String id);
 
-    UserEntity findByAccountAndPassword(String username, String password);
+    UserEntity findByZhAndMm(String zh, String mm);
 
 /*   @Query("select name,account,role,gender,jobtitle,idcard,birthdate,description from UserEntity order by updatedate desc")
     List<UserEntity> findAllUser();*/

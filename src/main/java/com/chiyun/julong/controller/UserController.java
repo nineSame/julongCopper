@@ -79,7 +79,7 @@ public class UserController {
         System.out.print("password:" + mm);
         String pwd = Md5Util.getMD5(mm);
         System.out.print("password:" + pwd);
-        UserEntity userEntity = userRepository.findByAccountAndPassword(zh, pwd);
+        UserEntity userEntity = userRepository.findByZhAndMm(zh, pwd);
         if (userEntity == null) {
             return ApiResult.FAILURE("用户名或密码错误");
         }
@@ -109,7 +109,7 @@ public class UserController {
         System.out.print("----------time:" + time);*/
 
         UserEntity userEntity = new UserEntity(zh,zw,xm,xb,zpfile,ms,mm,js,sfyx,sfz,zwdjpx);
-        userEntity.setUpdatetime(new Date());
+        userEntity.setGxsj(new Date());
         UserEntity entity = userRepository.save(userEntity);
         System.out.print("----------entity:" + entity + "userEntity"+ userEntity);
            if (entity == null) {
@@ -139,7 +139,7 @@ public class UserController {
         }else if (!userEntity1.getName().equals(userEntity.getName())) {
             userEntity1.setName(userEntity.getName());
         }*/
-        userEntity1.setUpdatetime(new Date());
+        userEntity1.setGxsj(new Date());
         UserEntity entity = userRepository.save(userEntity1);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
@@ -183,7 +183,7 @@ public class UserController {
         if (userEntity == null) {
             return ApiResult.FAILURE("不存在的用户");
         }
-        userEntity.setValid(sfyx);
+        userEntity.setSfyx(sfyx);
         userRepository.save(userEntity);
         return ApiResult.SUCCESS();
     }
@@ -203,7 +203,7 @@ public class UserController {
         if (userEntity == null) {
             return ApiResult.FAILURE("不存在的用户");
         }
-        userEntity.setRole(js);
+        userEntity.setJs(js);
         userRepository.save(userEntity);
         return ApiResult.SUCCESS();
     }
@@ -221,10 +221,10 @@ public class UserController {
         if (userEntity == null) {
             return ApiResult.FAILURE("不存在的用户");
         }
-        if (!Md5Util.getMD5(oldpwd).equals(userEntity.getPassword())) {
+        if (!Md5Util.getMD5(oldpwd).equals(userEntity.getMm())) {
             return ApiResult.FAILURE("原密码错误");
         }
-        userEntity.setPassword(Md5Util.getMD5(newpwd));
+        userEntity.setMm(Md5Util.getMD5(newpwd));
         userRepository.save(userEntity);
         return ApiResult.SUCCESS("密码修改成功");
     }
@@ -249,19 +249,12 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/user/page")
     public ApiResult<Object> page(String zh,int page,int size, HttpSession httpSession){
-
-        /*int page= (int) req.getAttribute("page");
-        int size= (int) req.getAttribute("size");*/
-        System.out.print("----1111111111:");
-        System.out.print("----zh:" + zh +"----page:" + page + "----size:" + size);
 //zh为关键字查询，目前只有帐号一个需求
 if(zh==null){
     zh="%%";
-    System.out.print("----2222222222:");
 }
-        Page<UserDisplay> list = userDisplayRepository.findAllByAccountLike(zh,PageRequest.of(page-1,size, Sort.unsorted()));
+        Page<UserDisplay> list = userDisplayRepository.findAllByZhLike(zh,PageRequest.of(page-1,size, Sort.unsorted()));
 
-        System.out.print("----list:" + list);
         if (list == null) {
             return ApiResult.FAILURE("没有数据");
         }
@@ -270,27 +263,4 @@ if(zh==null){
         return ApiResult.SUCCESS(list);
 
     }
-/*
-    @ResponseBody
-    @RequestMapping("/user/page")
-    public ApiResult<Object> page(String zh,int page, int size, HttpSession httpSession){
-
-        System.out.print("----1111111111:");
-        System.out.print("----zh:" + zh +"----page:" + page + "----size:" + size);
-//zh为关键字查询，目前只有帐号一个需求
-        if(zh==null){
-            zh="%%";
-            System.out.print("----2222222222:");
-        }
-        Page<UserDisplay> list = userDisplayRepository.findAllByAccountLike(zh,PageRequest.of(page,size, Sort.unsorted()));
-
-        System.out.print("----list:" + list);
-        if (list == null) {
-            return ApiResult.FAILURE("没有数据");
-        }
-        //httpSession.setAttribute("id", userEntity.getId());
-        //ApiPageResult ApiPageResult = new
-        return ApiResult.SUCCESS(list);
-
-    }*/
 }

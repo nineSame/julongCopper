@@ -7,40 +7,43 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "user", schema = "julong", catalog = "")
+@Table(name = "user", schema = "julong")
 public class UserEntity {
     private String id;
-    private String name;
-    private String password;
-    private String account;
-    private int role;
-    private Integer valid;
-    private int gender;
-    private String jobtitle;
-    private String idcard;
-    private String description;
-    private String photo;
-    private int jobtitlenum;
-    private Date updatetime;
+    private String xm;//姓名
+    private String mm;//密码
+    private String zh;//账号
+    private int js;//角色
+    private int sfyx;//是否有效
+    private int xb;//性别
+    private String zw;//职务
+    private String sfzh;//身份证号
+    private String ms;//描述
+    private String zp;//照片路径
+    private int zwdjpx;//职务登记排序
+    private Date gxsj;//更新时间
 
 
-    public UserEntity(String account, String password) {
-        this.account = account;
-        this.password = password;
+    public UserEntity(String zh, String mm) {
+        this.zh = zh;
+        this.mm = mm;
     }
 
-    public UserEntity(String account, String jobtitle, String name, int gender, String photo, String description, String password, int role, int valid, String idcard, int jobtitlenum) {
-        this.account = account;
-        this.jobtitle = jobtitle;
-        this.name = name;
-        this.gender = gender;
-        this.photo = photo;
-        this.description = description;
-        this.password = password;
-        this.role = role;
-        this.valid = valid;
-        this.idcard = idcard;
-        this.jobtitlenum = jobtitlenum;
+    public UserEntity(String zh, String xm, String zm, int xb, String zp, String ms, String mm, int js, int sfyx, String sfzh, int zwdjpx) {
+        this.zh = zh;
+        this.zw = zw;
+        this.xm = xm;
+        this.xb = xb;
+        this.zp = zp;
+        this.ms = ms;
+        this.mm = mm;
+        this.js = js;
+        this.sfyx = sfyx;
+        this.sfzh = sfzh;
+        this.zwdjpx = zwdjpx;
+    }
+
+    public UserEntity() {
     }
 
     @Id
@@ -57,122 +60,122 @@ public class UserEntity {
 
     @Basic
     @Column(name = "NAME")
-    public String getName() {
-        return name;
+    public String getXm() {
+        return xm;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setXm(String xm) {
+        this.xm = xm;
     }
 
     @Basic
     @Column(name = "PASSWORD")
-    public String getPassword() {
-        return password;
+    public String getMm() {
+        return mm;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setMm(String mm) {
+        this.mm = mm;
     }
 
     @Basic
     @Column(name = "ACCOUNT")
-    public String getAccount() {
-        return account;
+    public String getZh() {
+        return zh;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setZh(String zh) {
+        this.zh = zh;
     }
 
     @Basic
     @Column(name = "ROLE")
-    public int getRole() {
-        return role;
+    public int getJs() {
+        return js;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setJs(int js) {
+        this.js = js;
     }
 
     @Basic
     @Column(name = "VALID")
-    public Integer getValid() {
-        return valid;
+    public int getSfyx() {
+        return sfyx;
     }
 
-    public void setValid(Integer valid) {
-        this.valid = valid;
+    public void setSfyx(int sfyx) {
+        this.sfyx = sfyx;
     }
 
     @Basic
     @Column(name = "gender")
-    public int getGender() {
-        return gender;
+    public int getXb() {
+        return xb;
     }
 
-    public void setGender(int gender) {
-        this.gender = gender;
+    public void setXb(int xb) {
+        this.xb = xb;
     }
 
     @Basic
     @Column(name = "jobtitle")
-    public String getJobtitle() {
-        return jobtitle;
+    public String getZw() {
+        return zw;
     }
 
-    public void setJobtitle(String jobtitle) {
-        this.jobtitle = jobtitle;
+    public void setZw(String zw) {
+        this.zw = zw;
     }
 
     @Basic
     @Column(name = "idcard")
-    public String getIdcard() {
-        return idcard;
+    public String getSfzh() {
+        return sfzh;
     }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard;
+    public void setSfzh(String sfzh) {
+        this.sfzh = sfzh;
     }
 
     @Basic
     @Column(name = "description")
-    public String getDescription() {
-        return description;
+    public String getMs() {
+        return ms;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMs(String ms) {
+        this.ms = ms;
     }
 
     @Basic
     @Column(name = "photo")
-    public String getPhoto() {
-        return photo;
+    public String getZp() {
+        return zp;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setZp(String zp) {
+        this.zp = zp;
     }
 
     @Basic
     @Column(name = "jobtitlenum")
-    public int getJobtitlenum() {
-        return jobtitlenum;
+    public int getZwdjpx() {
+        return zwdjpx;
     }
 
-    public void setJobtitlenum(int jobtitlenum) {
-        this.jobtitlenum = jobtitlenum;
+    public void setZwdjpx(int zwdjpx) {
+        this.zwdjpx = zwdjpx;
     }
 
     @Basic
     @Column(name = "updatetime")
-    public Date getUpdatetime() {
-        return updatetime;
+    public Date getGxsj() {
+        return gxsj;
     }
 
-    public void setUpdatetime(Date updatetime) {
-        this.updatetime =  updatetime;
+    public void setGxsj(Date gxsj) {
+        this.gxsj =  gxsj;
     }
 
 
@@ -182,22 +185,22 @@ public class UserEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(account, that.account) &&
-                Objects.equals(role, that.role) &&
-                Objects.equals(gender, that.gender) &&
-                Objects.equals(jobtitle, that.jobtitle) &&
-                Objects.equals(idcard, that.idcard) &&
-                Objects.equals(description, that.description)&&
-                Objects.equals(photo, that.photo)&&
-                Objects.equals(jobtitlenum, that.jobtitlenum)&&
-                Objects.equals(updatetime, that.updatetime);
+                Objects.equals(xm, that.xm) &&
+                Objects.equals(mm, that.mm) &&
+                Objects.equals(zh, that.zh) &&
+                Objects.equals(js, that.js) &&
+                Objects.equals(xb, that.xb) &&
+                Objects.equals(zw, that.zw) &&
+                Objects.equals(sfzh, that.sfzh) &&
+                Objects.equals(ms, that.ms)&&
+                Objects.equals(zp, that.zp)&&
+                Objects.equals(zwdjpx, that.zwdjpx)&&
+                Objects.equals(gxsj, that.gxsj);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, name, password, account, role, valid, gender, jobtitle, idcard, description ,photo, jobtitlenum,updatetime);
+        return Objects.hash(id, xm, mm, zh, js, sfyx, xb, zw, sfzh, ms ,zp, zwdjpx,gxsj);
     }
 }

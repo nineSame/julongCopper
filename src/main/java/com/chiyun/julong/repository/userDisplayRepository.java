@@ -24,5 +24,5 @@ public interface userDisplayRepository  extends CrudRepository<UserDisplay, Long
 //    @Query(value = "select * from user_display limit (a-1)*b,b", nativeQuery = true)
 //    @Modifying
 //    @Transactional
-    Page<UserDisplay> findAllByAccountLike(String account,Pageable pageable);
+    Page<UserDisplay> findAllByZhLike(String account,Pageable pageable);
 }
