@@ -3,13 +3,7 @@
 $(function () {
     createHomeMenu();   //创建左边菜单
     leftMenuClass();    //左边菜单样式
-    //dateTime();         //时间控件初始化
-    dictInit('lx',DICT.dylx);
-    dictInit('sex',DICT.sex);
-    dictInit('xl',DICT.xl);
     initDataTable();//初始化Table插件
-
-
 });
 
 

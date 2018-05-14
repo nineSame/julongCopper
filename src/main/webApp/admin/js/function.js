@@ -159,6 +159,12 @@ function tableBtn(dataId,type) {
                 console.log(json);
                 //$("#dataTable").bootstrapTable('refresh',{});
                 //$('#delModal').modal('hide');
+                var data = json.data;
+                for(var k in data){
+                    var v = data[k];
+                    $('#' + k).val(v);
+                }
+                //setFormParam("#dataForm",data)
             }else{
                 alert(res.resMsg);
             }
@@ -167,9 +173,9 @@ function tableBtn(dataId,type) {
 }
 
 //表单赋值
-function setFormParam() {
+function setFormParam(formElement,data) {
     //简便方法
-    $('#info_form').find('[name]').each(function() {
+    $(formElement).find('[name]').each(function() {
         var type = $(this)[0].nodeName.toLowerCase();
         var name = $(this).attr('name');
         $(type+"[name='"+name+"']").val(data[''+name+'']);
