@@ -67,15 +67,15 @@ function initDataTable() {
             onLoadError: function(){  //加载失败时执行
                 console.info("加载数据失败");
             },
-            //queryParamsType : "undefined",
+            queryParamsType : "undefined",
 
-            /*queryParams: function queryParams(params) {   //设置查询参数
+            queryParams: function(params) {   //设置查询参数
+                console.log(111,params)
                 return {
-                    pageNumber: params.pageNumber,
-                    pageSize: params.pageSize,
-                    orderNum : $("#orderNum").val()
+                    page: params.pageNumber,
+                    size: params.pageSize,
                 }
-            },*/
+            },
             responseHandler: function(res) {
                 return {
                     "total": res.total,//总页数
