@@ -115,3 +115,30 @@
 .position_content li .bottom_con {
     padding: 55px 30px;
 }
+
+
+
+/*手机端*/
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+
+    .leader_name {
+        width: 30% !important;
+    }
+
+    .leader_position {
+        display: none;
+    }
+
+    .school {
+        display: none;
+    }
+
+    .top .ico {
+        float: right;
+        margin-right: 30px;
+    }
+
+
+
+}

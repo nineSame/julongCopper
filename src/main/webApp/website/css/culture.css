@@ -1,0 +1,76 @@
+.culture .title_box .title {
+    font-size: 30px;
+    color: #000;
+    padding-bottom: 10px;
+    margin-top: 50px;
+}
+
+.culture .title_box .dec {
+    font-size: 14px;
+    color: #8a8a8a;
+    padding-bottom: 35px;
+}
+
+.culture .part1 .part1_con li {
+    position: relative;
+}
+
+.culture .part1 .part1_con li .text_box {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: url(../img/culture_pt1_bg.png);
+    width: 100%;
+    color: #fff;
+    height: 144px;
+    transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    background-repeat-y: no-repeat;
+}
+
+.culture .part1 .part1_con li .text_box .cont{
+    padding: 50px 0 0 20px;
+}
+
+.culture .part1 .part1_con li .text_box .cont .title {
+    font-size: 22px;
+}
+
+.culture .part1 .part1_con li .text_box .cont .dec2 {
+    display: none;
+}
+
+.culture .part2 {
+    margin-top: 40px;
+}
+
+.culture .part2 .part2_con li {
+    margin-bottom: 30px;
+    background: #f9f7f0;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.culture .part2 .part2_con li .left_p {
+    width: 37.5%;
+}
+
+.culture .part2 .part2_con li .left_p .con {
+    padding: 70px;
+}
+
+.culture .part2 .part2_con li .left_p .con .title {
+    font-size: 26px;
+    color: #000;
+    padding-bottom: 25px;
+    margin-top: 15px;
+}
+
+.culture .part2 .part2_con li .left_p .con .dec {
+    font-size: 14px;
+    color: #8a8a8a;
+}
+
+.culture .part2 .part2_con li .right_p {
+    width: 62.5%;
+}
