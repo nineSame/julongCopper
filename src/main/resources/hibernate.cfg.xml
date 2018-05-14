@@ -9,6 +9,7 @@
     <mapping class="com.chiyun.julong.entity.UserEntity"/>
     <mapping class="com.chiyun.julong.entity.UserDisplay"/>
     <mapping class="com.chiyun.julong.entity.photoEntity"/>
+    <mapping class="com.chiyun.julong.entity.newsEntity"/>
 
     <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->

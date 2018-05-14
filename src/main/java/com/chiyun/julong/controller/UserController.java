@@ -248,12 +248,20 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/user/page")
-    public ApiResult<Object> page(String zh,int page, int size, HttpSession httpSession){
+    public ApiResult<Object> page(String zh,int page,int size, HttpSession httpSession){
 
+        /*int page= (int) req.getAttribute("page");
+        int size= (int) req.getAttribute("size");*/
+        System.out.print("----1111111111:");
+        System.out.print("----zh:" + zh +"----page:" + page + "----size:" + size);
+//zh为关键字查询，目前只有帐号一个需求
 if(zh==null){
     zh="%%";
+    System.out.print("----2222222222:");
 }
-        Page<UserDisplay> list = userDisplayRepository.findAllByAccountLike(zh,PageRequest.of(page,size, Sort.unsorted()));
+        Page<UserDisplay> list = userDisplayRepository.findAllByAccountLike(zh,PageRequest.of(page-1,size, Sort.unsorted()));
+
+        System.out.print("----list:" + list);
         if (list == null) {
             return ApiResult.FAILURE("没有数据");
         }
@@ -262,4 +270,27 @@ if(zh==null){
         return ApiResult.SUCCESS(list);
 
     }
+/*
+    @ResponseBody
+    @RequestMapping("/user/page")
+    public ApiResult<Object> page(String zh,int page, int size, HttpSession httpSession){
+
+        System.out.print("----1111111111:");
+        System.out.print("----zh:" + zh +"----page:" + page + "----size:" + size);
+//zh为关键字查询，目前只有帐号一个需求
+        if(zh==null){
+            zh="%%";
+            System.out.print("----2222222222:");
+        }
+        Page<UserDisplay> list = userDisplayRepository.findAllByAccountLike(zh,PageRequest.of(page,size, Sort.unsorted()));
+
+        System.out.print("----list:" + list);
+        if (list == null) {
+            return ApiResult.FAILURE("没有数据");
+        }
+        //httpSession.setAttribute("id", userEntity.getId());
+        //ApiPageResult ApiPageResult = new
+        return ApiResult.SUCCESS(list);
+
+    }*/
 }
