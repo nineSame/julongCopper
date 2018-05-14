@@ -25,7 +25,7 @@ public class photoController {
 
 
     @ResponseBody
-    @RequestMapping("/photo/display")
+    @RequestMapping("/banner/display")
     public ApiResult<Object> lb(HttpSession httpSession) throws Exception {
         ListPhoto = (List<photoEntity>) photoRepository.findAll();
 
@@ -37,7 +37,7 @@ public class photoController {
 
 
     @ResponseBody
-    @RequestMapping("/photo/del")
+    @RequestMapping("/banner/del")
     public ApiResult<Object> del(String id,HttpSession httpSession) throws Exception {
         //判断是否为管理员
 
@@ -56,7 +56,7 @@ public class photoController {
 
 
     @ResponseBody
-    @RequestMapping("/photo/updata")
+    @RequestMapping("/banner/updata")
     public ApiResult<Object> updata(photoEntity photoEntity,HttpSession httpSession) throws Exception {
         //判断是否登录
         String personid = (String) httpSession.getAttribute("id");
@@ -89,7 +89,7 @@ public class photoController {
 
 
     @ResponseBody
-    @RequestMapping("/photo/create")
+    @RequestMapping("/banner/create")
     //@AccessRequired(menue = 0, action = 1)
     public ApiResult<Object> create(String tpbt, HttpServletRequest tplj, String tpms, HttpSession httpSession) throws Exception {
         //判断是否为管理员
