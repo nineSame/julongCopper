@@ -108,7 +108,6 @@
 <div id="footer"></div>
 </body>
 <script src="../assets/bootstrap/jquery2.0.3.min.js"></script>
-
 <script src="../assets/bootstrap/bootstrap.js"></script>
 <script src="../assets/bootstrap/bootstrap-datetimepicker.js"></script>
 <script src="../assets/bootstrap/bootstrap-table.min.js"></script>
@@ -132,7 +131,7 @@
         displayUrl : ServerUrl + '/user/page',
         getByIdUrl : ServerUrl + '/user/seaarchById',
         updateUrl: ServerUrl + '/user/update',
-        delUrl: ServerUrl + '/user/del',
+        delUrl: ServerUrl + '/user/del'
     };
     $(function(){
         getData();
@@ -176,6 +175,11 @@
             //表头信息添加
             columns: [
                 {
+                    field: 'zh',
+                    title: '账号',
+                    align: 'center'
+                },
+                {
                     field: 'xm',
                     title: '姓名',
                     align: 'center'
@@ -189,13 +193,13 @@
                     }
                 },
                 {
-                    field: 'zh',
-                    title: '账号',
+                    field: 'sfzh',
+                    title: '身份证号',
                     align: 'center'
                 },
                 {
-                    field: 'mm',
-                    title: '密码',
+                    field: 'zw',
+                    title: '公司职务',
                     align: 'center'
                 },
                 {

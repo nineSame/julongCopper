@@ -92,24 +92,22 @@
 <div id="footer"></div>
 </body>
 <script src="../assets/bootstrap/jquery2.0.3.min.js"></script>
-<!-- bootstrap-table.min.js -->
-<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
-<!-- 引入中文语言包 -->
-<script src="https://cdn.bootcss.com/bootstrap-table/1.11.1/locale/bootstrap-table-zh-CN.min.js"></script>
+<script src="../assets/bootstrap/bootstrap.js"></script>
+<script src="../assets/bootstrap/bootstrap-datetimepicker.js"></script>
+<script src="../assets/bootstrap/bootstrap-table.min.js"></script>
+<script src="../assets/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="../assets/bootstrap/locales/bootstrap-table-zh-CN.min.js"></script>
+<!--处理其他-->
+<script src="../assets/bootstrap/jquery.dcjqaccordion.2.7.js"></script>
+<script src="../assets/bootstrap/jquery.scrollTo.js"></script>
+<!--处理滚动条-->
+<script src="../assets/bootstrap/jquery.slimscroll.js"></script>
+<script src="../assets/bootstrap/jquery.nicescroll.js"></script>
 <script src="../js/config.js?v=1.0"></script>
 <script src="../js/function.js?v=1.0"></script>
 <script src="../js/common.js?v=1.0"></script>
-<script src="../assets/bootstrap/bootstrap.js"></script>
-
-<script src="../assets/bootstrap/bootstrap-datetimepicker.js"></script>
-<script src="../assets/bootstrap/locales/bootstrap-datetimepicker.zh-CN.js"></script>
-<script src="../assets/bootstrap/jquery.dcjqaccordion.2.7.js"></script>
-<script src="../assets/bootstrap/jquery.scrollTo.js"></script>
+<!--处理菜单搜索展开-->
 <script src="../assets/bootstrap/scripts.js"></script>
-<script src="../assets/bootstrap/jquery.slimscroll.js"></script>
-<script src="../assets/bootstrap/jquery.nicescroll.js"></script>
-<script src="../assets/bootstrap/raphael-min.js"></script>
-<script src="../assets/bootstrap/morris.js"></script>
 <script>
     //接口地址
     var urlConfig = {
@@ -149,7 +147,12 @@
                     }
                 }
             ],
-            pagination: false
+            pagination: false,
+            responseHandler: function(res) {
+                return {
+                    "rows": res.data
+                };
+            }
         });
     }
 
