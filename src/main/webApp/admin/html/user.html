@@ -88,7 +88,7 @@
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">照片</span>
-                            <input type="file" style="width:416px;display: inline">
+                            <input type="file" style="width:416px;display: inline"  id="zp">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">人员描述</span>
@@ -96,7 +96,7 @@
                         </div>
                     </div>
 
-                    <input type="hidden" id="editId" name="id">
+                    <input type="hidden" id="editId">
                     
                 </div>
             <div class="modal-footer">
@@ -132,6 +132,7 @@
     //接口地址
     var urlConfig = {
         displayUrl : ServerUrl + '/user/page',
+        addUrl : ServerUrl + '/user/create',
         getByIdUrl : ServerUrl + '/user/seaarchById',
         updateUrl: ServerUrl + '/user/update',
         delUrl: ServerUrl + '/user/del'
