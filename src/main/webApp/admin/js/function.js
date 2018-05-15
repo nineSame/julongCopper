@@ -104,6 +104,7 @@ function operateData() {
         //编辑保存
         if(dataId){
             url = urlConfig.updateUrl;
+            formData.append('id',dataId);
         }
         $.ajax({
             cache: false,

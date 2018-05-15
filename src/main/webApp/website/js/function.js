@@ -1,27 +1,10 @@
 function pageCommonLink() {
     /************************************底部友情链接***************************************/
-    var oTopRignt = document.getElementsByClassName('top_right')[0];
-    var oFreindList = document.getElementsByClassName('friend_link')[0];
-    var friend_list_timer = null;
-    oTopRignt.onmouseover = function () {
-        oFreindList.style.display = 'block';
-    };
-
-    oTopRignt.onmouseout = function () {
-        friend_list_timer = setTimeout(function () {
-            oFreindList.style.display = 'none';
-        },100);
-    };
-
-    oFreindList.onmouseover = function () {
-        clearTimeout(friend_list_timer);
-        this.style.display = 'block';
-
-    };
-
-    oFreindList.onmouseout = function () {
-        this.style.display = 'none';
-    }
+    $('.top_right').hover(function (ev) {
+        $('.friend_link').stop().slideDown();
+    },function (ev) {
+        $('.friend_link').stop().slideUp();
+    });
 
     /****************************header、.front添加链接********************/
     $('.logo a').attr("href","./index.html");
@@ -30,7 +13,9 @@ function pageCommonLink() {
     //关于我们
     $('.down_ul').eq(0).find('li').eq(0).find('a').attr("href","./company_info.html");
     $('.down_ul').eq(0).find('li').eq(1).find('a').attr("href","./leaders.html");
+    $('.down_ul').eq(0).find('li').eq(3).find('a').attr("href","./culture.html");
     $('.down_ul').eq(0).find('li').eq(4).find('a').attr("href","./contact_us.html");
+
 
     //资讯中心
     $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","./news_list.html");
@@ -39,6 +24,10 @@ function pageCommonLink() {
 
     //投资者关系
     $('.down_ul').eq(3).find('li').eq(0).find('a').attr("href","./announce_list.html");
+    $('.down_ul').eq(3).find('li').eq(1).find('a').attr("href","./financial_report.html");
+    $('.down_ul').eq(3).find('li').eq(2).find('a').attr("href","./shares.html");
+
+
 
     //.front的链接处理
     if($('.front')){

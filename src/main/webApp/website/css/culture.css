@@ -32,6 +32,10 @@
     padding: 50px 0 0 20px;
 }
 
+.culture .part1 .part1_con li img {
+    transition: 0.3s;
+}
+
 .culture .part1 .part1_con li .text_box .cont .title {
     font-size: 22px;
 }
@@ -49,6 +53,10 @@
     background: #f9f7f0;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
+}
+
+.culture .part2 .part2_con li img {
+    transition: 0.3s;
 }
 
 .culture .part2 .part2_con li .left_p {
