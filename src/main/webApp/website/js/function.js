@@ -105,8 +105,11 @@ function setTop() {
 
     $('#to_top').click(function(){
 
+
+        var page = document.getElementsByClassName('detail_page')[0];
+
         //处理新闻详情页右侧滑动定位效果
-        if($('.detail_page')){
+        if(page != null){
 
             var pageTimer = null;
             setTimeout(function () {
