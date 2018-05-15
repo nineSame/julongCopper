@@ -82,3 +82,46 @@ function headerAnimation() {
     }
 
 }
+
+//top功能
+function setTop() {
+
+
+    //页面滑动top
+    var scroolTop = document.documentElement.scrollTop;
+
+
+    $('body').on('mousewheel',function () {
+        var scroolTop = document.documentElement.scrollTop;
+
+        if (scroolTop > 300){
+            $('#to_top').show();
+        }else {
+            $('#to_top').hide();
+
+        }
+    })
+
+
+    $('#to_top').click(function(){
+
+        //处理新闻详情页右侧滑动定位效果
+        if($('.detail_page')){
+
+            var pageTimer = null;
+            setTimeout(function () {
+                clearInterval(pageTimer);
+            },500);
+            pageTimer = setInterval(function () {
+                adjustPage();
+            },30);
+        }
+
+        $('html,body').animate(
+            {scrollTop: '0px'}, 500),$('#to_top').hide();
+    });
+
+
+
+
+}
