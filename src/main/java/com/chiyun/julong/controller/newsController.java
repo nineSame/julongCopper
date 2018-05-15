@@ -48,9 +48,7 @@ public class newsController {
         if (id == "" || id==null) {
             return ApiResult.FAILURE("参数错误");
         }
-        System.out.print("----------id:" + id);
         int isdel = newsRepository.deleteOrderById(id);
-        System.out.print("----------isdel:" + isdel);
         if (isdel == 0) {
             return ApiResult.FAILURE("删除失败");
         }
@@ -59,27 +57,38 @@ public class newsController {
 
 
     @ResponseBody
-    @RequestMapping("/news/updata")
-    public ApiResult<Object> updata(newsEntity newsEntity,HttpSession httpSession) throws Exception {
+    @RequestMapping("/news/update")
+    public ApiResult<Object> update(newsEntity newsEntity, HttpServletRequest tp, HttpSession httpSession) throws Exception {
         //判断是否登录
-        String personid = (String) httpSession.getAttribute("id");
+       /* String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
-        }
+        }*/
         //判断是否为管理员
 
-        //判断传进的参数是否为空
-        if (newsEntity == null) {
-            return ApiResult.FAILURE("参数错误");
+        //新闻标题和内容属于必填字段，但是新闻图片不一定，所以只在前面判断标题和内容，下面的图片路径可不必判断是否为空
+        //判断传进的新闻标题和内容是否为空
+        String title=newsEntity.getXwbt();
+        String content=newsEntity.getXwnr();
+        if(title==null||title==""||content==null||content==""){
+            return ApiResult.FAILURE("新闻标题和内容为空");
         }
-        //查询是否有该图片
-        newsEntity newsEntity1 = newsRepository.findById(newsEntity.getId());
+        //通过id查询是否有该新闻
+        newsEntity newsEntity1 = newsRepository.findByXwbt(newsEntity.getId());
         if(newsEntity1==null){
             return ApiResult.FAILURE("未找到该用户");
         }
+        //处理传过来的图片路径
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tp;
+        MultipartFile file = multipartRequest.getFile("xwtpfile");
+        String zpfile ="";
+        if (file!=null){
+            zpfile = file.getOriginalFilename();
+        }
+        newsEntity.setXwtplj(zpfile);
         //执行保存操作
-        newsEntity1.setGxsj(new Date());
-        newsEntity entity = newsRepository.save(newsEntity1);
+        newsEntity.setGxsj(new Date());
+        newsEntity entity = newsRepository.save(newsEntity);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
         }
@@ -90,26 +99,40 @@ public class newsController {
     @ResponseBody
     @RequestMapping("/news/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String xwbt, HttpServletRequest tplj, String xwms, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(newsEntity newsEntity, HttpServletRequest tp, HttpSession httpSession) throws Exception {
         //判断是否为管理员
 
         //判断数据中的必填项是否为空
         /*if(name.isEmpty()){
             return ApiResult.FAILURE("姓名为空");
         }*/
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tplj;
-        MultipartFile file = multipartRequest.getFile("newsfile");
-        String newsfile = file.getOriginalFilename();
-        newsEntity newsEntity = new newsEntity(xwbt, newsfile,xwms);
+        //新闻标题和内容属于必填字段，但是新闻图片不一定，所以只在前面判断标题和内容，下面的图片路径可不必判断是否为空
+        //判断传进的新闻标题和内容是否为空
+        String title=newsEntity.getXwbt();
+        String content=newsEntity.getXwnr();
+        if(title==null||title==""||content==null||content==""){
+            return ApiResult.FAILURE("新闻标题和内容为空");
+        }
+        if(newsRepository.findByXwbt(title)!=null){
+            return ApiResult.FAILURE("数据库已有该标题的数据");
+        }
+        //处理图片路径并存储
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tp;
+        MultipartFile file = multipartRequest.getFile("xwtpfile");
+        String zpfile ="";
+        if (file!=null){
+            zpfile = file.getOriginalFilename();
+        }
+        newsEntity.setXwtplj(zpfile);
+        //存创建时间和更新时间
         newsEntity.setCjsj(new Date());
         newsEntity.setGxsj(new Date());
         newsEntity entity = newsRepository.save(newsEntity);
-        System.out.print("----------entity:" + entity + "newsEntity"+ newsEntity);
         if (entity == null) {
-            return ApiResult.FAILURE("新建图片失败");
+            return ApiResult.FAILURE("新建新闻失败");
         }
 
-        return ApiResult.SUCCESS("新建图片成功");
+        return ApiResult.SUCCESS("新建新闻成功");
     }
 
     @ResponseBody

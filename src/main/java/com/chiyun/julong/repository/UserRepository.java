@@ -22,6 +22,8 @@ public interface UserRepository extends CrudRepository<UserEntity, Long> {
     @Modifying
     @Transactional
      int deleteOrderById(String id);
+
+    UserEntity findByZh(String zh);
     //UserEntity delete(String id);
 
 

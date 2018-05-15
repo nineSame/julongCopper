@@ -56,31 +56,40 @@ public class photoController {
 
 
     @ResponseBody
-    @RequestMapping("/banner/updata")
-    public ApiResult<Object> updata(photoEntity photoEntity,HttpSession httpSession) throws Exception {
+    @RequestMapping("/banner/update")
+    public ApiResult<Object> update(photoEntity photoEntity,HttpServletRequest tplj, HttpSession httpSession) throws Exception {
         //判断是否登录
-        String personid = (String) httpSession.getAttribute("id");
+       /* String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
-        }
+        }*/
         //判断是否为管理员
 
-        //判断传进的参数是否为空
-        if (photoEntity == null) {
-            return ApiResult.FAILURE("参数错误");
-        }
+        //由于图片标题和描述不一定需要，所以不需要判断传进来的两个参数是否为空，但是在下面必须判断图片路径是否为空
+        //查询是否有该图片
         photoEntity photoEntity1 = photoRepository.findById(photoEntity.getId());
         if(photoEntity1==null){
-            return ApiResult.FAILURE("未找到该用户");
+            return ApiResult.FAILURE("未找到该图片");
         }
-       /* //查询是否有该图片
+       /*
         photoEntity photoEntity1 = photoRepository.findById(photoEntity.getId());
         if (!photoEntity1.getTitle().equals(photoEntity.getTitle())) {
             photoEntity1.setTitle(photoEntity.getTitle());
         }*/
+        //处理传过来的图片路径
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tplj;
+        MultipartFile file = multipartRequest.getFile("tpfile");
+        String zpfile ="";
+        if (file!=null){
+            zpfile = file.getOriginalFilename();
+        }else{
+            return ApiResult.FAILURE("图片路径为空");
+        }
+        photoEntity.setTplj(zpfile);
+        //保存更新时间
+        photoEntity.setGxsj(new Date());
         //执行保存操作
-        photoEntity1.setGxsj(new Date());
-        photoEntity entity = photoRepository.save(photoEntity1);
+        photoEntity entity = photoRepository.save(photoEntity);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
         }
@@ -91,20 +100,22 @@ public class photoController {
     @ResponseBody
     @RequestMapping("/banner/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String tpbt, HttpServletRequest tplj, String tpms, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(photoEntity photoEntity, HttpServletRequest tp, HttpSession httpSession) throws Exception {
         //判断是否为管理员
 
-        //判断数据中的必填项是否为空
-        /*if(name.isEmpty()){
-            return ApiResult.FAILURE("姓名为空");
-        }*/
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tplj;
-        MultipartFile file = multipartRequest.getFile("photofile");
-        String photofile = file.getOriginalFilename();
-        photoEntity photoEntity = new photoEntity(tpbt, photofile,tpms);
+        //由于图片标题和描述不一定需要，所以不需要判断传进来的两个参数是否为空，但是在下面必须判断图片路径是否为空
+        //处理图片路径
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tp;
+        MultipartFile file = multipartRequest.getFile("tpfile");
+        String zpfile ="";
+        if (file!=null){
+            zpfile = file.getOriginalFilename();
+        }else{
+            return ApiResult.FAILURE("图片路径为空");
+        }
+        photoEntity.setTplj(zpfile);
         photoEntity.setGxsj(new Date());
         photoEntity entity = photoRepository.save(photoEntity);
-        System.out.print("----------entity:" + entity + "photoEntity"+ photoEntity);
         if (entity == null) {
             return ApiResult.FAILURE("新建图片失败");
         }

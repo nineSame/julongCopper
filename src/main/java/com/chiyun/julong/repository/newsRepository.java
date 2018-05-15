@@ -20,4 +20,6 @@ public interface newsRepository extends CrudRepository<newsEntity, Long> {
     int deleteOrderById(String id);
 
     Page<newsEntity> findAll(Pageable pageable);
+
+    newsEntity findByXwbt(String title);
 }

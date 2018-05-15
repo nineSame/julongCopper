@@ -10,7 +10,6 @@ import com.chiyun.julong.repository.userDisplayRepository;
 import com.chiyun.julong.utils.Md5Util;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +19,6 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.crypto.Data;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +27,6 @@ import java.util.List;
 //@RequestMapping("/User")
 public class UserController {
      private List<UserDisplay> listUser;
-     private List<UserDisplay> ListUserPage;
      //private String name;
     @Resource
     private userDisplayRepository userDisplayRepository;
@@ -89,29 +85,38 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/user/create")
-    //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(String xm, String mm, String zh, int js, int sfyx, int xb, String zw, String sfz, String ms, HttpServletRequest zp, int zwdjpx, HttpSession httpSession) throws Exception {
+    @AccessRequired(menue = 0, action = 1)
+    public ApiResult<Object> create(UserEntity userEntity, HttpServletRequest zp,  HttpSession httpSession) throws Exception {
 //        String personid = (String) httpSession.getAttribute("id");
 //        if (personid.isEmpty()) {
 //            return ApiResult.UNKNOWN();
 //        }
-        //String pwd = Md5Util.getMD5(password);
-        //UserEntity userEntity = new UserEntity(pwd, zh);
-      if(xm.isEmpty()){
-        return ApiResult.FAILURE("姓名为空");
-      }
+        //用户参数太多，所以在这里用帐号account作为唯一性的判断标志，新增方法中，帐号和密码属于必填字段
+       String username=userEntity.getZh();
+     if(username==null||username==""){
+       return ApiResult.FAILURE("帐号为空");
+     }
+      if(userRepository.findByZh(username)!=null){
+            return ApiResult.FAILURE("数据库已有该帐号的数据");
+        }
+      //处理传过来的图片路径
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) zp;
         MultipartFile file = multipartRequest.getFile("zpfile");
-        String zpfile = file.getOriginalFilename();
-
-        //保存当前时间到数据库
-       /* Date time=new Date(new java.util.Date().getTime());
-        System.out.print("----------time:" + time);*/
-
-        UserEntity userEntity = new UserEntity(zh,zw,xm,xb,zpfile,ms,mm,js,sfyx,sfz,zwdjpx);
+        String zpfile ="";
+        if (file!=null){
+             zpfile = file.getOriginalFilename();
+        }
+        userEntity.setZp(zpfile);
+        //取出密码加密再存进去
+        String password = userEntity.getMm();
+       if(password==null||password==""){
+           return ApiResult.FAILURE("密码不能为空");
+       }
+        userEntity.setMm(Md5Util.getMD5(password));
+        //存更新时间
         userEntity.setGxsj(new Date());
+        //存储操作
         UserEntity entity = userRepository.save(userEntity);
-        System.out.print("----------entity:" + entity + "userEntity"+ userEntity);
            if (entity == null) {
             return ApiResult.FAILURE("新建成员失败");
         }
@@ -122,13 +127,18 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/user/update")
     @AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> update(UserEntity userEntity, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> update(UserEntity userEntity,  HttpServletRequest zp, HttpSession httpSession) throws Exception {
       /*  String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
         }*/
-        if (userEntity == null) {
+        /*if (userEntity == null) {
             return ApiResult.FAILURE("参数错误");
+        }*/
+        //用户参数太多，所以在这里用帐号account作为唯一性的判断标志
+        String username=userEntity.getZh();
+        if(username==null||username==""){
+            return ApiResult.FAILURE("帐号为空");
         }
         UserEntity userEntity1 = userRepository.findById(userEntity.getId());
         if(userEntity1==null){
@@ -139,8 +149,22 @@ public class UserController {
         }else if (!userEntity1.getName().equals(userEntity.getName())) {
             userEntity1.setName(userEntity.getName());
         }*/
-        userEntity1.setGxsj(new Date());
-        UserEntity entity = userRepository.save(userEntity1);
+        //处理传过来的图片路径
+        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) zp;
+        MultipartFile file = multipartRequest.getFile("zpfile");
+        String zpfile ="";
+        if (file!=null){
+            zpfile = file.getOriginalFilename();
+        }else
+        userEntity.setZp(zpfile);
+       //更新的时候把密码加密
+        String password=userEntity.getMm();
+        if(password==null||password==""){
+            return ApiResult.FAILURE("密码不能为空");
+        }
+        userEntity.setMm(Md5Util.getMD5(password));
+        userEntity.setGxsj(new Date());
+        UserEntity entity = userRepository.save(userEntity);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
         }

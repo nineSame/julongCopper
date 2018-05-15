@@ -11,7 +11,7 @@ import java.util.Objects;
 public class newsEntity {
     private String id;
     private String xwbt;//新闻标题
-    private String tplj;//图片路径
+    private String xwtplj;//图片路径
     private String xwnr;//新闻内容
     private Date cjsj;//c创建时间时间
     private Date gxsj;//更新时间
@@ -19,9 +19,9 @@ public class newsEntity {
     public newsEntity() {
     }
 
-    public newsEntity(String xwbt, String tplj, String xwnr) {
+    public newsEntity(String xwbt, String xwtplj, String xwnr) {
         this.xwbt = xwbt;
-        this.tplj = tplj;
+        this.xwtplj = xwtplj;
         this.xwnr = xwnr;
     }
 
@@ -50,12 +50,12 @@ public class newsEntity {
 
     @Basic
     @Column(name = "photosrc")
-    public String getTplj() {
-        return tplj;
+    public String getXwtplj() {
+        return xwtplj;
     }
 
-    public void setTplj(String tplj) {
-        this.tplj = tplj;
+    public void setXwtplj(String xwtplj) {
+        this.xwtplj = xwtplj;
     }
 
     @Basic
@@ -96,7 +96,7 @@ public class newsEntity {
         newsEntity that = (newsEntity) o;
         return Objects.equals(id, that.id) &&
                 Objects.equals(xwbt, that.xwbt) &&
-                Objects.equals(tplj, that.tplj) &&
+                Objects.equals(xwtplj, that.xwtplj) &&
                 Objects.equals(xwnr, that.xwnr)&&
                 Objects.equals(gxsj, that.gxsj)&&
                 Objects.equals(cjsj, that.cjsj);
@@ -105,7 +105,7 @@ public class newsEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, xwbt, tplj, xwnr,gxsj, cjsj);
+        return Objects.hash(id, xwbt, xwtplj, xwnr,gxsj, cjsj);
     }
 }
 
