@@ -9,6 +9,11 @@ $(function () {
     document.body.onmousewheel = function () {
         adjustPage();
     }
+
+    $('body').scroll(function () {
+        adjustPage();
+    })
+
     setPageTitleHover();  //设置新闻选项hover效果
 });
 

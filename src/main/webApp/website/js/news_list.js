@@ -34,6 +34,7 @@ function setList() {
                 // $('#animation').terseBanner({btn:true});
                 initBannerData(); //设置banner的初始数据
                 setNewsListHover();//设置新闻列表的hover效果
+                $('#news_list').find('a').attr("href","news_detail.html");
             }else{
                 alert(json.resMsg);
             }
