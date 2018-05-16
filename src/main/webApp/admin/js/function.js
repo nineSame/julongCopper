@@ -5,8 +5,6 @@ function setValueByJson(obj) {
     }
 }
 
-
-
 //设置子框架容器高度
 function setContainerHeight(height) {
     $('#wrapper').height(height + 10);
@@ -90,49 +88,9 @@ function initDataTable() {
 }
 
 //新增,保存表单数据
-function operateData() {
-    //点击新增
-    $('#addDataBtn').off('click').on('click',function () {
-        $('#modalTitle').text('新增');
-        $("#dataForm")[0].reset();
-        $('#dataModal').modal('show');
-        $('#editId').val('');
-    });
-    //点击保存
-    $('#saveDataBtn').off('click').on('click',function () {
-        var formData = new FormData($("#dataForm")[0]);
-        var dataId = $('#editId').val();
-        var url = urlConfig.addUrl;
-        //编辑保存
-        if(dataId){
-            url = urlConfig.updateUrl;
-            formData.append('id',dataId);
-        }
-        $.ajax({
-            cache: false,
-            contentType: false,
-            processData: false,
-            url: url,
-            type: 'post',
-            data: formData,
-            dataType: 'json',
-            success: function (json) {
-                console.log(json);
-                if(json.resCode == 200){
-                    $('#dataModal').modal('hide');
-                    $("#dataTable").bootstrapTable('refresh',{});
-                }else{
-                    alert(json.resMsg);
-                }
+//新增,保存表单数据
 
-            },
-            error: function () {
-                alert('err');
-            }
-        });
 
-    });
-}
 
 //表格操作按钮
 function tableBtn(dataId,type) {
@@ -157,7 +115,7 @@ function tableBtn(dataId,type) {
         $('#modalTitle').text('编辑');
         $('#editId').val(dataId);
         $('#dataModal').modal('show');
-        $.post(urlConfig.getByIdUrl, {id:dataId},function (json) {
+        $.post(urlConfig.show, {id:dataId},function (json) {
             if(json.resCode == 200){
                 console.log(json);
                 //$("#dataTable").bootstrapTable('refresh',{});
@@ -194,3 +152,25 @@ function getFormParam(elem){
     });
     return formObj;
 }
+//点击input预览图片
+function imgViewByInput(inputId,imgId) {
+    //显示更新图片
+    $('#' + inputId).off('change').on('change', function () {
+        //检验是否为图像文件
+        var file = document.getElementById(inputId).files[0];
+        if(!/image\/\w+/.test(file.type)){
+            alert("请添加图片格式文件！");
+            return false;
+        }
+        var reader = new FileReader();
+        //将文件以Data URL形式读入页面
+        reader.readAsDataURL(file);
+        reader.onload=function(e){
+            var result=document.getElementById(imgId);
+            $('#' + imgId).prop('src',this.result);
+            //显示文件
+            //result.innerHTML='<img src="' + this.result +'" alt="" />';
+        }
+    });
+}
+
