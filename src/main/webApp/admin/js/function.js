@@ -5,14 +5,7 @@ function setValueByJson(obj) {
     }
 }
 
-//初始化字典选择框
-function dictInit(id,dict) {
-    var option = '';
-    for(var k in dict){
-        option += '<option value="'+k+'">'+dict[k]+'</option>'
-    }
-    $('#'+id).append(option);
-}
+
 
 //设置子框架容器高度
 function setContainerHeight(height) {
@@ -25,6 +18,14 @@ function setFrameHeight() {
 }
 
 /*** 工具函数方法 ***/
+//初始化字典选择框
+function dictInit(id,dict) {
+    var option = '';
+    for(var k in dict){
+        option += '<option value="'+k+'">'+dict[k]+'</option>'
+    }
+    $('#'+id).append(option);
+}
 
 //获取页面参数
 function getUrlParam() {
@@ -62,6 +63,7 @@ function initDataTable() {
             pageNumber: 1, // 首页页码
             sidePagination: 'server', // 设置为服务器端分页
             columns: [],
+            undefinedText:'',
             onLoadSuccess: function(){  //加载成功时执行
                 //console.info("加载成功");
             },
@@ -182,11 +184,13 @@ function setFormParam(formElement,data) {
         $(type+"[name='"+name+"']").val(data[''+name+'']);
     });
 }
+
 //表单取值
-function getFormParam(){
-    var param = {};
-    //简便方法
-    $('#info_form').find('[name]').each(function() {
-        param[$(this).attr('name')] = $(this).val();
+function getFormParam(elem){
+    var formObj = {};
+    var formData = $(elem).serializeArray();
+    $.each(formData, function() {
+        formObj[this.name] = this.value;
     });
+    return formObj;
 }

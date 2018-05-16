@@ -66,12 +66,9 @@
             <div class="modal-body">
                 <div  class="form-horizontal">
                     <div class="form-group clearfix modal-form">
+
                         <div class="form-item1 pull-left">
-                            <span class="pre">用户名</span>
-                            <input type="text" style="width:416px;" name="zh" id="zh">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">姓名</span>
+                            <span class="pre">* 姓名</span>
                             <input type="text" style="width:160px;" name="xm" id="xm">
                         </div>
                         <div class="form-item1 pull-left">
@@ -79,8 +76,16 @@
                             <select name="xb" id="xb" style="width:160px;"></select>
                         </div>
                         <div class="form-item1 pull-left">
+                            <span class="pre">* 用户名</span>
+                            <input type="text" placeholder="字母或数字" style="width:160px;" name="zh" id="zh">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">密码</span>
+                            <input type="password" placeholder="不填默认123456" style="width:160px;" id="password">
+                        </div>
+                        <div class="form-item1 pull-left">
                             <span class="pre">身份证号</span>
-                            <input type="text" style="width:416px;" name="sfzh" id="sfzh">
+                            <input type="text" placeholder="最长18位" style="width:416px;" name="sfzh" id="sfzh">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">职务</span>
@@ -88,7 +93,7 @@
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">照片</span>
-                            <input type="file" style="width:416px;display: inline"  id="zp">
+                            <input type="file" style="width:416px;display: inline" name="zp"  id="zp">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">人员描述</span>
@@ -139,9 +144,64 @@
     };
     $(function(){
         getData();
-        operateData();//操作数据
+        operateDataUser();//操作数据
         dictInit('xb',DICT.sex);
     });
+
+    //新增,保存表单数据
+    function operateDataUser() {
+        //点击新增
+        $('#addDataBtn').off('click').on('click',function () {
+            $('#modalTitle').text('新增');
+            $("#dataForm")[0].reset();
+            $('#dataModal').modal('show');
+            $('#editId').val('');
+        });
+        //点击保存
+        $('#saveDataBtn').off('click').on('click',function () {
+            var formData = new FormData($("#dataForm")[0]);
+            var dataId = $('#editId').val();
+            var password = $('#password').val();
+            var url = urlConfig.addUrl;
+            //编辑保存
+            if(dataId){
+                url = urlConfig.updateUrl;
+                formData.append('id',dataId);
+                if(password){
+                    formData.append('mm',password);
+                }
+            }
+            //新增
+            else{
+                password = password || '123456';
+                formData.append('mm',password);
+            }
+            $.ajax({
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: url,
+                type: 'post',
+                data: formData,
+                dataType: 'json',
+                success: function (json) {
+                    console.log(json);
+                    if(json.resCode == 200){
+                        $('#dataModal').modal('hide');
+                        $("#dataTable").bootstrapTable('refresh',{});
+                    }else{
+                        alert(json.resMsg);
+                    }
+
+                },
+                error: function () {
+                    alert('err');
+                }
+            });
+
+        });
+    }
+
 
     function getData() {
         $("#dataTable").dataTable({ // 对应table标签的id
