@@ -1,3 +1,4 @@
+
 .sel {
     margin-top: 50px;
 }
@@ -6,6 +7,9 @@
     font-size: 24px;
     padding: 0 30px;
     position: relative;
+}
+.sel li.cur {
+    color: #bb9205;
 }
 
 .first_li:after {
@@ -29,8 +33,8 @@
     width: 267px;
     height: 205px;
     overflow: hidden;
-    margin-right: 25px;
-    margin-bottom: 25px;
+    margin: 16px;
+    /*margin-bottom: 25px;*/
 }
 
 .img_list li ._img {
@@ -44,6 +48,7 @@
     vertical-align: top;
     -ms-interpolation-mode: bicubic;
     border: 0;
+    transition: 0.3s;
 }
 
 .img_list li i {
@@ -73,4 +78,31 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    transition: 0.3s;
+}
+
+/*遮罩轮播*/
+
+#mask {
+    /*display: none;*/
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 100;
+    top:0;
+    left: 0;
+    background: rgba(0,0,0,0.8);
+}
+
+#mask .lanrenzhijia {
+margin-top: 200px;
+}
+
+#mask .back {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
 }

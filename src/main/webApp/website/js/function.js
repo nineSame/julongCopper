@@ -16,6 +16,8 @@ function pageCommonLink() {
     $('.down_ul').eq(0).find('li').eq(3).find('a').attr("href","./culture.html");
     $('.down_ul').eq(0).find('li').eq(4).find('a').attr("href","./contact_us.html");
 
+    //全景巨龙
+    $('.down_ul').eq(1).find('li').eq(0).find('a').attr("href","./pictures.html");
 
     //资讯中心
     $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","./news_list.html");
