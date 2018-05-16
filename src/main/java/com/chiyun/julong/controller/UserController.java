@@ -159,10 +159,9 @@ public class UserController {
         userEntity.setZp(zpfile);
        //更新的时候把密码加密
         String password=userEntity.getMm();
-        if(password==null||password==""){
-            return ApiResult.FAILURE("密码不能为空");
+        if(password!=null && password!=""){
+            userEntity.setMm(Md5Util.getMD5(password));
         }
-        userEntity.setMm(Md5Util.getMD5(password));
         userEntity.setGxsj(new Date());
         UserEntity entity = userRepository.save(userEntity);
         if (entity == null) {
