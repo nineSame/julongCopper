@@ -10,14 +10,153 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" data-no-instant="">
     <meta name="format-detection" content="telephone=no">
     <meta name="author" content="">
+    <meta name="viewport" content="width=device-width,height=device-height, user-scalable=no,initial-scale=1, minimum-scale=1, maximum-scale=1,target-densitydpi=device-dpi ">
 
     <link rel="stylesheet" href="./Font-Awesome-3.2.1/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./css/common.css" />
-    <link rel="stylesheet" type="text/css" href="./css/leaders.css" />
+    <link rel="stylesheet" type="text/css" href="./css/leaders_test.css" />
     <link rel="icon" href="img/favicon.ico">
+
+
+
+    <link rel="stylesheet" type="text/css" href="../website/lib/side_nav/css/normalize.css" />
+    <!--<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">-->
+    <link rel='stylesheet' href='http://fonts.googleapis.com/icon?family=Material+Icons' type='text/css'>
+    <link rel="stylesheet" href="../website/lib/side_nav/dist/sidenav.min.css" type="text/css">
+    <style type="text/css">
+        .toggle {
+            display: block;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+            width: 24px;
+        }
+    </style>
 
 </head>
 <body>
+
+<!--侧边-->
+
+<!--侧边内容-->
+<nav class="sidenav" data-sidenav data-sidenav-toggle="#sidenav-toggle">
+    <!--<div class="sidenav-brand">-->
+    <!--巨龙铜业-->
+    <!--</div>-->
+
+    <!--<div class="sidenav-header">-->
+    <!--Section Header-->
+    <!--<small>secondary text</small>-->
+    <!--</div>-->
+
+    <ul class="sidenav-menu">
+
+        <li>
+            <a href="javascript:;" data-sidenav-dropdown-toggle class="active">
+                <span class="sidenav-link-icon">
+                <i class="icon-home"></i>
+                </span>
+                <span class="sidenav-link-title" onclick="location='index.html'">首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" data-sidenav-dropdown-toggle class="active">
+                <span class="sidenav-link-icon">
+                <i class="icon-group"></i>
+                </span>
+                <span class="sidenav-link-title">关于我们</span>
+                <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_down</i>
+	          </span>
+                <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_up</i>
+	          </span>
+            </a>
+
+            <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                <li><a href="company_info.html">公司简介</a></li>
+                <li><a href="leaders.html">结构组织</a></li>
+                <li><a href="event.html">发展历程</a></li>
+                <li><a href="culture.html">企业文化</a></li>
+                <li><a href="contact_us.html">联系我们</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" data-sidenav-dropdown-toggle class="active">
+	          <span class="sidenav-link-icon">
+	            <i class="icon-eye-open"></i>
+	          </span>
+                <span class="sidenav-link-title">全景巨龙</span>
+                <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_down</i>
+	          </span>
+                <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_up</i>
+	          </span>
+            </a>
+
+            <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                <li><a href="pictures.html">主营业务</a></li>
+                <li><a href="pictures.html">设备展示</a></li>
+                <li><a href="pictures.html">生产工艺</a></li>
+            </ul>
+        </li>
+
+
+
+        <li>
+            <a href="javascript:;" data-sidenav-dropdown-toggle class="active">
+	          <span class="sidenav-link-icon">
+	            <i class="icon-comment"></i>
+	          </span>
+                <span class="sidenav-link-title">资讯中心</span>
+                <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_down</i>
+	          </span>
+                <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_up</i>
+	          </span>
+            </a>
+
+            <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                <li><a href="news_list.html">公司信息</a></li>
+                <li><a href="social_responsibility.html">社会责任</a></li>
+                <li><a href="activities.html">专题活动</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <a href="javascript:;" data-sidenav-dropdown-toggle class="active">
+	          <span class="sidenav-link-icon">
+	            <i class="icon-bullhorn"></i>
+	          </span>
+                <span class="sidenav-link-title">公告信息</span>
+                <span class="sidenav-dropdown-icon show" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_down</i>
+	          </span>
+                <span class="sidenav-dropdown-icon" data-sidenav-dropdown-icon>
+	            <i class="material-icons">arrow_drop_up</i>
+	          </span>
+            </a>
+
+            <ul class="sidenav-dropdown" data-sidenav-dropdown>
+                <li><a href="announce_list.html">公司公告</a></li>
+                <li><a href="financial_report.html">财务报告</a></li>
+                <li><a href="shares.html">股票信息</a></li>
+            </ul>
+        </li>
+
+    </ul>
+</nav>
+
+<!--触发按钮-->
+<a href="javascript:;" class="toggle" id="sidenav-toggle" style="z-index: 100;position: fixed; top: 20px;right: 20px">
+    <i class="material-icons">menu</i>
+</a>
+
+<!--侧边结束-->
+
 
 <div class="header">
     <div class="header_content">
@@ -175,6 +314,13 @@
 <script src="./js/function.js"></script>
 <script src="js/common.js"></script>
 <script src="./js/leader.js"></script>
+
+
+
+<script src="http://cdn.bootcss.com/jquery/1.11.0/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="js/jquery-1.11.0.min.js"><\/script>')</script>
+<script src="../website/lib/side_nav/dist/sidenav.min.js"></script>
+<script></script>
 
 
 

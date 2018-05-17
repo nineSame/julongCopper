@@ -612,6 +612,11 @@ h2,h3,h4,p{
     height:60px;
 }
 
+/*侧边栏触发按钮*/
+#sidenav-toggle {
+    display: none;
+}
+
 @media screen and (min-width: 320px) and (max-width: 480px) {
     #main_content {
         width: 100%;
@@ -640,7 +645,42 @@ h2,h3,h4,p{
 
     .footer .wrap {
         width: 100% !important;
+        padding-top: 50px;
     }
+
+    .footer {
+        padding: 0;
+    }
+
+    .leader_name {
+        width: 30% !important;
+    }
+
+    .leader_position {
+        display: none;
+    }
+
+    .school {
+        display: none;
+    }
+
+    .top .ico {
+        float: right;
+        margin-right: 30px;
+    }
+
+    #sidenav-toggle {
+        display: block;
+    }
+
+    .logo.left img{
+        height: 40px;
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+
+
 }
 
 
