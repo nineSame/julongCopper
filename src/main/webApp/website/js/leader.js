@@ -123,6 +123,11 @@ function setUsersValue() {
                 for(var i=0;i<data.length;i++){
                     var item = data[i];
 
+                    //姓名为空不显示在页面上
+                    if (data[i].xm == null){
+                        continue;
+                    }
+
                     //数据按照职位阶级分组
                     if (item.zwdjpx == 0){
                         leaderGroup1.push(item);
