@@ -148,20 +148,20 @@
 }
 
 
-.footer_top .friend_link {
-    display: none;
-    width: 204px;
-    height: 140px;
-    padding-top: 0px;
-    margin-top: 0px;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
-    /*background: pink;*/
-    position: absolute;
-    overflow-y: scroll;
-    z-index: 2;
-    background: #ffffff;
-}
+/*.footer_top .friend_link {*/
+    /*display: none;*/
+    /*width: 204px;*/
+    /*height: 140px;*/
+    /*padding-top: 0px;*/
+    /*margin-top: 0px;*/
+    /*padding-bottom: 0px;*/
+    /*margin-bottom: 0px;*/
+    /*!*background: pink;*!*/
+    /*position: absolute;*/
+    /*overflow-y: scroll;*/
+    /*z-index: 2;*/
+    /*background: #ffffff;*/
+/*}*/
 
 .footer_top .friend_link ul {
     width: 100%;

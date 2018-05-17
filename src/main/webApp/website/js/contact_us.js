@@ -11,6 +11,7 @@ function setFrontLinks(){
     //设置导航条链接
     $('.guide_list li').eq(0).find('a').attr('href',"company_info.html");
     $('.guide_list li').eq(1).find('a').attr('href',"leaders.html");
+    $('.guide_list li').eq(2).find('a').attr('href',"event.html");
     $('.guide_list li').eq(3).find('a').attr('href',"culture.html");
     $('.guide_list li').eq(4).find('a').attr('href',"contact_us.html");
 }

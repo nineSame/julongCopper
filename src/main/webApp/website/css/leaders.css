@@ -46,6 +46,7 @@
     color: #bb9205;
     position: relative;
     padding-left: 15px;
+    /*text-align: center;*/
 }
 
 .position_content li .leader_name:after {
