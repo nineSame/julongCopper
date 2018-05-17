@@ -16,7 +16,6 @@
     <link href="../assets/css/font-awesome.css" rel="stylesheet">
     <!-- self -->
     <link rel="stylesheet" href="../css/common.css?v=1.0">
-    <link rel="stylesheet" href="../css/sjtj.css?v=1.0">
 </head>
 <body>
 <section id="container">
@@ -53,7 +52,7 @@
     </section>
 </section>
 
-<!-- 用户模态框 -->
+<!-- 模态框 -->
 <div class="modal fade bs-example-modal-lg" id="dataModal" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document" style="width: 600px;">
@@ -67,33 +66,34 @@
                 <div  class="form-horizontal">
                     <div class="form-group clearfix modal-form">
                         <div class="form-item1 pull-left">
-                            <div class="form-item1 pull-left">
-                                <span class="pre">新闻类型</span>
-                                <select name="xwlx" id="xwlx" style="width:416px;"></select>
-                            </div>
+                            <span class="pre">新闻类型</span>
+                            <select name="xwlx" id="xwlx" style="width:416px;"></select>
+                        </div>
+                        <div class="form-item1 pull-left">
                             <span class="pre">新闻标题</span>
                             <input type="text" style="width:416px;" name="xwbt" id="xwbt">
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">新闻照片</span>
-                            <input type="file" style="width:416px;display: inline"  id="zp">
+                            <span class="pre">新闻内容</span>
+                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="xwnr" id="xwnr"></textarea>
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">新闻内容</span>
-                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="ms" id="ms"></textarea>
+                            <span class="pre">新闻照片</span>
+                            <input type="file" style="width:416px;display: inline"  name="xwzpfile" id="imgFile">
                         </div>
                     </div>
-
-                    <input type="hidden" id="editId">
-                    
+                    <div class="text-center" style="height:200px;background:#f8f8f8;">
+                        <img src="../images/no_pic.png" style="max-width:100%;max-height: 100%" alt="图片预览区" id="imgView">
+                    </div>
+                    <input type="hidden" name="id" id="editId">
                 </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDataBtn">保存</button>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </div>
 
 <div id="footer"></div>
@@ -144,7 +144,10 @@
                 {
                     field: 'xwnr',
                     title: '新闻内容',
-                    align: 'center'
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return '<p class="desc">'+value+'</p>';
+                    }
                 },
                 {
                     title: "操作",

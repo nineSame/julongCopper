@@ -143,6 +143,61 @@ function setFormParam(formElement,data) {
     });
 }
 
+function operateData() {
+    imgViewByInput('imgFile','imgView');//选择文件预览图片
+    //点击新增
+    $('#addDataBtn').off('click').on('click',function () {
+        $('#modalTitle').text('新增');
+        $("#dataForm")[0].reset();
+        $('#dataModal').modal('show');
+        $('#editId').val('');
+        $('#imgView').prop('src','../images/no_pic.png');
+    });
+    //点击保存
+    $('#saveDataBtn').off('click').on('click',function () {
+        var formData = new FormData($("#dataForm")[0]);
+        var dataId = $('#editId').val();
+        var file = $('#imgFile').val();
+        var url = urlConfig.addUrl;
+        //编辑保存
+        if(dataId){
+            url = urlConfig.updateUrl;
+            formData.append('id',dataId);
+        }
+        //新增
+        else{
+            if(!file){
+                alert('请选择图片!');
+                return false;
+            }
+        }
+        if(!file){
+            formData.delete('tpfile');
+        }
+        $.ajax({
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: url,
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (json) {
+                if(json.resCode == 200){
+                    $('#dataModal').modal('hide');
+                    $("#dataTable").bootstrapTable('refresh',{});
+                }else{
+                    alert(json.resMsg);
+                }
+
+            },
+            error: function () {
+                alert('服务器错误');
+            }
+        });
+
+    });
+}
 //表单取值
 function getFormParam(elem){
     var formObj = {};
