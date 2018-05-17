@@ -8,6 +8,9 @@ import com.chiyun.julong.entity.UserEntity;
 import com.chiyun.julong.repository.UserRepository;
 import com.chiyun.julong.repository.userDisplayRepository;
 import com.chiyun.julong.utils.Md5Util;
+import com.chiyun.julong.utils.fileUtil;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,10 +18,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import sun.security.pkcs11.wrapper.Constants;
 
 import javax.annotation.Resource;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.util.Date;
 import java.util.List;
 
@@ -86,7 +92,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/user/create")
     @AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(UserEntity userEntity, HttpServletRequest zp,  HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(UserEntity userEntity, MultipartFile zpfile, HttpSession httpSession) throws Exception {
 //        String personid = (String) httpSession.getAttribute("id");
 //        if (personid.isEmpty()) {
 //            return ApiResult.UNKNOWN();
@@ -99,14 +105,48 @@ public class UserController {
       if(userRepository.findByZh(username)!=null){
             return ApiResult.FAILURE("数据库已有该帐号的数据");
         }
+
+
+       /* String path;
+        File file = new File(path);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
+        FileInputStream fileInputStream = (FileInputStream) file.getInputStream();
+        String fileName = Constants.getUUID() + ".png";
+        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(path + File.separator + fileName));
+        byte[] bs = new byte[1024];
+        int len;
+        while ((len = fileInputStream.read(bs)) != -1) {
+            bos.write(bs, 0, len);
+        }
+        bos.flush();
+        bos.close();
+       // return fileName;
+
+*/
+       //判断文件是否为空
+        if (!zpfile.isEmpty()) {
+            //判断文件上传大小
+            if(zpfile.getSize()>10485760){
+                return ApiResult.FAILURE("图片超出上传文件大小");
+            }
+            //不为空，文件大小符合，则上传图片
+            String filename=fileUtil.fileUpload(zpfile);
+            //由返回的数据判断图片是否上传成功
+            if(filename==null){
+                return ApiResult.FAILURE("图片上传失败");
+            }
+            //将返回的文件名保存在数据库
+            userEntity.setZp(filename);
+        }
       //处理传过来的图片路径
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) zp;
+        /*MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) zp;
         MultipartFile file = multipartRequest.getFile("zpfile");
         String zpfile ="";
         if (file!=null){
              zpfile = file.getOriginalFilename();
-        }
-        userEntity.setZp(zpfile);
+        }*/
         //取出密码加密再存进去
         String password = userEntity.getMm();
        if(password==null||password==""){
@@ -127,7 +167,7 @@ public class UserController {
     @ResponseBody
     @RequestMapping("/user/update")
     @AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> update(UserEntity userEntity,  HttpServletRequest zp, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> update(UserEntity userEntity, MultipartFile zpfile, HttpSession httpSession) throws Exception {
       /*  String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
@@ -149,20 +189,53 @@ public class UserController {
         }else if (!userEntity1.getName().equals(userEntity.getName())) {
             userEntity1.setName(userEntity.getName());
         }*/
-        //处理传过来的图片路径
+       /* //处理传过来的图片路径
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) zp;
         MultipartFile file = multipartRequest.getFile("zpfile");
         String zpfile ="";
         if (file!=null){
             zpfile = file.getOriginalFilename();
         }else
-        userEntity.setZp(zpfile);
-       //更新的时候把密码加密
+        userEntity.setZp(zpfile);*/
+       /*//更新的时候把密码加密
         String password=userEntity.getMm();
         if(password==null||password==""){
             return ApiResult.FAILURE("密码不能为空");
         }
-        userEntity.setMm(Md5Util.getMD5(password));
+        userEntity.setMm(Md5Util.getMD5(password));*/
+       //判断上传文件是否为空
+        if(!zpfile.isEmpty()){
+       //判断文件上传大小
+        if(zpfile.getSize()>10485760){
+            return ApiResult.FAILURE("图片超出上传文件大小");
+        }
+        //判断该用户数据库里面是否有照片
+       if(userEntity1.getZp()!=null&&userEntity1.getZp()!=""){
+            //如果有照片，删除原有照片
+            int isdel=fileUtil.fileDel(userEntity1.getZp());
+            //判断是否删除成功
+            if(isdel!=1){
+                return ApiResult.FAILURE("图片删除失败");
+            }
+            //删除成功后将用户修改的照片上传
+           String filename=fileUtil.fileUpload(zpfile);
+            //判断上传方法返回回来的数据
+           if(filename==null){
+               return ApiResult.FAILURE("图片上传失败");
+           }
+           //将文件名保存在数据库
+           userEntity.setZp(filename);
+       }else{
+            //如果没有，直接上传文件，保存文件名
+           String filename=fileUtil.fileUpload(zpfile);
+           //判断上传方法返回回来的数据
+           if(filename==null){
+               return ApiResult.FAILURE("图片上传失败");
+           }
+           //将文件名保存在数据库
+           userEntity.setZp(filename);
+       }
+        }
         userEntity.setGxsj(new Date());
         UserEntity entity = userRepository.save(userEntity);
         if (entity == null) {
@@ -287,4 +360,7 @@ if(zh==null){
         return ApiResult.SUCCESS(list);
 
     }
+
+
+
 }

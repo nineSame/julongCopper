@@ -22,4 +22,10 @@ public interface newsRepository extends CrudRepository<newsEntity, Long> {
     Page<newsEntity> findAll(Pageable pageable);
 
     newsEntity findByXwbt(String title);
+
+
+    @Query(value = "select * from news where 1=1 and (title like '%'?'%' or content like '%'?'%') ", nativeQuery = true)
+    @Modifying
+    @Transactional
+    List<newsEntity> findByCondition(String condition);
 }

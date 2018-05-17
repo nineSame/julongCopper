@@ -3,6 +3,7 @@ package com.chiyun.julong.controller;
 import com.chiyun.julong.common.ApiResult;
 import com.chiyun.julong.entity.newsEntity;
 import com.chiyun.julong.repository.newsRepository;
+import com.chiyun.julong.utils.fileUtil;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -58,7 +59,7 @@ public class newsController {
 
     @ResponseBody
     @RequestMapping("/news/update")
-    public ApiResult<Object> update(newsEntity newsEntity, HttpServletRequest tp, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> update(newsEntity newsEntity, MultipartFile xwtpfile, HttpSession httpSession) throws Exception {
         //判断是否登录
        /* String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
@@ -78,16 +79,42 @@ public class newsController {
         if(newsEntity1==null){
             return ApiResult.FAILURE("未找到该用户");
         }
-        //处理传过来的图片路径
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tp;
-        MultipartFile file = multipartRequest.getFile("xwtpfile");
-        String zpfile ="";
-        if (file!=null){
-            zpfile = file.getOriginalFilename();
+        //判断上传文件是否为空
+        if(!xwtpfile.isEmpty()){
+            //判断文件上传大小
+            if(xwtpfile.getSize()>10485760){
+                return ApiResult.FAILURE("图片超出上传文件大小");
+            }
+            //判断该用户数据库里面是否有照片
+            if(newsEntity1.getXwtp()!=null&&newsEntity1.getXwtp()!=""){
+                //如果有照片，删除原有照片
+                int isdel=fileUtil.fileDel(newsEntity1.getXwtp());
+                //判断是否删除成功
+                if(isdel!=1){
+                    return ApiResult.FAILURE("图片删除失败");
+                }
+                //删除成功后将用户修改的照片上传
+                String filename=fileUtil.fileUpload(xwtpfile);
+                //判断上传方法返回回来的数据
+                if(filename==null){
+                    return ApiResult.FAILURE("图片上传失败");
+                }
+                //将文件名保存在数据库
+                newsEntity.setXwtp(filename);
+            }else{
+                //如果没有，直接上传文件，保存文件名
+                String filename=fileUtil.fileUpload(xwtpfile);
+                //判断上传方法返回回来的数据
+                if(filename==null){
+                    return ApiResult.FAILURE("图片上传失败");
+                }
+                //将文件名保存在数据库
+                newsEntity.setXwtp(filename);
+            }
         }
-        newsEntity.setXwtplj(zpfile);
-        //执行保存操作
+        //保存更新时间
         newsEntity.setGxsj(new Date());
+        //保存操作
         newsEntity entity = newsRepository.save(newsEntity);
         if (entity == null) {
             return ApiResult.FAILURE("修改失败");
@@ -99,7 +126,7 @@ public class newsController {
     @ResponseBody
     @RequestMapping("/news/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(newsEntity newsEntity, HttpServletRequest tp, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(newsEntity newsEntity, MultipartFile xwtpfile, HttpSession httpSession) throws Exception {
         //判断是否为管理员
 
         //判断数据中的必填项是否为空
@@ -116,14 +143,22 @@ public class newsController {
         if(newsRepository.findByXwbt(title)!=null){
             return ApiResult.FAILURE("数据库已有该标题的数据");
         }
-        //处理图片路径并存储
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tp;
-        MultipartFile file = multipartRequest.getFile("xwtpfile");
-        String zpfile ="";
-        if (file!=null){
-            zpfile = file.getOriginalFilename();
+
+        //判断文件是否为空
+        if (!xwtpfile.isEmpty()) {
+            //判断文件上传大小
+            if(xwtpfile.getSize()>10485760){
+                return ApiResult.FAILURE("图片超出上传文件大小");
+            }
+            //不为空，文件大小符合，则上传图片
+            String filename=fileUtil.fileUpload(xwtpfile);
+            //由返回的数据判断图片是否上传成功
+            if(filename==null){
+                return ApiResult.FAILURE("图片上传失败");
+            }
+            //将返回的文件名保存在数据库
+            newsEntity.setXwtp(filename);
         }
-        newsEntity.setXwtplj(zpfile);
         //存创建时间和更新时间
         newsEntity.setCjsj(new Date());
         newsEntity.setGxsj(new Date());
@@ -152,6 +187,18 @@ public class newsController {
         return ApiResult.SUCCESS(list);
 
     }
+
+    @ResponseBody
+    @RequestMapping("/news/search")
+    public ApiResult<Object> search(String condition, HttpSession httpSession) {
+        System.out.print("111111111-------"+condition+"-------");
+        //暂时根据关键字查找新闻，后续会增加根据创建时间和关键字一起查找新闻
+        List<newsEntity> listNews = newsRepository.findByCondition(condition);
+        System.out.print("222222-------"+listNews.size()+"-------");
+         return ApiResult.SUCCESS(listNews);
+    }
+
+
 }
 
 

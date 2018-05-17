@@ -3,6 +3,7 @@ package com.chiyun.julong.controller;
 import com.chiyun.julong.common.ApiResult;
 import com.chiyun.julong.entity.photoEntity;
 import com.chiyun.julong.repository.photoRepository;
+import com.chiyun.julong.utils.fileUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,7 +58,7 @@ public class photoController {
 
     @ResponseBody
     @RequestMapping("/banner/update")
-    public ApiResult<Object> update(photoEntity photoEntity,HttpServletRequest tplj, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> update(photoEntity photoEntity,MultipartFile tpfile, HttpSession httpSession) throws Exception {
         //判断是否登录
        /* String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
@@ -76,16 +77,39 @@ public class photoController {
         if (!photoEntity1.getTitle().equals(photoEntity.getTitle())) {
             photoEntity1.setTitle(photoEntity.getTitle());
         }*/
-        //处理传过来的图片路径
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tplj;
-        MultipartFile file = multipartRequest.getFile("tpfile");
-        String zpfile ="";
-        if (file!=null){
-            zpfile = file.getOriginalFilename();
-        }else{
-            return ApiResult.FAILURE("图片路径为空");
+        //判断上传文件是否为空
+        if(!tpfile.isEmpty()){
+            //判断文件上传大小
+            if(tpfile.getSize()>10485760){
+                return ApiResult.FAILURE("图片超出上传文件大小");
+            }
+            //判断该用户数据库里面是否有照片
+            if(photoEntity1.getTplj()!=null&&photoEntity1.getTplj()!=""){
+                //如果有照片，删除原有照片
+                int isdel=fileUtil.fileDel(photoEntity1.getTplj());
+                //判断是否删除成功
+                if(isdel!=1){
+                    return ApiResult.FAILURE("图片删除失败");
+                }
+                //删除成功后将用户修改的照片上传
+                String filename=fileUtil.fileUpload(tpfile);
+                //判断上传方法返回回来的数据
+                if(filename==null){
+                    return ApiResult.FAILURE("图片上传失败");
+                }
+                //将文件名保存在数据库
+                photoEntity.setTplj(filename);
+            }else{
+                //如果没有，直接上传文件，保存文件名
+                String filename=fileUtil.fileUpload(tpfile);
+                //判断上传方法返回回来的数据
+                if(filename==null){
+                    return ApiResult.FAILURE("图片上传失败");
+                }
+                //将文件名保存在数据库
+                photoEntity.setTplj(filename);
+            }
         }
-        photoEntity.setTplj(zpfile);
         //保存更新时间
         photoEntity.setGxsj(new Date());
         //执行保存操作
@@ -100,20 +124,27 @@ public class photoController {
     @ResponseBody
     @RequestMapping("/banner/create")
     //@AccessRequired(menue = 0, action = 1)
-    public ApiResult<Object> create(photoEntity photoEntity, HttpServletRequest tp, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> create(photoEntity photoEntity, MultipartFile tpfile, HttpSession httpSession) throws Exception {
         //判断是否为管理员
 
         //由于图片标题和描述不一定需要，所以不需要判断传进来的两个参数是否为空，但是在下面必须判断图片路径是否为空
-        //处理图片路径
-        MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) tp;
-        MultipartFile file = multipartRequest.getFile("tpfile");
-        String zpfile ="";
-        if (file!=null){
-            zpfile = file.getOriginalFilename();
-        }else{
-            return ApiResult.FAILURE("图片路径为空");
+
+        //判断文件是否为空
+        if (!tpfile.isEmpty()) {
+            //判断文件上传大小
+            if(tpfile.getSize()>10485760){
+                return ApiResult.FAILURE("图片超出上传文件大小");
+            }
+            //不为空，文件大小符合，则上传图片
+            String filename=fileUtil.fileUpload(tpfile);
+            //由返回的数据判断图片是否上传成功
+            if(filename==null){
+                return ApiResult.FAILURE("图片上传失败");
+            }
+            //将返回的文件名保存在数据库
+            photoEntity.setTplj(filename);
         }
-        photoEntity.setTplj(zpfile);
+        //保存更新时间
         photoEntity.setGxsj(new Date());
         photoEntity entity = photoRepository.save(photoEntity);
         if (entity == null) {
