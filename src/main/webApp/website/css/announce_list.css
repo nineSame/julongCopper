@@ -102,3 +102,20 @@
     line-height: 32px;
     font-weight: normal;
 }
+
+/*手机端*/
+@media screen and (min-width: 320px) and (max-width: 480px){
+    a.download_btn {
+        width: 15%;
+        padding-left: 5%;
+    }
+
+    a.download_title{
+        width: 50%;
+    }
+
+    a.download_date{
+        width: 25%;
+        padding-right: 5%;
+    }
+}

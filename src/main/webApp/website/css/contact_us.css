@@ -80,3 +80,37 @@
 .part2 .bottom .row a:hover {
     color: #bb9205;
 }
+
+@media screen and (min-width: 320px) and (max-width: 480px) {
+
+    #contact {
+        position: inherit;
+        right: 0;
+    }
+
+    #contact .con {
+        padding: 10px 40px 0 40px;
+    }
+
+    #contact .con .title {
+        font-size: 18px;
+        padding-bottom: 20px;
+    }
+
+    #contact .con .address, #contact .con .code, #contact .con .tel, #contact .con .res_people {
+        padding-bottom: 15px;
+        font-size: 14px;
+    }
+
+
+    .bottom .row {
+        width: 100%;
+    }
+
+    .row>.span-3 {
+        width: 100%;
+    }
+
+}
+
+

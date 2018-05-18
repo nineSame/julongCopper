@@ -135,3 +135,23 @@ article {
     line-height: 2;
     font-size: 13px;
 }
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+
+
+
+    article {
+        padding: 0 10px 10px 10px;
+    }
+    .detail_right{
+        display: none;
+    }
+
+    .detail_left{
+        width: 100%;
+    }
+
+    .detail_left .detail_head h3{
+        font-size: 18px;
+    }
+}
