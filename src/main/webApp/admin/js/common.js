@@ -6,14 +6,6 @@ $(function () {
     initDataTable();//初始化Table插件
 });
 
-
-function sexInit() {
-    var op = '<option value="1">男</option>' +
-        '<option value="2">女</option>' +
-        '<option value="3">未知</option>';
-    $('#sex').append(op);
-}
-
 function setUserInfo() {
     var userInfo =  JSON.parse(localStorage.getItem('loginUserInfo'));
     if(userInfo.username){

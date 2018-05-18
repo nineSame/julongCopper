@@ -236,6 +236,10 @@ public class UserController {
            userEntity.setZp(filename);
        }
         }
+            String password=userEntity.getMm();
+        if(password!=null && password!=""){
+            userEntity.setMm(Md5Util.getMD5(password));
+        }
         userEntity.setGxsj(new Date());
         UserEntity entity = userRepository.save(userEntity);
         if (entity == null) {
@@ -360,7 +364,4 @@ if(zh==null){
         return ApiResult.SUCCESS(list);
 
     }
-
-
-
 }

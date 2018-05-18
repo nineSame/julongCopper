@@ -13,14 +13,17 @@ function pageCommonLink() {
     //关于我们
     $('.down_ul').eq(0).find('li').eq(0).find('a').attr("href","./company_info.html");
     $('.down_ul').eq(0).find('li').eq(1).find('a').attr("href","./leaders.html");
+    $('.down_ul').eq(0).find('li').eq(2).find('a').attr("href","./event.html");
     $('.down_ul').eq(0).find('li').eq(3).find('a').attr("href","./culture.html");
     $('.down_ul').eq(0).find('li').eq(4).find('a').attr("href","./contact_us.html");
 
+    //全景巨龙
+    $('.down_ul').eq(1).find('li').eq(0).find('a').attr("href","./pictures.html");
 
     //资讯中心
-    $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","./news_list.html");
-    $('.down_ul').eq(2).find('li').eq(2).find('a').attr("href","./social_responsibility.html");
-    $('.down_ul').eq(2).find('li').eq(3).find('a').attr("href","./activities.html");
+    $('.down_ul').eq(2).find('li').eq(0).find('a').attr("href","./news_list.html");
+    $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","./social_responsibility.html");
+    $('.down_ul').eq(2).find('li').eq(2).find('a').attr("href","./activities.html");
 
     //投资者关系
     $('.down_ul').eq(3).find('li').eq(0).find('a').attr("href","./announce_list.html");
@@ -105,8 +108,11 @@ function setTop() {
 
     $('#to_top').click(function(){
 
+
+        var page = document.getElementsByClassName('detail_page')[0];
+
         //处理新闻详情页右侧滑动定位效果
-        if($('.detail_page')){
+        if(page != null){
 
             var pageTimer = null;
             setTimeout(function () {

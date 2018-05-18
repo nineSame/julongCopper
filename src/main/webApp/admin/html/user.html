@@ -56,7 +56,7 @@
 <!-- 用户模态框 -->
 <div class="modal fade bs-example-modal-lg" id="dataModal" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document" style="width: 600px;">
+    <div class="modal-dialog modal-lg" role="document" style="width: 720px;">
         <form class="modal-content" id="dataForm">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -64,48 +64,56 @@
                 <h4 class="modal-title"><span id="modalTitle">添加</span>用户信息</h4>
             </div>
             <div class="modal-body">
-                <div  class="form-horizontal">
-                    <div class="form-group clearfix modal-form">
-                        <div class="form-item1 pull-left">
-                            <span class="pre">用户名</span>
-                            <input type="text" style="width:416px;" name="zh" id="zh">
+                <div  class="form-horizontal clearfix">
+                    <div class="pull-left">
+                        <div style="width:200px;height:240px;background: #eeeeee;margin-bottom:5px;">
+                            <img src="../images/no_pic.png" style="width:100%;max-height: 240px" id="imgView" alt="暂无图片">
                         </div>
+                        <div class="text-center">
+                            <a class="btn btn-primary btn-xs" id="imgEditBtn">编辑照片</a>
+                        </div>
+                    </div>
+                    <div class="form-group clearfix modal-form pull-left" style="width:500px;">
                         <div class="form-item1 pull-left">
-                            <span class="pre">姓名</span>
-                            <input type="text" style="width:160px;" name="xm" id="xm">
+                            <span class="pre">* 姓名</span>
+                            <input type="text" style="width:360px;" name="xm" id="xm">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">性别</span>
-                            <select name="xb" id="xb" style="width:160px;"></select>
+                            <select name="xb" id="xb" style="width:360px;"></select>
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">* 用户名</span>
+                            <input type="text" placeholder="字母或数字" style="width:360px;" name="zh" id="zh">
+                        </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">密码</span>
+                            <input type="password" placeholder="不填默认123456" style="width:360px;" id="password">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">身份证号</span>
-                            <input type="text" style="width:416px;" name="sfzh" id="sfzh">
+                            <input type="text" placeholder="最长18位" style="width:360px;" name="sfzh" id="sfzh">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">职务</span>
-                            <input type="text" style="width:416px;" name="zw" id="zw">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">照片</span>
-                            <input type="file" style="width:416px;display: inline"  id="zp">
+                            <input type="text" style="width:360px;" name="zw" id="zw">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">人员描述</span>
-                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="ms" id="ms"></textarea>
+                            <textarea type="text" style="width:360px;height:120px;resize: none;" name="ms" id="ms"></textarea>
                         </div>
                     </div>
 
                     <input type="hidden" id="editId">
-                    
+                    <input type="file" style="width:360px;display: none" name="zpfile"  id="imgFile">
                 </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDataBtn">保存</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDataBtn">保存</button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </div>
 
 <div id="footer"></div>
@@ -122,74 +130,11 @@
 <!--处理滚动条-->
 <script src="../assets/bootstrap/jquery.slimscroll.js"></script>
 <script src="../assets/bootstrap/jquery.nicescroll.js"></script>
-<script src="../js/config.js?v=1.0"></script>
-<script src="../js/function.js?v=1.0"></script>
-<script src="../js/common.js?v=1.0"></script>
+<script src="../js/config.js?v=1.0.0.0"></script>
+<script src="../js/function.js?v=1.0.0.0"></script>
+<script src="../js/common.js?v=1.0.0.0"></script>
+<script src="../js/user.js?v=1.0.0.0"></script>
+
 <!--处理菜单搜索展开-->
 <script src="../assets/bootstrap/scripts.js"></script>
-
-<script>
-    //接口地址
-    var urlConfig = {
-        displayUrl : ServerUrl + '/user/page',
-        addUrl : ServerUrl + '/user/create',
-        getByIdUrl : ServerUrl + '/user/seaarchById',
-        updateUrl: ServerUrl + '/user/update',
-        delUrl: ServerUrl + '/user/del'
-    };
-    $(function(){
-        getData();
-        operateData();//操作数据
-        dictInit('xb',DICT.sex);
-    });
-
-    function getData() {
-        $("#dataTable").dataTable({ // 对应table标签的id
-            //表头信息添加
-            columns: [
-                {
-                    field: 'zh',
-                    title: '账号',
-                    align: 'center'
-                },
-                {
-                    field: 'xm',
-                    title: '姓名',
-                    align: 'center'
-                },
-                {
-                    field: 'xb',
-                    title: '性别',
-                    align: 'center',
-                    formatter: function (value, row, index) {
-                        return DICT.sex[value];
-                    }
-                },
-                {
-                    field: 'sfzh',
-                    title: '身份证号',
-                    align: 'center'
-                },
-                {
-                    field: 'zw',
-                    title: '公司职务',
-                    align: 'center'
-                },
-                {
-                    title: "操作",
-                    align: 'center',
-                    width: 160, // 定义列的宽度，单位为像素px
-                    formatter: function (value, row, index) {
-                        var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
-                        btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
-                        if(row.account == 'admin'){
-                            btn = '';
-                        }
-                        return btn;
-                    }
-                }
-            ]
-        });
-    }
-</script>
 </html>

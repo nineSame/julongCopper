@@ -1,89 +1,127 @@
-$(function () {
-    getUserInfo(1, 100);
-    login();
+//接口地址
+var urlConfig = {
+    displayUrl : ServerUrl + '/user/page',
+    addUrl : ServerUrl + '/user/create',
+    show : ServerUrl + '/user/seaarchById',
+    updateUrl: ServerUrl + '/user/update',
+    delUrl: ServerUrl + '/user/del'
+};
+$(function(){
+    getData();
+    operateDataUser();//操作数据
+    dictInit('xb',DICT.sex);
 });
 
-function getUserInfo(pageno, pagesize) {
-    $.post(ServerUrl + 'admin/account/list', {pageno: pageno, pagesize: pagesize}, function (json) {
-    //$.post(ServerUrl + 'login', {pageno: pageno, pagesize: pagesize}, function (json) {
-        if(json.success){
-            var data = json.data;
-            var trHtml = '';
-            for (var i = 0; i < data.length; i++) {
-                var item = data[i];
-                trHtml += '<tr>\n' +
-                    '<td>' + item.userid + '</td>\n' +
-                    '<td>' + item.loginname + '</td>\n' +
-                    '<td>' + item.username + '</td>\n' +
-                    '<td>' + item.sex + '</td>\n' +
-                    '<td>' + item.idnumber + '</td>\n' +
-                    '<td dataid="' + item.id + '">\n' +
-                    '    <button btn-type="edit" class="btn btn-default btn-xs edit-user">编辑</button>\n' +
-                    '    <button btn-type="del" class="btn btn-danger btn-xs edit-user">删除</button>\n' +
-                    '</td>\n' +
-                    '</tr>'
+function operateDataUser(type) {
+    imgViewByInput('imgFile','imgView');//选择文件预览图片
+
+    //点击编辑图片
+    $('#imgEditBtn').off('click').on('click',function () {
+        $('#imgFile').click();
+    });
+
+    //点击新增
+    $('#addDataBtn').off('click').on('click',function () {
+        $('#modalTitle').text('新增');
+        $("#dataForm")[0].reset();
+        $('#dataModal').modal('show');
+        $('#editId').val('');
+        $('#imgView').prop('src','../images/no_pic.png');
+    });
+    //点击保存
+    $('#saveDataBtn').off('click').on('click',function () {
+        var formData = new FormData($("#dataForm")[0]);
+        var dataId = $('#editId').val();
+        var password = $('#password').val();
+        var file = $('#imgFile').val();
+        var url = urlConfig.addUrl;
+        //编辑保存
+        if(dataId){
+            url = urlConfig.updateUrl;
+            formData.append('id',dataId);
+            if(password){
+                formData.append('mm',password);
             }
-            $('#userTbody').empty().append(trHtml);
-            //点击编辑
-            $('#userTbody .edit-user').off('click').on('click', function () {
-                var $this = $(this);
-                var btnType = $this.attr('btn-type');
-                var dataId = $this.parent().attr('dataid');
-                if(btnType == 'del'){
-                    $('#accountDelModal').modal('show');
-                    $('#accountDelConfirm').click(function () {
-                        $.post(ServerUrl + 'admin/account/remove',{id: dataId},function (json) {
-                            getUserInfo(1, 100);
-                        });
-                    })
+        }
+        //新增
+        else{
+            password = password || '123456';
+            formData.append('mm',password);
+        }
+        if(!file){
+            formData.delete('zpfile');
+        }
+        $.ajax({
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: url,
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (json) {
+                console.log(json);
+                if(json.resCode == 200){
+                    $('#dataModal').modal('hide');
+                    $("#dataTable").bootstrapTable('refresh',{});
                 }else{
-                    $.post(ServerUrl + 'admin/account/show',{accountId: dataId},function (json) {
-                        var data = json.data;
-                        $('#loginname').val(data.loginname);
-                        $('#username').val(data.username);
-                    },'json');
-                    $('#userInfoModal').modal('show');
-                    $('#saveUserInfo').click(function () {
-                        var formObj = {};
-                        var formData = $('#userInfoModal form').serializeArray();
-                        $.each(formData, function() {
-                            formObj[this.name] = this.value;
-                        });
-                        formObj.id = dataId;
-                        console.log(formObj);
-                        $.post(ServerUrl + 'admin/account/modify',formObj,function (json) {
-                            console.log(json);
-                            getUserInfo(1, 100);
-                        });
-                    });
+                    alert(json.resMsg);
                 }
-            });
-        }
-        else if(json.code == 110){
-            alert(json.msg);
-            location.href = 'login.html';
-        }
-    }, 'json')
-}
-/*
-function login() {
-    var
-    $.post("login",
-        {username:phone,
-            poassword:email,},
-        function(result){
-            if(result=='ok'){
-                showMessage("操作成功！");
-                $("#phoneNumError").html("");
-                $("#emailError").html("");
-                $("#qqNumError").html("");
-                $("#houseNumError").html("");
-                if(result=="no"){
-                    showMessage("插入数据失败！");
-                }
-            }else{
-                showMessage(result);
+
+            },
+            error: function () {
+                alert('err');
             }
-        }
-    );
-    }*/
+        });
+
+    });
+}
+
+function getData() {
+    $("#dataTable").dataTable({ // 对应table标签的id
+        //表头信息添加
+        columns: [
+            {
+                field: 'zh',
+                title: '账号',
+                align: 'center'
+            },
+            {
+                field: 'xm',
+                title: '姓名',
+                align: 'center'
+            },
+            {
+                field: 'xb',
+                title: '性别',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    return DICT.sex[value];
+                }
+            },
+            {
+                field: 'sfzh',
+                title: '身份证号',
+                align: 'center'
+            },
+            {
+                field: 'zw',
+                title: '公司职务',
+                align: 'center'
+            },
+            {
+                title: "操作",
+                align: 'center',
+                width: 160, // 定义列的宽度，单位为像素px
+                formatter: function (value, row, index) {
+                    var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
+                    btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
+                    if(row.account == 'admin'){
+                        btn = '';
+                    }
+                    return btn;
+                }
+            }
+        ]
+    });
+}

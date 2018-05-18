@@ -2469,16 +2469,16 @@ h4 input[type="checkbox"] {
 }
  /*--placeholder-color--*/
 ::-webkit-input-placeholder {
-	color:#fff !important;
+	color: #b8b8b8 !important;
 }
 :-moz-placeholder { /* Firefox 18- */
-	color:#fff !important; 
+	color:#b8b8b8 !important;
 }
 ::-moz-placeholder {  /* Firefox 19+ */
-	color:#fff !important;
+	color:#b8b8b8 !important;
 }
 :-ms-input-placeholder {  
-	color:#fff !important;
+	color:#b8b8b8 !important;
 }
 /*--//placeholder-color--*/
 .alert {

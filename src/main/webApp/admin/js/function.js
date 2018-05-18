@@ -5,15 +5,6 @@ function setValueByJson(obj) {
     }
 }
 
-//初始化字典选择框
-function dictInit(id,dict) {
-    var option = '';
-    for(var k in dict){
-        option += '<option value="'+k+'">'+dict[k]+'</option>'
-    }
-    $('#'+id).append(option);
-}
-
 //设置子框架容器高度
 function setContainerHeight(height) {
     $('#wrapper').height(height + 10);
@@ -25,6 +16,14 @@ function setFrameHeight() {
 }
 
 /*** 工具函数方法 ***/
+//初始化字典选择框
+function dictInit(id,dict) {
+    var option = '';
+    for(var k in dict){
+        option += '<option value="'+k+'">'+dict[k]+'</option>'
+    }
+    $('#'+id).append(option);
+}
 
 //获取页面参数
 function getUrlParam() {
@@ -62,6 +61,7 @@ function initDataTable() {
             pageNumber: 1, // 首页页码
             sidePagination: 'server', // 设置为服务器端分页
             columns: [],
+            undefinedText:'',
             onLoadSuccess: function(){  //加载成功时执行
                 //console.info("加载成功");
             },
@@ -88,49 +88,9 @@ function initDataTable() {
 }
 
 //新增,保存表单数据
-function operateData() {
-    //点击新增
-    $('#addDataBtn').off('click').on('click',function () {
-        $('#modalTitle').text('新增');
-        $("#dataForm")[0].reset();
-        $('#dataModal').modal('show');
-        $('#editId').val('');
-    });
-    //点击保存
-    $('#saveDataBtn').off('click').on('click',function () {
-        var formData = new FormData($("#dataForm")[0]);
-        var dataId = $('#editId').val();
-        var url = urlConfig.addUrl;
-        //编辑保存
-        if(dataId){
-            url = urlConfig.updateUrl;
-            formData.append('id',dataId);
-        }
-        $.ajax({
-            cache: false,
-            contentType: false,
-            processData: false,
-            url: url,
-            type: 'post',
-            data: formData,
-            dataType: 'json',
-            success: function (json) {
-                console.log(json);
-                if(json.resCode == 200){
-                    $('#dataModal').modal('hide');
-                    $("#dataTable").bootstrapTable('refresh',{});
-                }else{
-                    alert(json.resMsg);
-                }
+//新增,保存表单数据
 
-            },
-            error: function () {
-                alert('err');
-            }
-        });
 
-    });
-}
 
 //表格操作按钮
 function tableBtn(dataId,type) {
@@ -155,7 +115,7 @@ function tableBtn(dataId,type) {
         $('#modalTitle').text('编辑');
         $('#editId').val(dataId);
         $('#dataModal').modal('show');
-        $.post(urlConfig.getByIdUrl, {id:dataId},function (json) {
+        $.post(urlConfig.show, {id:dataId},function (json) {
             if(json.resCode == 200){
                 console.log(json);
                 //$("#dataTable").bootstrapTable('refresh',{});
@@ -182,11 +142,90 @@ function setFormParam(formElement,data) {
         $(type+"[name='"+name+"']").val(data[''+name+'']);
     });
 }
-//表单取值
-function getFormParam(){
-    var param = {};
-    //简便方法
-    $('#info_form').find('[name]').each(function() {
-        param[$(this).attr('name')] = $(this).val();
+
+function operateData() {
+    imgViewByInput('imgFile','imgView');//选择文件预览图片
+    //点击新增
+    $('#addDataBtn').off('click').on('click',function () {
+        $('#modalTitle').text('新增');
+        $("#dataForm")[0].reset();
+        $('#dataModal').modal('show');
+        $('#editId').val('');
+        $('#imgView').prop('src','../images/no_pic.png');
+    });
+    //点击保存
+    $('#saveDataBtn').off('click').on('click',function () {
+        var formData = new FormData($("#dataForm")[0]);
+        var dataId = $('#editId').val();
+        var file = $('#imgFile').val();
+        var url = urlConfig.addUrl;
+        //编辑保存
+        if(dataId){
+            url = urlConfig.updateUrl;
+            formData.append('id',dataId);
+        }
+        //新增
+        else{
+            if(!file){
+                alert('请选择图片!');
+                return false;
+            }
+        }
+        if(!file){
+            formData.delete('tpfile');
+        }
+        $.ajax({
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: url,
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (json) {
+                if(json.resCode == 200){
+                    $('#dataModal').modal('hide');
+                    $("#dataTable").bootstrapTable('refresh',{});
+                }else{
+                    alert(json.resMsg);
+                }
+
+            },
+            error: function () {
+                alert('服务器错误');
+            }
+        });
+
     });
 }
+//表单取值
+function getFormParam(elem){
+    var formObj = {};
+    var formData = $(elem).serializeArray();
+    $.each(formData, function() {
+        formObj[this.name] = this.value;
+    });
+    return formObj;
+}
+//点击input预览图片
+function imgViewByInput(inputId,imgId) {
+    //显示更新图片
+    $('#' + inputId).off('change').on('change', function () {
+        //检验是否为图像文件
+        var file = document.getElementById(inputId).files[0];
+        if(!/image\/\w+/.test(file.type)){
+            alert("请添加图片格式文件！");
+            return false;
+        }
+        var reader = new FileReader();
+        //将文件以Data URL形式读入页面
+        reader.readAsDataURL(file);
+        reader.onload=function(e){
+            var result=document.getElementById(imgId);
+            $('#' + imgId).prop('src',this.result);
+            //显示文件
+            //result.innerHTML='<img src="' + this.result +'" alt="" />';
+        }
+    });
+}
+

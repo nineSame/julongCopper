@@ -11,10 +11,12 @@ body{
 a,button,input{
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+
 button,input{
     -webkit-appearance: none;
     border-radius: 0;
 }
+
 a{
     text-decoration: none;
 }
@@ -133,6 +135,11 @@ h2,h3,h4,p{
 
 .rect-50 {
     padding-bottom: 50%;
+}
+
+
+.rect-56 {
+    padding-bottom: 56%;
 }
 
 .rect-125 {
@@ -277,6 +284,50 @@ h2,h3,h4,p{
     color: #ba9121;
 }
 
+/*********************翻页控制条************************/
+
+#main_content .page_bar {
+    font-size: 13px;
+    color: #000;
+    text-align: center;
+    margin-top: 56px;
+}
+
+#main_content .page_bar a {
+    color: #000;
+    display: inline-block;
+    border: 1px solid #ededed;
+    padding: 8px 17px;
+    vertical-align: middle;
+    margin: 0 0 10px -1px;
+    background: #fff;
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 1.6;
+    transition: 0.3s;
+}
+
+#main_content .page_bar a:hover {
+    background: #bb9205;
+    color: #f9f7f0;
+}
+#main_content .page_bar p {
+    display: inline-block;
+    margin: 0 20px;
+}
+#main_content .page_bar input {
+    padding: 0;
+    width: 45px;
+    height: 45px;
+    border-style: none;
+    border: 1px solid #7D7D7D;
+    font-size: 18px;
+    text-align: center;
+    vertical-align: unset;
+    border-color: #ededed;
+}
+
+
 /*******************************************footer****************************************/
 .footer {
     height: 176px;
@@ -347,7 +398,7 @@ h2,h3,h4,p{
     max-height: 140px;
     padding-top: 0;
     margin-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 20px;
     margin-bottom: 0;
     /*background: pink;*/
     position: absolute;

@@ -56,7 +56,7 @@
 <!-- 表单模态框 -->
 <div class="modal fade bs-example-modal-lg" id="dataModal" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document" style="width: 600px;">
+    <div class="modal-dialog modal-lg" role="document" style="width: 800px;">
         <form class="modal-content" id="dataForm">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -68,26 +68,30 @@
                     <div class="form-group clearfix modal-form">
                         <div class="form-item1 pull-left">
                             <span class="pre">图片标题</span>
-                            <input type="text" style="width:416px;" name="tpbt" id="tpbt">
+                            <input type="text" style="width:580px;" name="tpbt" id="tpbt">
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">图片路径</span>
-                            <input type="file" style="width:416px;display: inline" name="tplj" id="tplj">
+                            <input type="file" style="width:580px;display: inline" name="tpfile" id="imgFile">
+                            <span>1920*600</span>
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">图片描述</span>
-                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="tpms" id="tpms"></textarea>
+                            <textarea type="text" style="width:580px;height:60px;resize: none;" name="tpms" id="tpms"></textarea>
                         </div>
                     </div>
-                    <!--<input type="hidden" name="id" id="editId">-->
+                    <div class="text-center" style="height:200px;background:#f8f8f8;">
+                        <img src="../images/no_pic.png" style="max-width:100%;max-height: 100%" alt="图片预览区" id="imgView">
+                    </div>
+                    <input type="hidden" name="id" id="editId">
                 </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDataBtn">保存</button>
             </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </div>
 <div id="footer"></div>
 </body>
@@ -106,55 +110,7 @@
 <script src="../js/config.js?v=1.0"></script>
 <script src="../js/function.js?v=1.0"></script>
 <script src="../js/common.js?v=1.0"></script>
+<script src="../js/banner.js?v=1.0"></script>
 <!--处理菜单搜索展开-->
 <script src="../assets/bootstrap/scripts.js"></script>
-<script>
-    //接口地址
-    var urlConfig = {
-        displayUrl : ServerUrl + '/photo/display',
-        addUrl : ServerUrl + '/photo/create',
-        delUrl : ServerUrl + '/photo/del',
-        updateUrl : ServerUrl + '/photo/update'
-    };
-    $(function(){
-        getData();//获取数据
-        operateData();//操作数据
-    });
-
-    function getData() {
-        $("#dataTable").dataTable({ // 对应table标签的id
-            //表头信息添加
-            columns: [
-                {
-                    field: 'title',
-                    title: '名称',
-                    align: 'center',
-                    valign: 'middle'
-                }, {
-                    field: 'src',
-                    title: '文件路径',
-                    align: 'center',
-                    valign: 'middle'
-                }, {
-                    title: "操作",
-                    align: 'center',
-                    valign: 'middle',
-                    width: 160, // 定义列的宽度，单位为像素px
-                    formatter: function (value, row, index) {
-                        var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
-                        btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
-                        return btn;
-                    }
-                }
-            ],
-            pagination: false,
-            responseHandler: function(res) {
-                return {
-                    "rows": res.data
-                };
-            }
-        });
-    }
-
-</script>
 </html>
