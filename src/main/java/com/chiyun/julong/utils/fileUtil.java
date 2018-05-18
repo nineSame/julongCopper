@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class fileUtil {
-    public static String fileUpload(MultipartFile file) {
+    public static String fileUpload(MultipartFile file,String name) {
         // 获取文件名
         String fileName = file.getOriginalFilename();
         System.out.print("上传的文件名为：" + fileName);
@@ -14,7 +14,7 @@ public class fileUtil {
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         System.out.print("上传的后缀名为：" + suffixName);
         // 文件上传后的路径
-        String filePath = "D:\\upload\\";
+        String filePath = "D:\\upload\\"+name+"\\";
         System.out.print("上传的地址为：" + filePath);
         // 解决中文问题，liunx下中文路径，图片显示问题
         // fileName = UUID.randomUUID() + suffixName;
@@ -34,11 +34,12 @@ public class fileUtil {
         return null;
     }
 
-    public static int fileDel(String fileName){
+    public static int fileDel(String fileName,String name){
+        String path="D:\\upload\\"+name+"\\";
         int result=0;
         try {
             // Specify the file name and path
-            File file = new File("D:\\upload\\"+fileName);
+            File file = new File(path+fileName);
       /* the delete() method return true if the file
       deleted successfully else it return false
        */

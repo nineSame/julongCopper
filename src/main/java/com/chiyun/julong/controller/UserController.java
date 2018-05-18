@@ -32,8 +32,6 @@ import java.util.List;
 @Controller
 //@RequestMapping("/User")
 public class UserController {
-     private List<UserDisplay> listUser;
-     //private String name;
     @Resource
     private userDisplayRepository userDisplayRepository;
     @Resource
@@ -51,13 +49,16 @@ public class UserController {
     }
 
 
+/*
     @ResponseBody
     @RequestMapping("/user/display")
     public ApiResult<Object> dislpay(HttpSession httpSession) throws Exception {
 
-        //listUser = (List<UserEntity>) userRepository.findAllUser();
-
-        listUser = userDisplayRepository.findAlldesc();
+        //List<UserDisplay> listUser = (List<UserEntity>) userRepository.findAllUser();
+        int page=1;
+        int size=20;
+        Page<UserDisplay> listUser = userDisplayRepository.findAlldesc(PageRequest.of(page-1,size, Sort.unsorted()));
+        //listUser = userDisplayRepository.findAlldesc();
         long total = userDisplayRepository.count();
         System.out.print("total:" + total);
         System.out.print("-------------listUser:" + listUser);
@@ -70,6 +71,7 @@ public class UserController {
         return ApiPageResult.SUCCESS(listUser,total);
 
     }
+*/
 
 
     @ResponseBody
@@ -126,13 +128,15 @@ public class UserController {
 
 */
        //判断文件是否为空
-        if (!zpfile.isEmpty()) {
+        if (zpfile==null||zpfile.getSize()==0){
+            System.out.print("文件为空");
+        }else {
             //判断文件上传大小
             if(zpfile.getSize()>10485760){
                 return ApiResult.FAILURE("图片超出上传文件大小");
             }
             //不为空，文件大小符合，则上传图片
-            String filename=fileUtil.fileUpload(zpfile);
+            String filename=fileUtil.fileUpload(zpfile,"user");
             //由返回的数据判断图片是否上传成功
             if(filename==null){
                 return ApiResult.FAILURE("图片上传失败");
@@ -153,6 +157,12 @@ public class UserController {
            return ApiResult.FAILURE("密码不能为空");
        }
         userEntity.setMm(Md5Util.getMD5(password));
+       if(userEntity.getSfzh() !=null && userEntity.getSfzh() !=""){
+           System.out.print("身份证号:"+userEntity.getSfzh().length());
+            if(userEntity.getSfzh().length() != 18){
+                return ApiResult.FAILURE("身份证号必须为18位");
+            }
+       }
         //存更新时间
         userEntity.setGxsj(new Date());
         //存储操作
@@ -203,8 +213,11 @@ public class UserController {
             return ApiResult.FAILURE("密码不能为空");
         }
         userEntity.setMm(Md5Util.getMD5(password));*/
+
        //判断上传文件是否为空
-        if(!zpfile.isEmpty()){
+        if (zpfile==null||zpfile.getSize()==0){
+            System.out.print("文件为空");
+        }else {
        //判断文件上传大小
         if(zpfile.getSize()>10485760){
             return ApiResult.FAILURE("图片超出上传文件大小");
@@ -212,13 +225,13 @@ public class UserController {
         //判断该用户数据库里面是否有照片
        if(userEntity1.getZp()!=null&&userEntity1.getZp()!=""){
             //如果有照片，删除原有照片
-            int isdel=fileUtil.fileDel(userEntity1.getZp());
+            int isdel=fileUtil.fileDel(userEntity1.getZp(),"user");
             //判断是否删除成功
             if(isdel!=1){
                 return ApiResult.FAILURE("图片删除失败");
             }
             //删除成功后将用户修改的照片上传
-           String filename=fileUtil.fileUpload(zpfile);
+           String filename=fileUtil.fileUpload(zpfile,"user");
             //判断上传方法返回回来的数据
            if(filename==null){
                return ApiResult.FAILURE("图片上传失败");
@@ -226,8 +239,8 @@ public class UserController {
            //将文件名保存在数据库
            userEntity.setZp(filename);
        }else{
-            //如果没有，直接上传文件，保存文件名
-           String filename=fileUtil.fileUpload(zpfile);
+            //如果没有，直接上传文件
+           String filename=fileUtil.fileUpload(zpfile,"user");
            //判断上传方法返回回来的数据
            if(filename==null){
                return ApiResult.FAILURE("图片上传失败");
@@ -309,8 +322,8 @@ public class UserController {
         return ApiResult.SUCCESS();
     }
 
-    @RequestMapping("/resetPassword")
-    public ApiResult<Object> changepassword(String oldpwd, String newpwd, HttpSession httpSession) throws Exception {
+    @RequestMapping("/user/changePassword")
+    public ApiResult<Object> changePassword(String oldpwd, String newpwd, HttpSession httpSession) throws Exception {
         String personid = (String) httpSession.getAttribute("id");
         if (personid.isEmpty()) {
             return ApiResult.UNKNOWN();
@@ -330,7 +343,19 @@ public class UserController {
         return ApiResult.SUCCESS("密码修改成功");
     }
 
-
+    @RequestMapping("/user/resetPassword")
+    public ApiResult<Object> changepassword(String id,HttpSession httpSession) throws Exception {
+        //判断是否为管理员
+        /*String personid = (String) httpSession.getAttribute("id");
+        if (personid.isEmpty()) {
+            return ApiResult.UNKNOWN();
+        }*/
+        //根据传过来的id重置密码
+        UserEntity userEntity = userRepository.findById(id);
+        userEntity.setMm(Md5Util.getMD5("123456"));
+        userRepository.save(userEntity);
+        return ApiResult.SUCCESS("密码重置成功");
+    }
 
     @ResponseBody
     @RequestMapping("/user/seaarchById")
@@ -351,9 +376,9 @@ public class UserController {
     @RequestMapping("/user/page")
     public ApiResult<Object> page(String zh,int page,int size, HttpSession httpSession){
 //zh为关键字查询，目前只有帐号一个需求
-if(zh==null){
-    zh="%%";
-}
+            if(zh==null){
+                zh="%%";
+                  }
         Page<UserDisplay> list = userDisplayRepository.findAllByZhLike(zh,PageRequest.of(page-1,size, Sort.unsorted()));
 
         if (list == null) {

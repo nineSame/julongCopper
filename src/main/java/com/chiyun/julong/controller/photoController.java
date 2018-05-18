@@ -78,7 +78,9 @@ public class photoController {
             photoEntity1.setTitle(photoEntity.getTitle());
         }*/
         //判断上传文件是否为空
-        if(!tpfile.isEmpty()){
+        if (tpfile==null||tpfile.getSize()==0){
+            System.out.print("文件为空");
+        }else {
             //判断文件上传大小
             if(tpfile.getSize()>10485760){
                 return ApiResult.FAILURE("图片超出上传文件大小");
@@ -86,13 +88,13 @@ public class photoController {
             //判断该用户数据库里面是否有照片
             if(photoEntity1.getTplj()!=null&&photoEntity1.getTplj()!=""){
                 //如果有照片，删除原有照片
-                int isdel=fileUtil.fileDel(photoEntity1.getTplj());
+                int isdel=fileUtil.fileDel(photoEntity1.getTplj(),"banner");
                 //判断是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("图片删除失败");
                 }
                 //删除成功后将用户修改的照片上传
-                String filename=fileUtil.fileUpload(tpfile);
+                String filename=fileUtil.fileUpload(tpfile,"banner");
                 //判断上传方法返回回来的数据
                 if(filename==null){
                     return ApiResult.FAILURE("图片上传失败");
@@ -101,7 +103,7 @@ public class photoController {
                 photoEntity.setTplj(filename);
             }else{
                 //如果没有，直接上传文件，保存文件名
-                String filename=fileUtil.fileUpload(tpfile);
+                String filename=fileUtil.fileUpload(tpfile,"banner");
                 //判断上传方法返回回来的数据
                 if(filename==null){
                     return ApiResult.FAILURE("图片上传失败");
@@ -130,13 +132,15 @@ public class photoController {
         //由于图片标题和描述不一定需要，所以不需要判断传进来的两个参数是否为空，但是在下面必须判断图片路径是否为空
 
         //判断文件是否为空
-        if (!tpfile.isEmpty()) {
+        if (tpfile==null||tpfile.getSize()==0){
+            System.out.print("文件为空");
+        }else {
             //判断文件上传大小
             if(tpfile.getSize()>10485760){
                 return ApiResult.FAILURE("图片超出上传文件大小");
             }
             //不为空，文件大小符合，则上传图片
-            String filename=fileUtil.fileUpload(tpfile);
+            String filename=fileUtil.fileUpload(tpfile,"banner");
             //由返回的数据判断图片是否上传成功
             if(filename==null){
                 return ApiResult.FAILURE("图片上传失败");

@@ -22,22 +22,25 @@ import java.util.List;
 @Controller
 public class newsController {
 
-    private List<newsEntity> ListNews;
-
     @Resource
     private newsRepository newsRepository;
 
+/*
 
     @ResponseBody
     @RequestMapping("/news/display")
     public ApiResult<Object> lb(HttpSession httpSession) throws Exception {
-        ListNews = (List<newsEntity>) newsRepository.findAll();
+        int page=1;
+        int size=10;
+        Page<newsEntity> ListNews = newsRepository.findAll(PageRequest.of(page-1,size, Sort.unsorted()));
+       // List<newsEntity> ListNews = (List<newsEntity>) newsRepository.findAll();
 
         if (ListNews == null) {
             return ApiResult.FAILURE("数据库错误");
         }
         return ApiResult.SUCCESS(ListNews);
     }
+*/
 
 
     @ResponseBody
@@ -80,7 +83,9 @@ public class newsController {
             return ApiResult.FAILURE("未找到该用户");
         }
         //判断上传文件是否为空
-        if(!xwtpfile.isEmpty()){
+        if (xwtpfile==null||xwtpfile.getSize()==0){
+            System.out.print("文件为空");
+        }else {
             //判断文件上传大小
             if(xwtpfile.getSize()>10485760){
                 return ApiResult.FAILURE("图片超出上传文件大小");
@@ -88,13 +93,13 @@ public class newsController {
             //判断该用户数据库里面是否有照片
             if(newsEntity1.getXwtp()!=null&&newsEntity1.getXwtp()!=""){
                 //如果有照片，删除原有照片
-                int isdel=fileUtil.fileDel(newsEntity1.getXwtp());
+                int isdel=fileUtil.fileDel(newsEntity1.getXwtp(),"news");
                 //判断是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("图片删除失败");
                 }
                 //删除成功后将用户修改的照片上传
-                String filename=fileUtil.fileUpload(xwtpfile);
+                String filename=fileUtil.fileUpload(xwtpfile,"news");
                 //判断上传方法返回回来的数据
                 if(filename==null){
                     return ApiResult.FAILURE("图片上传失败");
@@ -103,7 +108,7 @@ public class newsController {
                 newsEntity.setXwtp(filename);
             }else{
                 //如果没有，直接上传文件，保存文件名
-                String filename=fileUtil.fileUpload(xwtpfile);
+                String filename=fileUtil.fileUpload(xwtpfile,"news");
                 //判断上传方法返回回来的数据
                 if(filename==null){
                     return ApiResult.FAILURE("图片上传失败");
@@ -145,13 +150,15 @@ public class newsController {
         }
 
         //判断文件是否为空
-        if (!xwtpfile.isEmpty()) {
+        if (xwtpfile==null||xwtpfile.getSize()==0){
+            System.out.print("文件为空");
+        }else {
             //判断文件上传大小
             if(xwtpfile.getSize()>10485760){
                 return ApiResult.FAILURE("图片超出上传文件大小");
             }
             //不为空，文件大小符合，则上传图片
-            String filename=fileUtil.fileUpload(xwtpfile);
+            String filename=fileUtil.fileUpload(xwtpfile,"news");
             //由返回的数据判断图片是否上传成功
             if(filename==null){
                 return ApiResult.FAILURE("图片上传失败");
@@ -190,10 +197,11 @@ public class newsController {
 
     @ResponseBody
     @RequestMapping("/news/search")
-    public ApiResult<Object> search(String condition, HttpSession httpSession) {
+    public ApiResult<Object> search(Date begin,Date end,String condition, HttpSession httpSession) {
         System.out.print("111111111-------"+condition+"-------");
         //暂时根据关键字查找新闻，后续会增加根据创建时间和关键字一起查找新闻
-        List<newsEntity> listNews = newsRepository.findByCondition(condition);
+        condition = "%"+condition+"%";
+        List<newsEntity> listNews = newsRepository.findAllByCondition(condition,begin,end);
         System.out.print("222222-------"+listNews.size()+"-------");
          return ApiResult.SUCCESS(listNews);
     }

@@ -8,13 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 public interface newsRepository extends CrudRepository<newsEntity, Long> {
     newsEntity findById(String id);
 
     //使用原生sql通过id删除用户
-    @Query(value = "delete from news where id=? ", nativeQuery = true)
+    @Query(value = "delete from news where id=?1 ", nativeQuery = true)
     @Modifying
     @Transactional
     int deleteOrderById(String id);
@@ -24,8 +25,8 @@ public interface newsRepository extends CrudRepository<newsEntity, Long> {
     newsEntity findByXwbt(String title);
 
 
-    @Query(value = "select * from news where 1=1 and (title like '%'?'%' or content like '%'?'%') ", nativeQuery = true)
+    @Query(value = "select * from news where (title like ?1 or content like ?1) and (createtime between ?2 and ?2) ", nativeQuery = true)
     @Modifying
     @Transactional
-    List<newsEntity> findByCondition(String condition);
+    List<newsEntity> findAllByCondition(String Condition,Date begin,Date end);
 }

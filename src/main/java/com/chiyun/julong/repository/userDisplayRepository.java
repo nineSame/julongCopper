@@ -18,7 +18,7 @@ public interface userDisplayRepository  extends CrudRepository<UserDisplay, Long
     UserDisplay findById(String id);
 
     @Query(value ="select * from user_display order by updatetime desc", nativeQuery = true)
-    List<UserDisplay> findAlldesc();
+    //List<UserDisplay> findAlldesc();
 
     //分页查询
 //    @Query(value = "select * from user_display limit (a-1)*b,b", nativeQuery = true)
