@@ -41,3 +41,48 @@ a{text-decoration:none;}
 #main_content .main .year .list ul li .intro{font-size:18px;line-height:32px;color:#555;}
 #main_content .wrapper:first-child .main .year.close h2 i{transform:rotate(-90deg);-webkit-transform:rotate(-90deg);-moz-transform:rotate(-90deg);-ms-transform:rotate(-90deg);-o-transform:rotate(-90deg)}
 #main_content .wrapper:first-child .main .year.close .list{opacity:0;height:0!important;}
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+
+    #main_content{
+        width: 100%;
+        left: -50px;
+        margin-bottom: 100px ;
+    }
+    #main_content .wrapper {
+        width: 100%;
+    }
+
+    #main_content .main .title {
+        left: 100px;
+    }
+
+    #main_content .main{
+        background:url("../lib/timeline/images/log/line-bg2.png") repeat-y 119px 0;
+    }
+
+    #main_content .main .year .list ul li {
+        background:url("../lib/timeline/images/log/point.jpg") no-repeat 105px 31px;padding:30px 0;color:#797979;
+    }
+
+    #main_content .main .year{
+        top:100px;
+    }
+
+    #main_content .main .year h2{
+        width: 240px;
+    }
+
+    #main_content .main .year h2 i {
+        left: 280px;
+    }
+
+    #main_content .main .year .list ul li .intro, #main_content .main .year .list ul li .more{
+        margin-left: 150px;
+        width:220px
+    }
+
+    #main_content .main .year .list ul li .date{
+        width: 220px;
+    }
+}
