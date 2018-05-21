@@ -247,9 +247,7 @@ setImg(aBannerLi[0],IMGARR[0]);
 setImg(aBannerLi[1],IMGARR[1]);
 
 
-
-oNext.onclick = function(){
-
+function nextNews() {
     // alert(1)
     if(!oWrap.moved){
         return;
@@ -272,6 +270,8 @@ oNext.onclick = function(){
         oWrap.style.left = '0';
     });
 }
+
+oNext.onclick = nextNews();
 
 oPrev.onclick = function(){
 
@@ -348,7 +348,7 @@ var ZTtimer = null;
 function setZTtimer() {
     ZTtimer = setInterval(
         function () {
-            oNext.click();
+            nextNews();
         },5000
     )
 }
