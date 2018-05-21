@@ -235,14 +235,16 @@ var oWrap = document.getElementsByClassName("banner_wrap")[0],
 
 
 //设置下一页点击
-oNext.onclick = function(){
+oNext.onclick = function(liWidth){
 
     if(!oWrap.moved){
         return;
     }
     aLi[1].style.position = 'absolute';
     aLi[1].style.top = '0';
-    aLi[1].style.left = '840px';
+    liWidth = parseInt(window.getComputedStyle(aLi[1]).width);
+    // console.log(liWidth);
+    aLi[1].style.left = liWidth + 'px';
 
     num++;
     if(num == arrImg.length){
@@ -254,7 +256,7 @@ oNext.onclick = function(){
     aLi[1].getElementsByClassName('suolue')[0].innerHTML = arrNews[num];
     aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = arrTimes[num];
     aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = arrRead[num];
-    move(oWrap, 'left', -840, 20, 20, function(){
+    move(oWrap, 'left', -liWidth, 20, 20, function(){
         // aImg[0].src = aImg[1].src;
         aLi[0].getElementsByTagName('img')[0].src = aLi[1].getElementsByTagName('img')[0].src;
         aLi[0].getElementsByTagName('h3')[0].innerHTML = aLi[1].getElementsByTagName('h3')[0].innerHTML;
@@ -266,13 +268,14 @@ oNext.onclick = function(){
 };
 
 //设置上一页点击
-oPrev.onclick = function(){
+oPrev.onclick = function(liWidth){
     if(!oWrap.moved){
         return;
     }
     aLi[1].style.position = 'absolute';
     aLi[1].style.top = '0';
-    aLi[1].style.left = '-840px';
+    liWidth = parseInt(window.getComputedStyle(aLi[1]).width);
+    aLi[1].style.left = -liWidth + 'px';
 
     num--;
     if(num < 0) {
@@ -284,7 +287,7 @@ oPrev.onclick = function(){
     aLi[1].getElementsByClassName('suolue')[0].innerHTML = arrNews[num];
     aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = arrTimes[num];
     aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = arrRead[num];
-    move(oWrap, 'left', 840, 20, 20, function(){
+    move(oWrap, 'left', liWidth, 20, 20, function(){
         // aLi[0].src = aLi[1].src;
         aLi[0].getElementsByTagName('img')[0].src = aLi[1].getElementsByTagName('img')[0].src;
         aLi[0].getElementsByTagName('h3')[0].innerHTML = aLi[1].getElementsByTagName('h3')[0].innerHTML;

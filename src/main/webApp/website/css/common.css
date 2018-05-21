@@ -612,6 +612,18 @@ h2,h3,h4,p{
     height:60px;
 }
 
+.toggle {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 24px;
+}
+
+#sidenav-toggle{
+    display: none;
+}
+
 @media screen and (min-width: 320px) and (max-width: 480px) {
     #main_content {
         width: 100%;
@@ -634,12 +646,24 @@ h2,h3,h4,p{
         display: none;
     }
 
+    .footer {
+        padding: 0;
+    }
+
     .footer_top {
         display: none;
     }
 
     .footer .wrap {
         width: 100% !important;
+        padding-top: 50px;
+    }
+    .footer .bottom_left {
+        margin-left: 20px;
+    }
+
+    #sidenav-toggle {
+        display: block;
     }
 }
 

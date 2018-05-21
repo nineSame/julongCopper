@@ -451,3 +451,9 @@
     right: 0;
     bottom: 0;
 }
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+    .part1 .second_banner{
+        width: 100%;
+    }
+}
