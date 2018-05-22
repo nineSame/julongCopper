@@ -89,7 +89,7 @@
     }
 
     #contact .con {
-        padding: 10px 40px 0 40px;
+        padding: 10px 20px 0 20px;
     }
 
     #contact .con .title {
@@ -109,6 +109,14 @@
 
     .row>.span-3 {
         width: 100%;
+    }
+
+    #map_container {
+        height: 300px;
+    }
+
+    .main_wrap {
+        padding-top: 0;
     }
 
 }

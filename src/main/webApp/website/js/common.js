@@ -5,6 +5,7 @@ $(function () {
     headerAnimation();  //设置header下拉动画
     setTop();           //设置top按钮
     setSideNav();
+    autoHideSideNav();
 });
 
 

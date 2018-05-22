@@ -642,6 +642,14 @@ h2,h3,h4,p{
         width: 100% !important;
     }
 
+    .header .header_content .logo{
+        padding: 10px 0 0 10px;
+    }
+
+    .logo.left img {
+        height: 40px;
+    }
+
     .header .nav {
         display: none;
     }
