@@ -80,7 +80,7 @@ public class newsController {
         //通过id查询是否有该新闻
         newsEntity newsEntity1 = newsRepository.findByXwbt(newsEntity.getId());
         if(newsEntity1==null){
-            return ApiResult.FAILURE("未找到该用户");
+            return ApiResult.FAILURE("未找到该新闻");
         }
         //判断上传文件是否为空
         if (xwtpfile==null||xwtpfile.getSize()==0){
@@ -90,7 +90,7 @@ public class newsController {
             if(xwtpfile.getSize()>10485760){
                 return ApiResult.FAILURE("图片超出上传文件大小");
             }
-            //判断该用户数据库里面是否有照片
+            //判断该数据库里面是否有照片
             if(newsEntity1.getXwtp()!=null&&newsEntity1.getXwtp()!=""){
                 //如果有照片，删除原有照片
                 int isdel=fileUtil.fileDel(newsEntity1.getXwtp(),"news");

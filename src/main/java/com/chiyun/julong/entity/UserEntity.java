@@ -22,14 +22,17 @@ public class UserEntity {
     private String zp;//照片路径
     private int zwdjpx;//职务登记排序
     private Date gxsj;//更新时间
+    private String lxyx;//联系邮箱
+    private String lxdh;//联系电话
+    private String lxsj;//联系手机
 
 
-    public UserEntity(String zh, String mm) {
+/*    public UserEntity(String zh, String mm) {
         this.zh = zh;
         this.mm = mm;
     }
 
-    public UserEntity(String zh, String xm, String zm, int xb, String zp, String ms, String mm, int js, int sfyx, String sfzh, int zwdjpx) {
+    public UserEntity(String zh, String xm, String zm, int xb, String zp, String ms, String mm, int js, int sfyx, String sfzh, int zwdjpx, String lxyx, String lxdh, String lxsj) {
         this.zh = zh;
         this.zw = zw;
         this.xm = xm;
@@ -41,7 +44,10 @@ public class UserEntity {
         this.sfyx = sfyx;
         this.sfzh = sfzh;
         this.zwdjpx = zwdjpx;
-    }
+        this.lxyx = lxyx;
+        this.lxdh = lxdh;
+        this.lxsj = lxsj;
+    }*/
 
     public UserEntity() {
     }
@@ -178,6 +184,35 @@ public class UserEntity {
         this.gxsj =  gxsj;
     }
 
+    @Basic
+    @Column(name = "email")
+    public String getLxyx() {
+        return lxyx;
+    }
+
+    public void setLxyx(String lxyx) {
+        this.lxyx = lxyx;
+    }
+
+    @Basic
+    @Column(name = "phone")
+    public String getLxdh() {
+        return lxdh;
+    }
+
+    public void setLxdh(String lxdh) {
+        this.lxdh = lxdh;
+    }
+
+    @Basic
+    @Column(name = "payphone")
+    public String getLxsj() {
+        return lxsj;
+    }
+
+    public void setLxsj(String lxsj) {
+        this.lxsj = lxsj;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -195,12 +230,15 @@ public class UserEntity {
                 Objects.equals(ms, that.ms)&&
                 Objects.equals(zp, that.zp)&&
                 Objects.equals(zwdjpx, that.zwdjpx)&&
-                Objects.equals(gxsj, that.gxsj);
+                Objects.equals(gxsj, that.gxsj)&&
+                Objects.equals(lxyx, that.lxyx)&&
+                Objects.equals(lxdh, that.lxdh)&&
+                Objects.equals(lxsj, that.lxsj);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, xm, mm, zh, js, sfyx, xb, zw, sfzh, ms ,zp, zwdjpx,gxsj);
+        return Objects.hash(id, xm, mm, zh, js, sfyx, xb, zw, sfzh, ms ,zp, zwdjpx, gxsj, lxyx, lxdh,lxsj);
     }
 }

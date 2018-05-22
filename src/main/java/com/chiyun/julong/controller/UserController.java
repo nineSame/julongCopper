@@ -163,6 +163,12 @@ public class UserController {
                 return ApiResult.FAILURE("身份证号必须为18位");
             }
        }
+        if(userEntity.getLxsj() !=null && userEntity.getLxsj() !=""){
+            System.out.print("手机号码:"+userEntity.getLxsj().length());
+            if(userEntity.getLxsj().length() != 11){
+                return ApiResult.FAILURE("手机号码必须为11位");
+            }
+        }
         //存更新时间
         userEntity.setGxsj(new Date());
         //存储操作
@@ -252,6 +258,18 @@ public class UserController {
             String password=userEntity.getMm();
         if(password!=null && password!=""){
             userEntity.setMm(Md5Util.getMD5(password));
+        }
+        if(userEntity.getSfzh() !=null && userEntity.getSfzh() !=""){
+            System.out.print("身份证号:"+userEntity.getSfzh().length());
+            if(userEntity.getSfzh().length() != 18){
+                return ApiResult.FAILURE("身份证号必须为18位");
+            }
+        }
+        if(userEntity.getLxsj() !=null && userEntity.getLxsj() !=""){
+            System.out.print("手机号码:"+userEntity.getLxsj().length());
+            if(userEntity.getLxsj().length() != 11){
+                return ApiResult.FAILURE("手机号码必须为11位");
+            }
         }
         userEntity.setGxsj(new Date());
         UserEntity entity = userRepository.save(userEntity);

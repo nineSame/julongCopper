@@ -2,29 +2,20 @@ package com.chiyun.julong.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name = "news", schema = "julong")
-public class newsEntity {
+public class announcementEntity {
     private String id;
-    private String xwbt;//新闻标题
-    private String xwtp;//新闻图片
-    private String xwnr;//新闻内容
+    private String ggbt;//公告标题
+    private String ggdz;//公告地址
     private Date cjsj;//创建时间
     private Date gxsj;//更新时间
-
-    public newsEntity() {
-    }
-
-/*    public newsEntity(String xwbt, String xwtp, String xwnr) {
-        this.xwbt = xwbt;
-        this.xwtp = xwtp;
-        this.xwnr = xwnr;
-    }*/
-
+    private int lx;//类型
 
     @Id
     @Column(name = "ID")
@@ -40,32 +31,22 @@ public class newsEntity {
 
     @Basic
     @Column(name = "title")
-    public String getXwbt() {
-        return xwbt;
+    public String getGgbt() {
+        return ggbt;
     }
 
-    public void setXwbt(String xwbt) {
-        this.xwbt = xwbt;
-    }
-
-    @Basic
-    @Column(name = "photosrc")
-    public String getXwtp() {
-        return xwtp;
-    }
-
-    public void setXwtp(String xwtp) {
-        this.xwtp = xwtp;
+    public void setGgbt(String ggbt) {
+        this.ggbt = ggbt;
     }
 
     @Basic
-    @Column(name = "content")
-    public String getXwnr() {
-        return xwnr;
+    @Column(name = "path")
+    public String getGgdz() {
+        return ggdz;
     }
 
-    public void setXwnr(String xwnr) {
-        this.xwnr = xwnr;
+    public void setGgdz(String ggdz) {
+        this.ggdz = ggdz;
     }
 
     @Basic
@@ -89,15 +70,25 @@ public class newsEntity {
     }
 
 
+    @Basic
+    @Column(name = "style")
+    public int getLx() {
+        return lx;
+    }
+
+    public void setLx(int lx) {
+        this.lx = lx;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        newsEntity that = (newsEntity) o;
+        announcementEntity that = (announcementEntity) o;
         return Objects.equals(id, that.id) &&
-                Objects.equals(xwbt, that.xwbt) &&
-                Objects.equals(xwtp, that.xwtp) &&
-                Objects.equals(xwnr, that.xwnr)&&
+                Objects.equals(ggbt, that.ggbt) &&
+                Objects.equals(ggdz, that.ggdz) &&
+                Objects.equals(lx, that.lx)&&
                 Objects.equals(gxsj, that.gxsj)&&
                 Objects.equals(cjsj, that.cjsj);
     }
@@ -105,7 +96,7 @@ public class newsEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(id, xwbt, xwtp, xwnr,gxsj, cjsj);
+        return Objects.hash(id, ggbt, ggdz, lx,gxsj, cjsj);
     }
-}
 
+}
