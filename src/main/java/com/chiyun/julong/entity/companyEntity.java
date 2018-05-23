@@ -2,12 +2,11 @@ package com.chiyun.julong.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "company", schema = "julong")
 public class companyEntity {
     private String id;
     private String gsmz;//公司名字

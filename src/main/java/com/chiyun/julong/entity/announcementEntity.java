@@ -2,13 +2,12 @@ package com.chiyun.julong.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "announcement", schema = "julong")
 public class announcementEntity {
     private String id;
     private String ggbt;//公告标题

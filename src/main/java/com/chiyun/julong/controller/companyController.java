@@ -5,6 +5,7 @@ import com.chiyun.julong.common.ApiResult;
 import com.chiyun.julong.entity.companyEntity;
 import com.chiyun.julong.repository.companyRepository;
 import com.chiyun.julong.utils.fileUtil;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
+@Controller
 public class companyController {
     @Resource
     private companyRepository companyRepository;
