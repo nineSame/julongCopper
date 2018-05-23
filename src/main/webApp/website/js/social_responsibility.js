@@ -4,7 +4,8 @@
 
 $(function () {
     setFrontLinks(); //设置导航链接
-    setPart1Animation(); //设置part1的交互效果
+    setPart1Animation(oLeft); //设置part1的交互效果PC
+    setPart1Animation(oLeftMobile)//设置part1的交互效果mobile
     createAccordion('show1');//添加手风琴效果
 })
 
@@ -18,7 +19,9 @@ function setFrontLinks() {
 
 var oPart1 = document.getElementsByClassName('part1')[0];
 var oLeft = oPart1.getElementsByClassName('part1_left')[0];
-var aLeftLi = oLeft.getElementsByTagName('li');
+var oLeftMobile = oPart1.getElementsByClassName('part1_left_mobile')[0];
+
+
 var oRight = document.getElementsByClassName('part1_right')[0];
 var aImg = oRight.getElementsByTagName('div');
 
@@ -30,7 +33,9 @@ function hideImg() {
 }
 
 
-function setPart1Animation() {
+function setPart1Animation(obj) {
+
+    var aLeftLi = obj.getElementsByTagName('li');
     for (var i = 0 ; i  < aLeftLi.length; i++){
 
         aLeftLi[i].index = i;
@@ -40,12 +45,24 @@ function setPart1Animation() {
             var oTitle = oContent.getElementsByClassName('list_title')[0];
             var oDec = oContent.getElementsByClassName('dec')[0];
 
-            oContent.style.background = "#bb9205";
-            oTitle.style.color = "#bb9205";
-            oTitle.style.background = "#fff";
-            oDec.style.color = "#fff";
-            hideImg();
-            aImg[this.index].style.display = "block";
+            if ($(this).parent().parent().attr('class') == 'part1_left_mobile left'){
+                oContent.style.background = "#bb9205";
+                oTitle.style.color = "#fff";
+                // oTitle.style.background = "#fff";
+                oDec.style.color = "#fff";
+                hideImg();
+                aImg[this.index].style.display = "block";
+            }else {
+                oContent.style.background = "#bb9205";
+                oTitle.style.color = "#bb9205";
+                oTitle.style.background = "#fff";
+                oDec.style.color = "#fff";
+                hideImg();
+                aImg[this.index].style.display = "block";
+            }
+
+
+            // alert($(this).parent().parent().attr('class'))
 
         }
 
@@ -54,10 +71,18 @@ function setPart1Animation() {
             var oTitle = oContent.getElementsByClassName('list_title')[0];
             var oDec = oContent.getElementsByClassName('dec')[0];
 
-            oContent.style.background = "#f9f7f0";
-            oTitle.style.color = "#fff";
-            oTitle.style.background = "#bb9205";
-            oDec.style.color = "#555";
+            if ($(this).parent().parent().attr('class') == 'part1_left_mobile left'){
+                oContent.style.background = "#f9f7f0";                oTitle.style.color = "#222";
+                oDec.style.color = "#757575";
+                hideImg();
+                aImg[this.index].style.display = "block";
+            }else {
+                oContent.style.background = "#f9f7f0";
+                oTitle.style.color = "#fff";
+                oTitle.style.background = "#bb9205";
+                oDec.style.color = "#757575";
+            }
+
         }
 
     }

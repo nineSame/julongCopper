@@ -582,7 +582,6 @@
         overflow: hidden;
         display: -webkit-box;
         -webkit-line-clamp: 2;
-
         -webkit-box-orient: vertical;
     }
 
@@ -592,19 +591,19 @@
     }
 
     .sel-wrap {
-        width: 320px;
+        width: 280px;
     }
 
     .sel-show {
-        width: 320px;
-    }.news_list .list_text
+        width: 280px;
+    }
 
     .sel-option {
-        width:320px;
+        width:280px;
     }
 
     .part1 input {
-        width: 320px;
+        width: 280px;
     }
 
     .part1 .second_search #search_btn {

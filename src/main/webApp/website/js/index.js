@@ -271,7 +271,7 @@ function nextNews() {
     });
 }
 
-oNext.onclick = nextNews();
+oNext.onclick = nextNews;
 
 oPrev.onclick = function(){
 

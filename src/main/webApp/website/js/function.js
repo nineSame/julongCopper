@@ -1,10 +1,5 @@
 function pageCommonLink() {
-    /************************************底部友情链接***************************************/
-    $('.top_right').hover(function (ev) {
-        $('.friend_link').stop().slideDown();
-    },function (ev) {
-        $('.friend_link').stop().slideUp();
-    });
+
 
     /****************************header、.front添加链接********************/
     $('.logo a').attr("href","./index.html");
@@ -143,4 +138,16 @@ function autoHideSideNav() {
     $('.sidenav-menu>li a[href]').click(function () {
         $('#sidenav-toggle').click()
     })
+}
+
+function addFooter() {
+    var footerHtml = '<div class="footer"><div class="wrap"><div class="footer_top"><div class="top_left"><ul><li class="left"><a href="legal_notice.html">法律声明</a></li><li class="left"><a href="contact_us.html">联系我们</a></li><li class="left"><a>员工通道</a></li></ul></div><div class="top_right right"><div class="station_button clearfix"><div><span class="left">友情链接</span><span class="right"><i class="icon-angle-down icon-2x"></i></span></div></div><div class="friend_link"><ul><li><a href="http://www.cdchiy.com/">驰云科技</a></li></ul></div></div></div><div class="footer_bottom"><div class="bottom_left"><ul><li><span>电话</span>:<a>0891-6819288</a></li><li><span>地址</span>: 拉萨市金珠中路22号</li><li>Copyright &copy; 2018 <a class="company">西藏巨龙铜矿</a></li><li>版权所有 <a>这里是版权号</a></li></ul></div><div class="bottom_right"></div></div></div></div>';
+    $(footerHtml).insertAfter('section');
+    // alert();
+    /************************************底部友情链接***************************************/
+    $('.top_right').hover(function (ev) {
+        $('.friend_link').stop().slideDown();
+    },function (ev) {
+        $('.friend_link').stop().slideUp();
+    });
 }
