@@ -83,7 +83,7 @@
 
 /*遮罩轮播*/
 
-#mask {
+#mask1 {
     /*display: none;*/
     width: 100%;
     height: 100%;
@@ -94,15 +94,225 @@
     background: rgba(0,0,0,0.8);
 }
 
-#mask .lanrenzhijia {
+#mask1 .lanrenzhijia {
 margin-top: 200px;
 }
 
-#mask .back {
+#mask1 .back {
     position: fixed;
     top: 20px;
     right: 25px;
     color: #fff;
     padding: 5px;
     cursor: pointer;
+}
+
+
+/*手机遮罩*/
+
+#mask2 {
+
+}
+
+#mask2 .second_banner{
+    /*background: #fcf2cf;*/
+    height: 303px;
+    width: 840px;
+    overflow: hidden;
+    position: relative;
+}
+
+.second_banner .banner_wrap {
+    width: 200%;
+    height: 303px;
+    /*background: #f9f7f0;*/
+    position: absolute;
+}
+
+.second_banner .banner_wrap ul {
+    height: 303px;
+    width: 100%;
+}
+
+
+
+.banner_wrap li {
+    position: relative;
+    width: 50%;
+    height: 303px;
+    display: inline-block;
+    /*background: #f9f7f0;*/
+}
+
+#mask2 .second_banner .img_wrap {
+    /*width: 305px;*/
+    /*height: 170px;*/
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: absolute;
+}
+
+.img_wrap img {
+    /*width: 305px;*/
+    /*height: 170px;*/
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+}
+
+.img_wrap img:hover {
+    transform: scale(1.1);
+}
+
+.second_banner .banner_text {
+    position: absolute;
+    /*background: aqua;*/
+    width: 415px;
+    left: 385px;
+    top: 40px;
+}
+
+.second_banner .banner_news {
+    cursor: pointer;
+}
+
+.second_banner h3 {
+    position: absolute;
+    font-size: 26px;
+    color: #000;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    transition: 0.3s;
+    top: 40px;
+    left: 380px;
+}
+
+
+
+.second_banner .article_info {
+    position: absolute;
+    padding: 10px 0;
+    top: 160px;
+    left: 380px;
+}
+
+
+
+
+
+
+#mask2 .prev, #mask2 .next{
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    line-height: 36px;
+    text-align: center;
+    background: #d5a93d;
+    position: absolute;
+    color: #eeeeee;
+    bottom: 0;
+}
+
+.second_banner .prev {
+    right: 40px;
+
+}
+
+
+.second_banner .next {
+    right: 0;
+}
+
+
+.second_banner .prev:hover, .second_banner .next:hover{
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+.ovfHidden{
+    overflow: hidden;
+    height: 100%;
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+    /*遮罩*/
+    #mask2{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        z-index: 100;
+        top:0;
+        left: 0;
+        background: rgba(0,0,0,0.8);
+    }
+    #mask2 .second_banner{
+        width: 100%;
+    }
+    #mobile_mask_info {
+        position: absolute;
+        width: 100%;
+        height: 36px;
+        bottom: 0;
+        left: 0;
+        padding: 15px;
+    }
+    #mobile_mask_info .wrapfix{
+        width: 100%;
+        height: 36px;
+        position: relative;
+    }
+    #mobile_mask_info .prev {
+        left: 0;
+        background: inherit;
+    }
+    #mobile_mask_info .next {
+        left:140px;
+        background: inherit;
+    }
+    #mobile_mask_info i {
+        position: absolute;
+        right: 40px;
+        color: #fff;
+    }
+    #mobile_mask_info .num {
+        position: absolute;
+        width: 100px;
+        height: 36px;
+        left: 40px;
+        color: #fff;
+        line-height: 36px;
+        font-size: 20px;
+    }
+    #mobile_mask_info .num span{
+        display: inline-block;
+        width: 40px;
+        text-align: center;
+    }
+
+    .second_banner h3{
+       display: none;
+    }
+
+    #mobile_mask_title {
+        /*background: yellow;*/
+        width: 80%;
+        height: 40px;
+        position: absolute;
+        top:640px;
+        left: 40px;
+        font-size: 20px;
+        line-height: 40px;
+        color: #fff;
+    }
+
+    /*内容*/
+    .img_list li {
+        width: 90%;
+    }
+
+    .img_list li ._title {
+        display: none;
+    }
+
+
 }

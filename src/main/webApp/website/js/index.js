@@ -130,50 +130,50 @@ for (var i = 0; i < aListBox.length; i++){
 }
 
 /*****************************股票模块**********************************************/
-
-var oRealTimeInfo = document.getElementById('real_time_info');
-var aGP_list = oRealTimeInfo.getElementsByTagName('li');
-var oMainLeft = document.getElementsByClassName('main_left')[0];
-var aPics = oMainLeft.getElementsByTagName('li');
-
-
-
-function hidePics() {
-    for (var i =0 ; i < aPics.length; i++){
-        aPics[i].style.display = 'none';
-    }
-}
-
-for (var i = 0; i < aGP_list.length; i++){
-    aGP_list[i].index = i;
-
-    aGP_list[i].onmouseover = function () {
-        this.style.background = "#bb9205"
-
-        $(this).find('span').css({"color":"#fff","font-weight":"bold"});
-        hidePics();
-        aPics[this.index].style.display = 'block';
-        // alert($(this).attr("class"))
-        if ($(this).attr("class") == "stock_up"){
-            $(this).find('span:last-child').css("background-position","-40px 0")
-        }
-        if ($(this).attr("class") == "stock_down"){
-            $(this).find('span:last-child').css("background-position","-60px 0")
-        }
-    }
-
-    aGP_list[i].onmouseout = function () {
-        this.style.backgroundColor = "rgba(255,255,255,0.8)";
-        $(this).find('span').css({"color":"#7c7c7c","font-weight":"normal"});
-        hidePics();
-        if ($(this).attr("class") == "stock_up"){
-            $(this).find('span:last-child').css("background-position","0 0")
-        }
-        if ($(this).attr("class") == "stock_down"){
-            $(this).find('span:last-child').css("background-position","-20px 0")
-        }
-    }
-}
+//
+// var oRealTimeInfo = document.getElementById('real_time_info');
+// var aGP_list = oRealTimeInfo.getElementsByTagName('li');
+// var oMainLeft = document.getElementsByClassName('main_left')[0];
+// var aPics = oMainLeft.getElementsByTagName('li');
+//
+//
+//
+// function hidePics() {
+//     for (var i =0 ; i < aPics.length; i++){
+//         aPics[i].style.display = 'none';
+//     }
+// }
+//
+// for (var i = 0; i < aGP_list.length; i++){
+//     aGP_list[i].index = i;
+//
+//     aGP_list[i].onmouseover = function () {
+//         this.style.background = "#bb9205"
+//
+//         $(this).find('span').css({"color":"#fff","font-weight":"bold"});
+//         hidePics();
+//         aPics[this.index].style.display = 'block';
+//         // alert($(this).attr("class"))
+//         if ($(this).attr("class") == "stock_up"){
+//             $(this).find('span:last-child').css("background-position","-40px 0")
+//         }
+//         if ($(this).attr("class") == "stock_down"){
+//             $(this).find('span:last-child').css("background-position","-60px 0")
+//         }
+//     }
+//
+//     aGP_list[i].onmouseout = function () {
+//         this.style.backgroundColor = "rgba(255,255,255,0.8)";
+//         $(this).find('span').css({"color":"#7c7c7c","font-weight":"normal"});
+//         hidePics();
+//         if ($(this).attr("class") == "stock_up"){
+//             $(this).find('span:last-child').css("background-position","0 0")
+//         }
+//         if ($(this).attr("class") == "stock_down"){
+//             $(this).find('span:last-child').css("background-position","-20px 0")
+//         }
+//     }
+// }
 
 
 /**************************************banner滑动**********************************/
@@ -247,9 +247,7 @@ setImg(aBannerLi[0],IMGARR[0]);
 setImg(aBannerLi[1],IMGARR[1]);
 
 
-
-oNext.onclick = function(){
-
+function nextNews() {
     // alert(1)
     if(!oWrap.moved){
         return;
@@ -272,6 +270,8 @@ oNext.onclick = function(){
         oWrap.style.left = '0';
     });
 }
+
+oNext.onclick = nextNews();
 
 oPrev.onclick = function(){
 
@@ -348,7 +348,7 @@ var ZTtimer = null;
 function setZTtimer() {
     ZTtimer = setInterval(
         function () {
-            oNext.click();
+            nextNews();
         },5000
     )
 }

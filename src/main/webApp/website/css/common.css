@@ -612,9 +612,21 @@ h2,h3,h4,p{
     height:60px;
 }
 
+.toggle {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    width: 24px;
+}
+
+#sidenav-toggle{
+    display: none;
+}
+
 @media screen and (min-width: 320px) and (max-width: 480px) {
     #main_content {
-        width: 100%;
+        width: 100% !important;
         padding-top: 60px;
     }
 
@@ -630,8 +642,20 @@ h2,h3,h4,p{
         width: 100% !important;
     }
 
+    .header .header_content .logo{
+        padding: 10px 0 0 10px;
+    }
+
+    .logo.left img {
+        height: 40px;
+    }
+
     .header .nav {
         display: none;
+    }
+
+    .footer {
+        padding: 0;
     }
 
     .footer_top {
@@ -640,6 +664,14 @@ h2,h3,h4,p{
 
     .footer .wrap {
         width: 100% !important;
+        padding-top: 50px;
+    }
+    .footer .bottom_left {
+        margin-left: 20px;
+    }
+
+    #sidenav-toggle {
+        display: block;
     }
 }
 

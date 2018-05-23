@@ -2,15 +2,15 @@
   "resCode": 200,
   "resMsg": "success",
   "data": [
-    {"id":"news1","title": "标题1","src":"news1.png","day":"21","monthAndYear":"3-2018","click":"123","news":"新闻内容1"},
-    {"id":"news2","title": "标题2","src":"news2.jpg","day":"22","monthAndYear":"3-2018","click":"1232","news":"新闻内容2"},
-    {"id":"news3","title": "标题3","src":"news3.jpg","day":"23","monthAndYear":"3-2018","click":"1293","news":"新闻内容3"},
-    {"id":"news4","title": "标题4","src":"news1.png","day":"24","monthAndYear":"3-2018","click":"1213","news":"新闻内容4"},
-    {"id":"news5","title": "标题5","src":"news2.jpg","day":"25","monthAndYear":"3-2018","click":"1833","news":"新闻内容5"},
-    {"id":"news6","title": "标题6","src":"news3.jpg","day":"26","monthAndYear":"4-2018","click":"1243","news":"新闻内容6"},
-    {"id":"news7","title": "标题7","src":"news1.png","day":"10","monthAndYear":"4-2018","click":"1203","news":"新闻内容7"},
-    {"id":"news8","title": "标题8","src":"news2.jpg","day":"28","monthAndYear":"4-2018","click":"1523","news":"新闻内容8"},
-    {"id":"news9","title": "标题9","src":"news3.jpg","day":"29","monthAndYear":"4-2018","click":"1203","news":"新闻内容9"}
+    {"id":"news1","title": "标题1","src":"news1.png","day":"21","monthAndYear":"3-2018","click":"123","news":"新闻内容1,占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位占位"},
+    {"id":"news2","title": "标题2","src":"news2.jpg","day":"22","monthAndYear":"3-2018","click":"1232","news":"新闻内容2新闻内容2新闻内容2新闻内容2新闻内容2新闻内容2新闻内容2新闻内容2新闻内容2"},
+    {"id":"news3","title": "标题3","src":"news3.jpg","day":"23","monthAndYear":"3-2018","click":"1293","news":"新闻内容3新闻内容3新闻内容3新闻内容3新闻内容3新闻内容3新闻内容3新闻内容3"},
+    {"id":"news4","title": "标题4","src":"news1.png","day":"24","monthAndYear":"3-2018","click":"1213","news":"新闻内容4新闻内容4新闻内容4新闻内容4新闻内容4新闻内容4新闻内容4新闻内容4"},
+    {"id":"news5","title": "标题5","src":"news2.jpg","day":"25","monthAndYear":"3-2018","click":"1833","news":"新闻内容5新闻内容5新闻内容5新闻内容5新闻内容5"},
+    {"id":"news6","title": "标题6","src":"news3.jpg","day":"26","monthAndYear":"4-2018","click":"1243","news":"新闻内容6新闻内容6新闻内容6新闻内容6新闻内容6新闻内容6新闻内容6新闻内容6新闻内容6"},
+    {"id":"news7","title": "标题7","src":"news1.png","day":"10","monthAndYear":"4-2018","click":"1203","news":"新闻内容7新闻内容7新闻内容7新闻内容7新闻内容7"},
+    {"id":"news8","title": "标题8","src":"news2.jpg","day":"28","monthAndYear":"4-2018","click":"1523","news":"新闻内容8新闻内容8新闻内容8新闻内容8"},
+    {"id":"news9","title": "标题9","src":"news3.jpg","day":"29","monthAndYear":"4-2018","click":"1203","news":"新闻内容9新闻内容9新闻内容9新闻内容9新闻内容9新闻内容9新闻内容9新闻内容9新闻内容9"}
   ]
 }
 
