@@ -20,4 +20,6 @@ public interface announcementRepository extends CrudRepository<announcementEntit
     int deleteOrderById(String id);
 
     announcementEntity findByGgbt(String title);
+
+    announcementEntity findById(String id);
 }

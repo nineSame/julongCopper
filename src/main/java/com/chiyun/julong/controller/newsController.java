@@ -78,7 +78,7 @@ public class newsController {
             return ApiResult.FAILURE("新闻标题和内容为空");
         }
         //通过id查询是否有该新闻
-        newsEntity newsEntity1 = newsRepository.findByXwbt(newsEntity.getId());
+        newsEntity newsEntity1 = newsRepository.findById(newsEntity.getId());
         if(newsEntity1==null){
             return ApiResult.FAILURE("未找到该新闻");
         }
