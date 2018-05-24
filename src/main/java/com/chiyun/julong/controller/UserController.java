@@ -282,7 +282,7 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/user/del")
-    public ApiResult<Object> login(String id, HttpSession httpSession) throws Exception {
+    public ApiResult<Object> del(String id, HttpSession httpSession) throws Exception {
        /*UserEntity userEntity = userRepository.delete(id);
         if (userEntity == null) {
             return ApiResult.FAILURE("用户名或密码错误");
@@ -399,9 +399,6 @@ public class UserController {
                   }
         Page<UserDisplay> list = userDisplayRepository.findAllByZhLike(zh,PageRequest.of(page-1,size, Sort.unsorted()));
 
-        if (list == null) {
-            return ApiResult.FAILURE("没有数据");
-        }
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new
         return ApiResult.SUCCESS(list);

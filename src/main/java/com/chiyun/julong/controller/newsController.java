@@ -72,9 +72,7 @@ public class newsController {
 
         //新闻标题和内容属于必填字段，但是新闻图片不一定，所以只在前面判断标题和内容，下面的图片路径可不必判断是否为空
         //判断传进的新闻标题和内容是否为空
-        String title=newsEntity.getXwbt();
-        String content=newsEntity.getXwnr();
-        if(title==null||title==""||content==null||content==""){
+        if(newsEntity.getXwbt()==null||newsEntity.getXwbt()==""||newsEntity.getXwnr()==null||newsEntity.getXwnr()==""){
             return ApiResult.FAILURE("新闻标题和内容为空");
         }
         //通过id查询是否有该新闻
@@ -140,14 +138,12 @@ public class newsController {
         }*/
         //新闻标题和内容属于必填字段，但是新闻图片不一定，所以只在前面判断标题和内容，下面的图片路径可不必判断是否为空
         //判断传进的新闻标题和内容是否为空
-        String title=newsEntity.getXwbt();
-        String content=newsEntity.getXwnr();
-        if(title==null||title==""||content==null||content==""){
+        if(newsEntity.getXwbt()==null||newsEntity.getXwbt()==""||newsEntity.getXwnr()==null||newsEntity.getXwnr()==""){
             return ApiResult.FAILURE("新闻标题和内容为空");
         }
-        if(newsRepository.findByXwbt(title)!=null){
+  /*      if(newsRepository.findByXwbt(newsEntity.getXwbt())!=null){
             return ApiResult.FAILURE("数据库已有该标题的数据");
-        }
+        }*/
 
         //判断文件是否为空
         if (xwtpfile==null||xwtpfile.getSize()==0){
@@ -186,9 +182,6 @@ public class newsController {
         }*/
         Page<newsEntity> list = newsRepository.findAll(PageRequest.of(page-1,size, Sort.unsorted()));
 
-        if (list == null) {
-            return ApiResult.FAILURE("没有数据");
-        }
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new
         return ApiResult.SUCCESS(list);

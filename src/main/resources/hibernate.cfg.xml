@@ -11,6 +11,8 @@
     <mapping class="com.chiyun.julong.entity.photoEntity"/>
     <mapping class="com.chiyun.julong.entity.newsEntity"/>
     <mapping class="com.chiyun.julong.entity.announcementEntity"/>
+    <mapping class="com.chiyun.julong.entity.companyEntity"/>
+    <mapping class="com.chiyun.julong.entity.developmentEntity"/>
 
     <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->

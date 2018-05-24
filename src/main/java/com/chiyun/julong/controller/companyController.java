@@ -26,9 +26,7 @@ public class companyController {
     public ApiResult<Object> dislpay(HttpSession httpSession) throws Exception {
 
         List<companyEntity> list = companyRepository.findAll();
-        if (list == null) {
-            return ApiResult.FAILURE("数据库错误");
-        }
+
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new
         return ApiPageResult.SUCCESS(list);

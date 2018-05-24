@@ -30,9 +30,6 @@ public class photoController {
     public ApiResult<Object> lb(HttpSession httpSession) throws Exception {
         ListPhoto = (List<photoEntity>) photoRepository.findAll();
 
-        if (ListPhoto == null) {
-            return ApiResult.FAILURE("数据库错误");
-        }
         return ApiResult.SUCCESS(ListPhoto);
     }
 
