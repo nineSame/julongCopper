@@ -675,7 +675,7 @@ h2,h3,h4,p{
     }
 
     .footer ul{
-        width: 100%;
+        width: 100% !important;
     }
     .footer .bottom_left ul li{
         float: none;
