@@ -53,17 +53,21 @@ function getEventData() {
                         //获取日，处理月份前面的0
                         var date = groupedArr[i][j].fzlcsj.substring(8,10);
                         if (date.substring(0,1) == '0'){
-                            date = month.substring(1,2);
+                            date = date.substring(1,2);
                         }
                         //拼接ul内容
                         eventHtml +=  '<li class="cls"><p class="date">'+month+'月'+date+'日</p><p class="intro">'+groupedArr[i][j].fzlcbt+'</p><p class="version">&nbsp;</p><div class="more"><p>'+groupedArr[i][j].fzlcnr+'</p></div></li>';
                     }
 
-                    eventHtml += '</ul></div></div>'
+                    eventHtml += '</ul></div></div>';
+
+                    console.log(groupedArr[1][0].fzlcsj.substring(8,10));
                 }
 
 
                 // console.log(eventHtml);
+
+
 
                 $('#event_container').append(eventHtml);
                 operateEvent();
