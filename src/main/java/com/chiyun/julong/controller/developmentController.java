@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class developmentController {
@@ -21,14 +22,10 @@ public class developmentController {
     private developmentRepository developmentRepository;
 
     @ResponseBody
-    @RequestMapping("/development/page")
-    public ApiResult<Object> page(Date fzlcsj, int page, int size, HttpSession httpSession){
+    @RequestMapping("/development/diaplay")
+    public ApiResult<Object> diaplay( HttpSession httpSession){
 
-        if(fzlcsj==null){
-            return ApiResult.FAILURE("发展历程时间为空");
-        }
-        Page<developmentEntity> list = developmentRepository.findAllByFzlcsj(fzlcsj,PageRequest.of(page-1,size, Sort.unsorted()));
-
+        List<developmentEntity> list = developmentRepository.findAll();
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new
         return ApiResult.SUCCESS(list);

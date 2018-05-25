@@ -16,4 +16,6 @@ public interface developmentRepository extends CrudRepository<developmentEntity,
     developmentEntity findById(String id);
 
     int deleteOrderById(String id);
+
+    List<developmentEntity> findAll();
 }
