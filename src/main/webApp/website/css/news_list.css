@@ -287,6 +287,19 @@
 
 }
 
+/****************新闻列表hover******************************/
+#main_content .news_list li:hover h3,#main_content .news_list li:hover p a{
+    color: #bb9205;
+}
+
+#main_content .news_list li:hover img {
+    transform: scale(1.1);
+}
+
+
+
+
+
 .news_list .list_wrap{
     /*background: pink;*/
     height: 168px;
@@ -335,7 +348,7 @@
 }
 
 .news_list .list_text {
-    left: 60px;
+    padding-left: 20px;
 }
 
 .news_list .list_text h3 a {
@@ -386,6 +399,11 @@
     right: 0;
     bottom: 0;
 }
+.page_wrapper {
+    text-align: center;
+    margin-top: 20px;;
+}
+
 
 @media screen and (min-width: 320px) and (max-width: 480px){
 
@@ -492,7 +510,9 @@
 
     .news_list .list_text {
         position: absolute;
+        padding-left: 0;
         bottom: 40px;
+        left: 60px;
 
     }
 
