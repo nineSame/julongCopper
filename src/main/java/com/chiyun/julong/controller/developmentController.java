@@ -25,7 +25,7 @@ public class developmentController {
     @RequestMapping("/development/display")
     public ApiResult<Object> display( HttpSession httpSession){
 
-        List<developmentEntity> list = developmentRepository.findAll();
+        List<developmentEntity> list = developmentRepository.findAlldesc();
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new
         return ApiResult.SUCCESS(list);
