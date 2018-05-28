@@ -61,7 +61,6 @@ function getEventData() {
 
                     eventHtml += '</ul></div></div>';
 
-                    console.log(groupedArr[1][0].fzlcsj.substring(8,10));
                 }
 
 

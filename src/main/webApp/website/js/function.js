@@ -121,8 +121,19 @@ function setTop() {
         $('html,body').animate(
             {scrollTop: '0px'}, 500),$('#to_top').hide();
     });
-
 }
+
+
+//手机端的top处理
+document.addEventListener('touchstart',function (event) {
+    event.preventDefault();
+    if (event.touches.length == 1){
+       if (event.touches[0].pageY > 800){
+           $('#to_top').show();
+       }
+    }
+})
+
 
 
 function setSideNav() {

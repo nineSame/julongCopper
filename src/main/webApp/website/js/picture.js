@@ -4,6 +4,7 @@
 $(function () {
     setLiMask();
     setScreenMask();
+    setBannerData();
 })
 
 //显示图片hover的遮罩
@@ -35,8 +36,6 @@ function setLiMask() {
 
     })
 }
-
-
 
 
 //遮罩轮播层
@@ -140,12 +139,10 @@ function initBannerData(){
     $('.num .now').html(1);
     $('.num .all').html(arrTitle.length);
     $('#mobile_mask_title').html(arrTitle[0]);
-//        aLi[0].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = arrTimes[0];
-//        aLi[0].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = arrRead[0];
+
     aLi[1].getElementsByTagName('img')[0].src = arrImg[1];
     aLi[1].getElementsByTagName('h3')[0].innerHTML = arrTitle[1];
-//        aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = arrTimes[1];
-//        aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = arrRead[1];
+
 }
 
 var oWrap = document.getElementsByClassName("banner_wrap")[0],
@@ -186,14 +183,11 @@ oNext.onclick = function(liWidth){
     $('.num .now').html(num + 1);
     $('.num .all').html(arrTitle.length);
 
-//        aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = arrTimes[num];
-//        aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = arrRead[num];
     move(oWrap, 'left', -liWidth, 20, 20, function(){
         // aImg[0].src = aImg[1].src;
         aLi[0].getElementsByTagName('img')[0].src = aLi[1].getElementsByTagName('img')[0].src;
         aLi[0].getElementsByTagName('h3')[0].innerHTML = aLi[1].getElementsByTagName('h3')[0].innerHTML;
-//            aLi[0].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML;
-//            aLi[0].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML;
+
         oWrap.style.left = '0';
     });
 };
@@ -216,19 +210,19 @@ oPrev.onclick = function(liWidth){
     aLi[1].getElementsByTagName('img')[0].src = arrImg[num];
     aLi[1].getElementsByTagName('h3')[0].innerHTML = arrTitle[num];
     $('#mobile_mask_title').html(arrTitle[num]);
-//        aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = arrTimes[num];
-//        aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = arrRead[num];
+    $('.num .now').html(num + 1);   //此处用+1表示当前编号，本身序号在上面的的递减中处理过了，易混淆，所以备注一下
+    $('.num .all').html(arrTitle.length);
+
     move(oWrap, 'left', liWidth, 20, 20, function(){
         // aLi[0].src = aLi[1].src;
         aLi[0].getElementsByTagName('img')[0].src = aLi[1].getElementsByTagName('img')[0].src;
         aLi[0].getElementsByTagName('h3')[0].innerHTML = aLi[1].getElementsByTagName('h3')[0].innerHTML;
-//            aLi[0].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML = aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[0].innerHTML;
-//            aLi[0].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML = aLi[1].getElementsByClassName('article_info')[0].getElementsByTagName('p')[1].innerHTML;
+
         oWrap.style.left = '0';
     })
 };
 
-setBannerData();
+// setBannerData();
 
 
 $('#mask2 .second_banner').css("margin-top",$(window).height()/2 - 150 + 'px')
@@ -259,79 +253,27 @@ function setBannerHover() {
     }
 }
 
-/**************************************手机端遮罩的拖拽滑动**********************************/
-//var mask2 = document.getElementById('mask2');
-//    mask2.addEventListener('touchstart',touch, false);
-//    mask2.addEventListener('touchmove',touch, false);
-//    mask2.addEventListener('touchend',touch, false);
-//    var downX = null;
-//    var upX = null;
-//    function touch (event) {
-//
-//            downX = null;
-//            upX = null;
-//            var event = event || window.event;
-//
-//
-//            switch (event.type) {
-//                case "touchstart":
-////                oInp.innerHTML = "Touch started (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
-//                    downX = event.touches[0].clientX;
-//                    console.log(downX);
-//                    break;
-//                case "touchend":
-////                oInp.innerHTML = "<br>Touch end (" + event.changedTouches[0].clientX + "," + event.changedTouches[0].clientY + ")";
-//                    upX = event.changedTouches[0].clientX;
-//                    console.log(upX);
-//                    break;
-//                case "touchmove":
-//                    event.preventDefault();
-////                oInp.innerHTML = "<br>Touch moved (" + event.touches[0].clientX + "," + event.touches[0].clientY + ")";
-//                    console.log('touchmove');
-//            }
-//
-//            console.log('DOWN'+downX);
-//
-//    }
+var oMask2 = document.getElementById('mask2');
+
+var downX,upX;
+oMask2.addEventListener('touchstart',function (event) {
+    if (event.touches.length == 1){
+        // alert(event.touches[0].clientX);
+        downX = event.touches[0].clientX;
+    }
+},false);
+
+oMask2.addEventListener('touchend',function (event) {
+        // alert(event.changedTouches[0].clientX);
+        upX = event.changedTouches[0].clientX;
+
+    if (downX < upX){
+        oPrev.click();
+    }else if(downX > upX){
+        oNext.click();
+    }
+},false);
 
 
-
-
-
-//
-
-
-//    function slideMask2(event) {
-//        var downX = null;
-//        var upX = null;
-//        $('#mask2').on('mousedown',function () {
-////            console.log(ev.clientX);
-//            if(event.touches.length == 1){
-//                console.log(ev.touches[0].clientX);
-//                downX = ev.clientX;
-//            }
-//
-//        })
-//                .on('mouseup',function () {
-////                    console.log(ev.clientX);
-//                    if (event.touches.length == 1){
-//                        console.log(ev.touches[0].clientX);
-//                        upX = ev.clientX;
-//                    }
-//
-//                    if (downX < upX){
-//                        //上一张
-//                        oPrev.click();
-//                    }else if(downX > upX) {
-//                        //下一张
-//                        oNext.click();
-//                    }
-//                })
-//
-//
-//
-//    }
-//
-//    slideMask2();
 
 
