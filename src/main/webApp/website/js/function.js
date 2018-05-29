@@ -128,9 +128,7 @@ function setTop() {
 document.addEventListener('touchstart',function (event) {
     event.preventDefault();
     if (event.touches.length == 1){
-       if (event.touches[0].pageY > 800){
-           $('#to_top').show();
-       }
+        event.touches[0].pageY > 800 ? $('#to_top').show():$('#to_top').hide();
     }
 })
 
