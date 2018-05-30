@@ -8,6 +8,7 @@ $(function() {
     setList();
     setSearchBox(); //设置模拟搜索框
     $('body').click(function(){bodyClicked();}); //添加点击其他位置收起搜索选项
+    document.addEventListener("touchstart",bodyClicked,false);
     setBannerData();  //设置banner的数据
     setBannerHover();//设置banner的hover效果
 });

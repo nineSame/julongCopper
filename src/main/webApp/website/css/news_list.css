@@ -388,17 +388,7 @@
 
 
 
-#to_top {
-    background: #deba28;
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    color: #ffffff;
-    line-height: 50px;
-    text-align: center;
-    right: 0;
-    bottom: 0;
-}
+
 .page_wrapper {
     text-align: center;
     margin-top: 20px;;
@@ -536,7 +526,7 @@
     }
 
     .sel-wrap {
-        width: 280px;
+        width: 320px;
     }
 
     .sel-show {
@@ -544,6 +534,10 @@
     }
 
     .sel-option {
+        width:280px;
+    }
+
+    .sel-option li {
         width:280px;
     }
 

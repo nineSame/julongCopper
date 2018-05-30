@@ -126,7 +126,6 @@ function setTop() {
 
 //手机端的top处理
 document.addEventListener('touchstart',function (event) {
-    event.preventDefault();
     if (event.touches.length == 1){
         event.touches[0].pageY > 800 ? $('#to_top').show():$('#to_top').hide();
     }
