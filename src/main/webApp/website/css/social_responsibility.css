@@ -170,6 +170,10 @@
     display: none;
 }
 
+#show2 img{
+    width: 100%;
+}
+
 .part1_left_mobile {
     display: none;
 }
@@ -245,7 +249,10 @@
         width: 90%;
     }
 
-
+    .part2 ul img{
+        width: 100%;
+        height: auto;
+    }
 
 }
 

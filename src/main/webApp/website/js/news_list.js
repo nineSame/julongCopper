@@ -134,9 +134,9 @@ function bodyClicked(ev) {
 
     //设置导航链接
 function setFrontLinks() {
-        $('.guide_list li').eq(1).find('a').attr('href',"news_list.html");
-        $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
-        $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
+        $('.guide_list li').eq(0).find('a').attr('href',"news_list.html");
+        $('.guide_list li').eq(1).find('a').attr('href',"social_responsibility.html");
+        $('.guide_list li').eq(2).find('a').attr('href',"activities.html");
 }
 
 
@@ -147,9 +147,9 @@ function getStyle(obj, attr){
 //简易的运动方法
 function move(obj, attr, distance, step, frequency, endFn) {
     //参数  运动物体、变化属性、目标点值、步长（运动速度）、调用频率、回调函数
-    if(!obj.moved) return;
+    if(!obj.moved) return;  //用于控制运动中再次调用运动函数不响应
     var startVal = parseInt(getStyle(obj, attr));
-    var times = 0;
+    var times = 0;  //用以计数，计算定时器方法调用次数，以计算运动的总距离
     obj.moved = false;
     step = distance > 0 ? step : -step;
     clearInterval(obj.move);
