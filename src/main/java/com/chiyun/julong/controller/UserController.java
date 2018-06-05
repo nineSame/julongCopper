@@ -159,8 +159,8 @@ public class UserController {
         userEntity.setMm(Md5Util.getMD5(password));
        if(userEntity.getSfzh() !=null && userEntity.getSfzh() !=""){
            System.out.print("身份证号:"+userEntity.getSfzh().length());
-            if(userEntity.getSfzh().length() != 18){
-                return ApiResult.FAILURE("身份证号必须为18位");
+            if(userEntity.getSfzh().length() > 18){
+                return ApiResult.FAILURE("身份证号最长为18位");
             }
        }
         if(userEntity.getLxsj() !=null && userEntity.getLxsj() !=""){
@@ -258,12 +258,6 @@ public class UserController {
             String password=userEntity.getMm();
         if(password!=null && password!=""){
             userEntity.setMm(Md5Util.getMD5(password));
-        }
-        if(userEntity.getSfzh() !=null && userEntity.getSfzh() !=""){
-            System.out.print("身份证号:"+userEntity.getSfzh().length());
-            if(userEntity.getSfzh().length() != 18){
-                return ApiResult.FAILURE("身份证号必须为18位");
-            }
         }
         if(userEntity.getLxsj() !=null && userEntity.getLxsj() !=""){
             System.out.print("手机号码:"+userEntity.getLxsj().length());
@@ -388,7 +382,20 @@ public class UserController {
         return ApiResult.SUCCESS(oneUser);
 
     }
+/*
+    @ResponseBody
+    @RequestMapping("/user/seaarchByNum")
+    public ApiResult<Object> searchByNum(String zwdjpx,HttpSession httpSession) throws Exception {
 
+        UserDisplay oneUser = userDisplayRepository.findById(zwdjpx);
+        if (oneUser == null) {
+            return ApiResult.FAILURE("未找到该用户");
+        }
+        //httpSession.setAttribute("id", userEntity.getId());
+        //ApiPageResult ApiPageResult = new
+        return ApiResult.SUCCESS(oneUser);
+
+    }*/
 
     @ResponseBody
     @RequestMapping("/user/page")
