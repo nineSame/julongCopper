@@ -43,11 +43,10 @@ public class fileUtil {
     }
 
     public static int fileDel(String fileName,String name){
-        String path="D:\\upload\\"+name+"\\";
         int result=0;
         try {
             // Specify the file name and path
-            File file = new File(path+fileName);
+            File file = new File(fileName);
       /* the delete() method return true if the file
       deleted successfully else it return false
        */
