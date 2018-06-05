@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>后台管理-西藏巨龙铜业有限公司</title>
+    <title>公告管理-巨龙官网</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
@@ -16,7 +16,6 @@
     <link href="../assets/css/font-awesome.css" rel="stylesheet">
     <!-- self -->
     <link rel="stylesheet" href="../css/common.css?v=1.0">
-    <link rel="stylesheet" href="../css/sjtj.css?v=1.0">
 </head>
 <body>
 <section id="container">
@@ -33,11 +32,11 @@
     <!--右边内容-->
     <section id="main-content">
         <section class="wrapper" id="wrapper">
-            <h3 class="main-title" id="mainTitle">人员管理</h3>
+            <h3 class="main-title" id="mainTitle">公告管理</h3>
             <div>
                 <div class="col-sm-5 m-b-xs">
                     <button  class="btn btn-sm btn-primary" id="addDataBtn">
-                        添加人员
+                        添加公告
                     </button>
                 </div>
                 <div class="col-sm-4 text-left">
@@ -53,64 +52,34 @@
     </section>
 </section>
 
-<!-- 用户模态框 -->
+<!-- 模态框 -->
 <div class="modal fade bs-example-modal-lg" id="dataModal" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document" style="width: 720px;">
+    <div class="modal-dialog modal-lg" role="document" style="width: 600px;">
         <form class="modal-content" id="dataForm">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><span id="modalTitle">添加</span>用户信息</h4>
+                <h4 class="modal-title"><span id="modalTitle">添加</span>公告信息</h4>
             </div>
             <div class="modal-body">
-                <div  class="form-horizontal clearfix">
-                    <div class="pull-left">
-                        <div style="width:200px;height:240px;background: #eeeeee;margin-bottom:5px;">
-                            <img src="../images/no_pic.png" style="width:100%;max-height: 240px" id="imgView" alt="暂无图片">
+                <div  class="form-horizontal">
+                    <div class="form-group clearfix modal-form">
+                        <div class="form-item1 pull-left">
+                            <span class="pre">公告标题</span>
+                            <input name="ggbt" id="ggbt" style="width:416px;">
                         </div>
-                        <div class="text-center">
-                            <a class="btn btn-primary btn-xs" id="imgEditBtn">编辑照片</a>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">公告附件</span>
+                            <input type="file" style="width:416px;display: inline"  name="ggdzfile" id="ggdzfile">
                         </div>
                     </div>
-                    <div class="form-group clearfix modal-form pull-left" style="width:500px;">
-                        <div class="form-item1 pull-left">
-                            <span class="pre">* 职员姓名</span>
-                            <input type="text" style="width:360px;" name="xm" id="xm">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">职员性别</span>
-                            <select name="xb" id="xb" style="width:360px;"></select>
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">* 职员账号</span>
-                            <input type="text" placeholder="字母或数字" style="width:360px;" name="zh" id="zh">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">用户密码</span>
-                            <input type="password" placeholder="默认123456" style="width:360px;" id="password">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">身份证号</span>
-                            <input type="text" style="width:360px;" name="sfzh" id="sfzh">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">公司职务</span>
-                            <input type="text" style="width:360px;" name="zw" id="zw">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">职员描述</span>
-                            <textarea type="text" style="width:360px;height:120px;resize: none;" name="ms" id="ms"></textarea>
-                        </div>
-                    </div>
-
-                    <input type="hidden" id="editId">
-                    <input type="file" style="width:360px;display: none" name="zpfile"  id="imgFile">
+                    <input type="hidden" name="id" id="editId">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                    <button type="button" class="btn btn-primary" id="saveDataBtn">保存</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDataBtn">保存</button>
             </div>
         </form>
     </div>
@@ -130,11 +99,57 @@
 <!--处理滚动条-->
 <script src="../assets/bootstrap/jquery.slimscroll.js"></script>
 <script src="../assets/bootstrap/jquery.nicescroll.js"></script>
-<script src="../js/config.js?v=1.0.0.0"></script>
-<script src="../js/function.js?v=1.0.0.0"></script>
-<script src="../js/common.js?v=1.0.0.0"></script>
-<script src="../js/user.js?v=1.0.0.0"></script>
-
+<script src="../js/config.js?v=1.0"></script>
+<script src="../js/function.js?v=1.0"></script>
+<script src="../js/common.js?v=1.0"></script>
 <!--处理菜单搜索展开-->
 <script src="../assets/bootstrap/scripts.js"></script>
+
+<script>
+    //接口地址
+    var urlConfig = {
+        displayUrl : ServerUrl + '/ann/page',
+        addUrl : ServerUrl + '/ann/create',
+        updateUrl: ServerUrl + '/ann/update',
+        delUrl: ServerUrl + '/ann/del'
+    };
+    $(function(){
+        getData();
+        operateData2();//操作数据
+    });
+
+    function getData() {
+        $("#dataTable").dataTable({ // 对应table标签的id
+            //表头信息添加
+            columns: [
+                {
+                    field: 'xwbt',
+                    title: '新闻标题',
+                    align: 'center'
+                },
+                {
+                    field: 'xwnr',
+                    title: '新闻内容',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return '<p class="desc">'+value+'</p>';
+                    }
+                },
+                {
+                    title: "操作",
+                    align: 'center',
+                    width: 160, // 定义列的宽度，单位为像素px
+                    formatter: function (value, row, index) {
+                        var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
+                        btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
+                        if(row.account == 'admin'){
+                            btn = '';
+                        }
+                        return btn;
+                    }
+                }
+            ]
+        });
+    }
+</script>
 </html>

@@ -5,20 +5,30 @@ var ServerUrl = location.origin;
 //左侧菜单
 var HomeMenu = [
     {
-        name: '人员管理',
+        name: '公司人员管理',
         icon: 'icon-th-list' ,
         type: 'user',
         children: []
     },
     {
-        name: '新闻管理',
+        name: '公司新闻管理',
         icon: 'icon-th-list' ,
         type:'news'
     },
     {
-        name: '轮播图管理',
+        name: '轮播图片管理',
         icon: 'icon-th-list' ,
         type:'banner'
+    },
+    {
+        name: '公告信息管理',
+        icon: 'icon-th-list' ,
+        type:'gonggao'
+    },
+    {
+        name: '公告信息管理',
+        icon: 'icon-th-list' ,
+        type:'gonggao'
     }
 ];
 

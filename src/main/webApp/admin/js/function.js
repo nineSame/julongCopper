@@ -123,7 +123,12 @@ function tableBtn(dataId,type) {
                 var data = json.data;
                 for(var k in data){
                     var v = data[k];
-                    $('#' + k).val(v);
+                    if(k == 'zp'){
+                        var src = ServerUrl + v;
+                        $('#imgView').prop('src',src);
+                    }else{
+                        $('#' + k).val(v);
+                    }
                 }
                 //setFormParam("#dataForm",data)
             }else{
@@ -198,6 +203,51 @@ function operateData() {
 
     });
 }
+
+function operateData2() {
+    //点击新增
+    $('#addDataBtn').off('click').on('click',function () {
+        $('#modalTitle').text('新增');
+        $("#dataForm")[0].reset();
+        $('#dataModal').modal('show');
+        $('#editId').val('');
+    });
+    //点击保存
+    $('#saveDataBtn').off('click').on('click',function () {
+        var formData = new FormData($("#dataForm")[0]);
+        var dataId = $('#editId').val();
+        var url = urlConfig.addUrl;
+        //编辑保存
+        if(dataId){
+            url = urlConfig.updateUrl;
+            formData.append('id',dataId);
+        }
+        $.ajax({
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: url,
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (json) {
+                if(json.resCode == 200){
+                    $('#dataModal').modal('hide');
+                    $("#dataTable").bootstrapTable('refresh',{});
+                }else{
+                    alert(json.resMsg);
+                }
+
+            },
+            error: function () {
+                alert('服务器错误');
+            }
+        });
+
+    });
+}
+
+
 //表单取值
 function getFormParam(elem){
     var formObj = {};
