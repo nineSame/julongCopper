@@ -211,8 +211,8 @@ var oWrap = document.getElementsByClassName("ul1")[0],
     num = 0;
 
 //假数据
-var li_1_img  = ["./img/e70414051f1447e482e390a9e6bd6050.jpg","./img/map.png","./img/951f54876288437fb1e1cb42d167a9ee.jpg"];
-var li_2_img = ["./img/map.png","./img/951f54876288437fb1e1cb42d167a9ee.jpg","./img/e70414051f1447e482e390a9e6bd6050.jpg"];
+var li_1_img  = ["./img/e70414051f1447e482e390a9e6bd6050.jpg","./img/building-2762319_640.jpg","./img/garzweiler-2515791_640.jpg"];
+var li_2_img = ["./img/smelter-597529_640.jpg","./img/structure-353006_640.jpg","./img/work-1000618_640.jpg"];
 
 var IMGARR = [li_1_img,li_2_img];
 oWrap.moved = true;

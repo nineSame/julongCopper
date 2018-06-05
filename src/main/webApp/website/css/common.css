@@ -681,6 +681,10 @@ h2,h3,h4,p{
         float: none;
     }
 
+    .footer_bottom {
+        width: 100%;
+    }
+
     #sidenav-toggle {
         display: block;
     }

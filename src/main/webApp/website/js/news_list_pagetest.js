@@ -8,9 +8,8 @@ $(function() {
     setList();
     setSearchBox(); //设置模拟搜索框
     $('body').click(function(){bodyClicked();}); //添加点击其他位置收起搜索选项
-    document.addEventListener("touchstart",bodyClicked,false);
-    setBannerData();  //设置banner的数据
-    setBannerHover();//设置banner的hover效果
+    // setBannerData();  //设置banner的数据
+    // setBannerHover();//设置banner的hover效果
 });
 
 function setList() {
@@ -23,19 +22,68 @@ function setList() {
             console.log(1111,json);
             if(json.resCode == 200){
 
+
+                //banner数据
                 var data = json.data;
-                var liHtml = '';
                 for(var i=0;i<data.length;i++){
                     var item = data[i];
-                    // liHtml += '<li><img src="'+ ServerUrl +'website/img/' +item.src+'"></li>'
-                    liHtml +=  '<li><div class="list_wrap"><div class="time left"><span class="day">'+item.day+'</span><span class="month_and_year">'+item.monthAndYear+'</span></div><div class="list_text left"><h3><a>'+item.title+'</a></h3><div class="info_bar"><span><i class="icon-eye-open"></i>'+'点击数：'+item.click+'</span><a class="share"><i class="icon-share-alt"></i>分享</a></div><p><a>'+item.news+'</a></p></div><a class="news_pic_wrap right"><img src="'+ ServerUrl +'website/img/' +item.src+'" /></a></div></li>'
+                    arrImg.push('img/' + item.src);
+                    arrTitle.push(item.title);
+                    arrNews.push(item.news);
+                    var monthAndYear = item.monthAndYear.split("-");  //此处结果是数组  [月份 ， 年]
+                    arrTimes.push(monthAndYear[1]+'-'+monthAndYear[0]+'-'+item.day); //调整发布时间格式  年-月-日
+                    arrRead.push(item.click);
                 }
-                // console.log(liHtml);
-                $('#news_list').append(liHtml);
-                // $('#animation').terseBanner({btn:true});
-                initBannerData(); //设置banner的初始数据
-                setNewsListHover();//设置新闻列表的hover效果
-                $('#news_list').find('a').attr("href","news_detail.html");
+                initBannerData();
+
+
+
+                    var container = $('#pagination-demo1');
+                    var sources = json.data;
+
+
+
+                var options = {
+                    dataSource: sources,
+                    pageSize: 4,
+                    totalNumber: 20,
+                    showGoInput: true,
+                    showNavigator: true,
+                    showGoButton: true,
+                    className: 'paginationjs-theme-yellow paginationjs-big',
+                    callback: function(response, pagination){
+                        window.console && console.log(response, pagination);
+
+                        var dataHtml = '<ul>';
+
+                        $.each(response, function(index, item){
+                            dataHtml +=' <li><div class="list_wrap"><div class="time left"><span class="day">'+item.day+'</span><span class="month_and_year">'+item.monthAndYear+'</span></div><div class="list_text left"><h3><a>'+item.title+'</a></h3><div class="info_bar"><span><i class="icon-eye-open"></i>'+'点击数：'+item.click+'</span><a class="share"><i class="icon-share-alt"></i>分享</a></div><p><a>'+item.news+'</a></p></div><a class="news_pic_wrap right"><img src="'+ ServerUrl +'website/img/' +item.src+'" /></a></div></li>';
+                        });
+
+                        dataHtml += '</ul>';
+
+                        container.parent().prev().html(dataHtml);
+
+
+                    }
+                };
+
+                container.addHook('beforeInit', function(){
+                    window.console && console.log('beforeInit...');
+                });
+                container.pagination(options);
+
+                container.addHook('beforePageOnClick', function(){
+                    window.console && console.log('beforePageOnClick...');
+                    //return false
+                });
+
+                initBannerData();
+                setBannerHover();//设置banner的hover效果
+                // setNewsListHover();
+
+
+
             }else{
                 alert(json.resMsg);
             }
@@ -45,6 +93,73 @@ function setList() {
         }
     });
 }
+
+
+
+// function setList() {
+//
+//
+//                 var options = {
+//                     dataSource: sources,
+//                     pageSize: 3,
+//                     showGoInput: true,
+//                     showNavigator: true,
+//                     showGoButton: true,
+//                     className: 'paginationjs-theme-yellow paginationjs-big',
+//                     callback: function(response, pagination){
+//                         window.console && console.log(response, pagination);
+//
+//                         $.ajax({
+//                             url: ServerUrl + 'website/json/news_list.json',
+//                             type: 'get',
+//                             dataType: 'json',
+//                             success: function (json) {
+//                                 //var data = json.data;
+//                                 console.log(1111,json);
+//                                 if(json.resCode == 200){
+//
+//                                     var container = $('#pagination-demo1');
+//                                     var sources = json.data;
+//
+//                                     var dataHtml = '<ul>';
+//
+//                                     $.each(response, function(index, item){
+//                                         dataHtml +=' <li><div class="list_wrap"><div class="time left"><span class="day">'+item.day+'</span><span class="month_and_year">'+item.monthAndYear+'</span></div><div class="list_text left"><h3><a>'+item.title+'</a></h3><div class="info_bar"><span><i class="icon-eye-open"></i>'+'点击数：'+item.click+'</span><a class="share"><i class="icon-share-alt"></i>分享</a></div><p><a>'+item.news+'</a></p></div><a class="news_pic_wrap right"><img src="'+ ServerUrl +'website/img/' +item.src+'" /></a></div></li>';
+//                                     });
+//
+//                                     dataHtml += '</ul>';
+//
+//                                     container.prev().html(dataHtml);
+//
+//
+//                                 }else{
+//                                     alert(json.resMsg);
+//                                 }
+//                             },
+//                             error: function () {
+//                                 alert('err')
+//                             }
+//                         });
+//
+//
+//                     }
+//                 };
+//
+//                 container.addHook('beforeInit', function(){
+//                     window.console && console.log('beforeInit...');
+//                 });
+//                 container.pagination(options);
+//
+//                 container.addHook('beforePageOnClick', function(){
+//                     window.console && console.log('beforePageOnClick...');
+//                     //return false
+//                 });
+//
+//                 initBannerData();
+//                 setBannerHover();//设置banner的hover效果
+//                 setNewsListHover();
+//
+// }
 
 
 /*****************************此部分js模拟sselect下拉列表的实现***************************/
@@ -134,9 +249,9 @@ function bodyClicked(ev) {
 
     //设置导航链接
 function setFrontLinks() {
-        $('.guide_list li').eq(0).find('a').attr('href',"news_list.html");
-        $('.guide_list li').eq(1).find('a').attr('href',"social_responsibility.html");
-        $('.guide_list li').eq(2).find('a').attr('href',"activities.html");
+        $('.guide_list li').eq(1).find('a').attr('href',"news_list.html");
+        $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
+        $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
 }
 
 
@@ -147,9 +262,9 @@ function getStyle(obj, attr){
 //简易的运动方法
 function move(obj, attr, distance, step, frequency, endFn) {
     //参数  运动物体、变化属性、目标点值、步长（运动速度）、调用频率、回调函数
-    if(!obj.moved) return;  //用于控制运动中再次调用运动函数不响应
+    if(!obj.moved) return;
     var startVal = parseInt(getStyle(obj, attr));
-    var times = 0;  //用以计数，计算定时器方法调用次数，以计算运动的总距离
+    var times = 0;
     obj.moved = false;
     step = distance > 0 ? step : -step;
     clearInterval(obj.move);
@@ -166,41 +281,41 @@ function move(obj, attr, distance, step, frequency, endFn) {
     }, frequency)
 }
 
-function setBannerData() {
-    $.ajax({
-        url: ServerUrl + 'website/json/news_list.json',
-        type: 'get',
-        dataType: 'json',
-        success: function (json) {
-            //var data = json.data;
-            // console.log(1111,json);
-            if(json.resCode == 200){
-
-                var data = json.data;
-                var liHtml = '';
-                for(var i=0;i<data.length;i++){
-                    var item = data[i];
-                    arrImg.push('img/' + item.src);
-                    arrTitle.push(item.title);
-                    arrNews.push(item.news);
-                    var monthAndYear = item.monthAndYear.split("-");  //此处结果是数组  [月份 ， 年]
-                    arrTimes.push(monthAndYear[1]+'-'+monthAndYear[0]+'-'+item.day); //调整发布时间格式  年-月-日
-                    arrRead.push(item.click);
-                }
-                // console.log(arrImg);
-                // console.log(arrTitle);
-                // console.log(arrNews);
-                // console.log(arrTimes);
-                // console.log(arrRead);
-            }else{
-                alert(json.resMsg);
-            }
-        },
-        error: function () {
-            alert('err')
-        }
-    });
-}
+// function setBannerData() {
+//     $.ajax({
+//         url: ServerUrl + 'website/json/news_list.json',
+//         type: 'get',
+//         dataType: 'json',
+//         success: function (json) {
+//             //var data = json.data;
+//             // console.log(1111,json);
+//             if(json.resCode == 200){
+//
+//                 var data = json.data;
+//                 var liHtml = '';
+//                 for(var i=0;i<data.length;i++){
+//                     var item = data[i];
+//                     arrImg.push('img/' + item.src);
+//                     arrTitle.push(item.title);
+//                     arrNews.push(item.news);
+//                     var monthAndYear = item.monthAndYear.split("-");  //此处结果是数组  [月份 ， 年]
+//                     arrTimes.push(monthAndYear[1]+'-'+monthAndYear[0]+'-'+item.day); //调整发布时间格式  年-月-日
+//                     arrRead.push(item.click);
+//                 }
+//                 // console.log(arrImg);
+//                 // console.log(arrTitle);
+//                 // console.log(arrNews);
+//                 // console.log(arrTimes);
+//                 // console.log(arrRead);
+//             }else{
+//                 alert(json.resMsg);
+//             }
+//         },
+//         error: function () {
+//             alert('err')
+//         }
+//     });
+// }
 
 //初始化banner数据
 function initBannerData(){
@@ -327,39 +442,39 @@ function setBannerHover() {
 
 /******************************新闻列表的hover*******************************/
 
-function setNewsListHover() {
-    // var oNews_ul = document.getElementsByClassName('news_list')[0];
-    var oNews_ul = document.getElementById('news_list');
-    var aNewsLi = oNews_ul.getElementsByTagName('li');
+// function setNewsListHover() {
+//     // var oNews_ul = document.getElementsByClassName('news_list')[0];
+//     var oNews_ul = document.getElementById('news_list');
+//     var aNewsLi = oNews_ul.getElementsByTagName('li');
+//
+//     for (var i = 0; i < aNewsLi.length; i ++){
+//
+//         aNewsLi[i].index = i;
+//
+//         aNewsLi[i].onmouseover = function () {
+//             var oTitle = this.getElementsByTagName('h3')[0];
+//             var oNews = this.getElementsByTagName('p')[0].getElementsByTagName('a')[0];
+//             var oImg = this.getElementsByTagName('img')[0];
+//
+//             oTitle.style.color = "#bb9205";
+//             oNews.style.color = "#bb9205";
+//             oImg.style.transform = "scale(1.1)";
+//         };
+//
+//         aNewsLi[i].onmouseout = function () {
+//             var oTitle = this.getElementsByTagName('h3')[0];
+//             var oNews = this.getElementsByTagName('p')[0].getElementsByTagName('a')[0];
+//             var oImg = this.getElementsByTagName('img')[0];
+//
+//             oTitle.style.color = "#000";
+//             oNews.style.color = "#464646";
+//             oImg.style.transform = "scale(1)";
+//         }
+//     }
+// }
 
-    for (var i = 0; i < aNewsLi.length; i ++){
-
-        aNewsLi[i].index = i;
-
-        aNewsLi[i].onmouseover = function () {
-            var oTitle = this.getElementsByTagName('h3')[0];
-            var oNews = this.getElementsByTagName('p')[0].getElementsByTagName('a')[0];
-            var oImg = this.getElementsByTagName('img')[0];
-
-            oTitle.style.color = "#bb9205";
-            oNews.style.color = "#bb9205";
-            oImg.style.transform = "scale(1.1)";
-        };
-
-        aNewsLi[i].onmouseout = function () {
-            var oTitle = this.getElementsByTagName('h3')[0];
-            var oNews = this.getElementsByTagName('p')[0].getElementsByTagName('a')[0];
-            var oImg = this.getElementsByTagName('img')[0];
-
-            oTitle.style.color = "#000";
-            oNews.style.color = "#464646";
-            oImg.style.transform = "scale(1)";
-        }
-    }
-}
 
 
-
-setBannerData();
+// setBannerData();
 
 
