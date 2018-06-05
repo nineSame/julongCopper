@@ -7,39 +7,39 @@ var HomeMenu = [
     {
         name: '公司信息',
         icon: 'icon-home' ,
-        //type: 'home',
+        //page: 'home',
         children: [
             {
                 name: '公司简介',
                 icon: 'icon-home' ,
-                type: 'home',
+                page: 'home'
             },
             {
                 name: '企业文化',
                 icon: 'icon-home' ,
-                type: 'qywh',
+                page: 'qywh'
             },
             {
                 name: '联系方式',
                 icon: 'icon-home' ,
-                type: 'contact',
+                page: 'contact'
             }
         ]
     },
     {
         name: '人员管理',
         icon: 'icon-user' ,
-        type: 'user',
+        page: 'user',
     },
     {
         name: '资讯管理',
         icon: 'icon-file-alt' ,
-        type:'news'
+        page:'news'
     },
     {
         name: '轮播管理',
         icon: 'icon-picture' ,
-        type:'banner'
+        page:'banner'
     },
     {
         name: '公告信息',
@@ -48,29 +48,48 @@ var HomeMenu = [
             {
                 name: '公司公告',
                 icon: 'icon-bullhorn' ,
-                type:'gonggao',
+                page:'gonggao',
             },
             {
                 name: '财务公告',
                 icon: 'icon-bullhorn' ,
-                type:'caiwu',
+                page:'caiwu',
             },
             {
                 name: '股票信息',
                 icon: 'icon-bullhorn' ,
-                type:'gupiao',
+                page:'gupiao',
             }
         ]
     },
     {
         name: '发展历程',
         icon: 'icon-sitemap' ,
-        type:'fzlc'
+        page:'fzlc'
     },
     {
         name: '全景巨龙',
         icon: 'icon-camera-retro' ,
-        type:'fzlc'
+        children: [
+            {
+                name: '主营业务',
+                icon: 'icon-camera-retro' ,
+                page:'qjjl',
+                type:'1'
+            },
+            {
+                name: '设备展示',
+                icon: 'icon-camera-retro' ,
+                page:'qjjl',
+                type:'2'
+            },
+            {
+                name: '生产工艺',
+                icon: 'icon-camera-retro' ,
+                page:'qjjl',
+                type:'3'
+            },
+        ]
     }
 ];
 
