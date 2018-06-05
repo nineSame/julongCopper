@@ -148,6 +148,16 @@ function setFormParam(formElement,data) {
     });
 }
 
+//表单取值
+function getFormParam(elem){
+    var formObj = {};
+    var formData = $(elem).serializeArray();
+    $.each(formData, function() {
+        formObj[this.name] = this.value;
+    });
+    return formObj;
+}
+
 function operateData() {
     imgViewByInput('imgFile','imgView');//选择文件预览图片
     //点击新增
@@ -247,16 +257,6 @@ function operateData2() {
     });
 }
 
-
-//表单取值
-function getFormParam(elem){
-    var formObj = {};
-    var formData = $(elem).serializeArray();
-    $.each(formData, function() {
-        formObj[this.name] = this.value;
-    });
-    return formObj;
-}
 //点击input预览图片
 function imgViewByInput(inputId,imgId) {
     //显示更新图片
@@ -276,6 +276,23 @@ function imgViewByInput(inputId,imgId) {
             //显示文件
             //result.innerHTML='<img src="' + this.result +'" alt="" />';
         }
+    });
+}
+//时间控件处理
+function initTime(format) {
+    var format = format || 'yyyy-mm-dd hh:ii:ss';
+    $('.form-date').datetimepicker({
+        width: 240,
+        format: format,
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 1, //最小可以选择到
+        maxView: 4, //最大可以选择到
+        forceParse: 0,
     });
 }
 

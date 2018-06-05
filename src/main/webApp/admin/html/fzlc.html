@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>新闻管理-巨龙官网</title>
+    <title>发展历程-巨龙官网</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
@@ -32,11 +32,11 @@
     <!--右边内容-->
     <section id="main-content">
         <section class="wrapper" id="wrapper">
-            <h3 class="main-title" id="mainTitle">新闻信息管理</h3>
+            <h3 class="main-title" id="mainTitle">公司发展历程</h3>
             <div>
                 <div class="col-sm-5 m-b-xs">
                     <button  class="btn btn-sm btn-primary" id="addDataBtn">
-                        添加新闻
+                        添加历程
                     </button>
                 </div>
                 <div class="col-sm-4 text-left">
@@ -60,32 +60,25 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><span id="modalTitle">添加</span>新闻信息</h4>
+                <h4 class="modal-title"><span id="modalTitle">添加</span>公告信息</h4>
             </div>
             <div class="modal-body">
                 <div  class="form-horizontal">
                     <div class="form-group clearfix modal-form">
                         <div class="form-item1 pull-left">
-                            <span class="pre">新闻类型</span>
-                            <select name="xwlx" id="xwlx" style="width:416px;"></select>
+                            <span class="pre">历程标题</span>
+                            <input name="fzlcbt" id="fzlcbt" style="width:416px;">
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">新闻标题</span>
-                            <input type="text" style="width:416px;" name="xwbt" id="xwbt">
+                            <span class="pre">发生时间</span>
+                            <input class="form-date" name="fzlcsj" id="fzlcsj" style="width:416px;">
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">新闻内容</span>
-                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="xwnr" id="xwnr"></textarea>
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">新闻照片</span>
-                            <input type="file" style="width:416px;display: inline"  name="xwzpfile" id="imgFile">
+                            <span class="pre">历程内容</span>
+                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="fzlcnr" id="fzlcnr"></textarea>
                         </div>
                     </div>
-                    <div class="text-center" style="height:200px;background:#f8f8f8;">
-                        <img src="../images/no_pic.png" style="max-width:100%;max-height: 100%" alt="图片预览区" id="imgView">
-                    </div>
-                    <input type="hidden" name="id" id="editId">
+                    <input type="hidden" id="editId">
                 </div>
             </div>
             <div class="modal-footer">
@@ -119,17 +112,27 @@
 <script>
     //接口地址
     var urlConfig = {
-        displayUrl : ServerUrl + '/news/page',
-        addUrl : ServerUrl + '/news/create',
-        show : ServerUrl + '/news/seaarchById',
-        updateUrl: ServerUrl + '/news/update',
-        delUrl: ServerUrl + '/news/del'
+        displayUrl : ServerUrl + '/development/display',
+        addUrl : ServerUrl + '/development/create',
+        updateUrl: ServerUrl + '/development/update',
+        delUrl: ServerUrl + '/development/del'
     };
     $(function(){
         getData();
-        operateData();//操作数据
-        dictInit('xwlx',DICT.xwlx);
-
+        operateData2();//操作数据
+        $('#fzlcsj').datetimepicker({
+            width: 240,
+            format: 'yyyy-mm-dd hh:ii:ss',
+            language:  'zh-CN',
+            weekStart: 1,
+            todayBtn:  1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2, //最小可以选择到
+            maxView: 4, //最大可以选择到
+            forceParse: 0,
+        });
     });
 
     function getData() {
@@ -137,24 +140,21 @@
             //表头信息添加
             columns: [
                 {
-                    field: 'xwlx',
-                    title: '新闻类型',
-                    align: 'center',
-                    formatter: function (value, row, index) {
-                        return DICT.xwlx[value];
-                    }
-                },
-                {
-                    field: 'xwbt',
-                    title: '新闻标题',
+                    field: 'fzlcbt',
+                    title: '历程标题',
                     align: 'center'
                 },
                 {
-                    field: 'xwnr',
-                    title: '新闻内容',
+                    field: 'fzlcsj',
+                    title: '历程时间',
+                    align: 'center'
+                },
+                {
+                    field: 'fzlcnr',
+                    title: '历程描述',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return '<p class="desc">'+value+'</p>';
+                        return '<p class="desc">'+value+'</p>'
                     }
                 },
                 {
@@ -170,7 +170,14 @@
                         return btn;
                     }
                 }
-            ]
+            ],
+            pagination: false,
+            responseHandler: function(res) {
+                return {
+                    //"total": res.data.totalElements,//总页数
+                    "rows": res.data
+                };
+            }
         });
     }
 </script>

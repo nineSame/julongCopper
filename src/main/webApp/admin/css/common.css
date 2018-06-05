@@ -140,3 +140,17 @@ h3.main-title{
     height: 150px;
     margin-bottom: 5px;
 }
+
+td .desc{
+    width:240px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
+}
+.module-title{
+    color: #377bb5;
+    border-bottom: 1px dotted #377bb5;
+    margin:15px 0;
+    font-size: 14px;
+}
