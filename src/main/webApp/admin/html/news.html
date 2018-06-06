@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>新闻管理-巨龙官网</title>
+    <title>西藏巨龙铜业有限公司-后台管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
@@ -136,6 +136,14 @@
         $("#dataTable").dataTable({ // 对应table标签的id
             //表头信息添加
             columns: [
+                {
+                    field: 'xwlx',
+                    title: '新闻类型',
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return DICT.xwlx[value];
+                    }
+                },
                 {
                     field: 'xwbt',
                     title: '新闻标题',

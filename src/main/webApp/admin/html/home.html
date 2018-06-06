@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <title>后台管理-西藏巨龙铜业有限公司</title>
+    <title>西藏巨龙铜业有限公司-后台管理</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="keywords" content=""/>
@@ -33,71 +33,138 @@
     <!--右边内容-->
     <section id="main-content">
         <section class="wrapper" id="wrapper">
-            <h3 class="main-title" id="mainTitle">网站首页管理</h3>
-            <form class="form-horizontal">
+            <h3 class="main-title" id="mainTitle">公司信息管理</h3>
+            <form class="form-horizontal" id="gsxxForm">
+                <div class="module-title">
+                    公司信息
+                </div>
                 <div class="form-group">
-                    <label for="webName" class="col-sm-2 control-label">网站名称</label>
-                    <div class="col-sm-4">
-                        <input type="text" class="form-control" id="webName" placeholder="网站名称" value="西藏巨龙铜业有限公司">
+                    <label class="col-sm-2 control-label">公司名称</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="gsmz">
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">保存</button>
+                    <label class="col-sm-2 control-label">公司地址</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="gsdz">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">邮政编码</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="gsyb">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">联系人</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="gslxr">
+                    </div>
+                    <label class="col-sm-2 control-label">联系电话</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="gsdh">
+                    </div>
+                </div>
+                <div class="module-title">
+                    公司简介
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">简介标题</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="jjbt">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">公司主旨</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="gszz">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">公司图片</label>
+                    <div class="col-sm-7">
+                        <input class="form-control" name="gstp" type="file">
+                    </div>
+                    <div class="col-sm-1">
+                        400*400
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">公司介绍</label>
+                    <div class="col-sm-8">
+                        <textarea class="form-control" name="gsjs" style="resize: none;height:120px;"></textarea>
+                    </div>
+                </div>
+                <div class="module-title">
+                    人力资源信息
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">招聘邮箱</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">联系人</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="">
+                    </div>
+                    <label class="col-sm-2 control-label">联系电话</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="">
+                    </div>
+                </div>
+                <div class="module-title">
+                    其他邮箱
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">董事长邮箱</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">党委书记邮箱</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">纪检办邮箱</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="">
+                    </div>
+                </div>
+                <div class="module-title">
+                    网络招标
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">招标电话</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="">
+                    </div>
+                    <label class="col-sm-2 control-label">技术电话</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" name="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">招标地址</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" name="">
+                    </div>
+                </div>
+                <input type="hidden" name="id">
+                <div class="form-group">
+                    <div class="col-sm-12 text-center">
+                        <a type="button" id="saveBtn" class="btn btn-primary">保存信息</a>
                     </div>
                 </div>
             </form>
         </section>
     </section>
 </section>
-
-<!-- 用户模态框 -->
-<div class="modal fade bs-example-modal-lg" id="dataModal" tabindex="-1" role="dialog"
-     aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document" style="width: 600px;">
-        <form class="modal-content" id="dataForm">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalTitle">用户信息</h4>
-            </div>
-            <div class="modal-body">
-                <div  class="form-horizontal">
-                    <div class="form-group clearfix modal-form">
-                        <div class="form-item1 pull-left">
-                            <span class="pre">用户名</span>
-                            <input type="text" style="width:416px;" name="username" id="username">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">姓名</span>
-                            <input type="text" style="width:160px;" name="name" id="name">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">性别</span>
-                            <input type="text" style="width:160px;" name="sex" id="sex">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">职务</span>
-                            <input type="text" style="width:416px;">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">活动地点</span>
-                            <input type="text" style="width:416px;">
-                        </div>
-                        <div class="form-item1 pull-left">
-                            <span class="pre">人员描述</span>
-                            <textarea type="text" style="width:416px;height:60px;resize: none;"></textarea>
-                        </div>
-                    </div>
-                </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" id="saveDataBtn">保存</button>
-            </div>
-        </div>
-    </form>
-</div>
-</div>
 <div id="footer"></div>
 </body>
 <script src="../assets/bootstrap/jquery2.0.3.min.js"></script>
@@ -116,39 +183,34 @@
 <script src="../assets/bootstrap/morris.js"></script>
 <script>
     $(function(){
-        getData();//获取数据
-        operateData();//操作数据
-
+        getCompanyData();//获取数据
+        saveCompanyData();
     });
-    function operateData() {
-        $('#addDataBtn').off('click').on('click',function () {
-            $('#dataModal').modal('show');
-        });
-        $('#saveDataBtn').off('click').on('click',function () {
-            var formData = new FormData($("#dataForm")[0]);
-            $.ajax({
-                cache: false,
-                contentType: false,
-                processData: false,
-                url: '1.html',
-                type: 'post',
-                data: formData,
-                dataType: 'json',
-                success: function (json) {
-                    console.log(json);
-                    $('#dataModal').modal('hide');
-                },
-                error: function () {
-                    alert('err');
-                }
-            });
 
+    function getCompanyData() {
+        $.ajax({
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: ServerUrl + '/company/display',
+            type: 'post',
+            dataType: 'json',
+            success: function (json) {
+                console.log(json);
+                var data = json.data;
+                setFormParam('#gsxxForm',data[0]);
+            }
         });
     }
 
 
-    function getData() {
-
+    function saveCompanyData() {
+        $('#saveBtn').off('click').on('click',function () {
+            var param = getFormParam('#gsxxForm');
+            $.post(ServerUrl + '/company/update',param,function () {
+                getCompanyData();
+            });
+        });
     }
 </script>
 </html>

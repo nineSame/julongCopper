@@ -4,6 +4,10 @@ $(function () {
     createHomeMenu();   //创建左边菜单
     leftMenuClass();    //左边菜单样式
     initDataTable();//初始化Table插件
+    $(document).ajaxError(function(e,e2,e3,e4){
+        var url = e3.url;
+        alert("请求错误,请求地址:" + url);
+    });
 });
 
 function setUserInfo() {
@@ -23,25 +27,27 @@ function createHomeMenu() {
     var menuHtml = '';
     for (var i = 0; i < HomeMenu.length; i++) {
         var menuItem = HomeMenu[i];
-        var type = menuItem.type;
+        var page = menuItem.page;
+        var type = menuItem.type || page;
         var activeClass = '';
         var href = 'javascript:;';
-        if(type && type != 'undefined'){
-            href = type + '.html?pageType=' + type;
+        if(page && page != 'undefined'){
+            href = page + '.html?page=' + page + '&type=' + type;
         }
         var subMenu = menuItem.children;
-        menuHtml += '<li title="' + menuItem.name + '" class="sub-menu" type="' + type + '">';
-        menuHtml += '<a class="dcjq-parent menu-' + type + '" href="' + href + '">' +
+        menuHtml += '<li title="' + menuItem.name + '" class="sub-menu" type="' + page + '">';
+        menuHtml += '<a class="dcjq-parent menu-' + page + type + '" href="' + href + '">' +
                         '<i class="fa ' + menuItem.icon + '"></i><span>' + menuItem.name + '</span>' +
                     '</a>';
         if (subMenu && subMenu.length) {
             menuHtml += '<ul class="sub">';
             for (var j = 0; j < subMenu.length; j++) {
                 var subMenuItem = subMenu[j];
-                var subType = subMenuItem.type;
-                var url = subType + '.html?pageType=' + subType;
+                var subPage = subMenuItem.page;
+                var subType = subMenuItem.type || subPage;
+                var url = subPage + '.html?page=' + subPage + '&type=' + subType;
                 menuHtml += '<li title="' + subMenuItem.name + '" url="' + subMenuItem.url + '">' +
-                    '<a class="menu-' + subType + '" menuType="sunMenu" href="' + url + '">' + subMenuItem.name + '</a>' +
+                    '<a class="menu-' + subPage + subType + '" menuType="sunMenu" href="' + url + '">' + subMenuItem.name + '</a>' +
                     '</li>';
             }
             menuHtml += '</ul>';
@@ -54,11 +60,12 @@ function createHomeMenu() {
 //处理左边菜单显示状态
 function leftMenuClass() {
     var urlParam = getUrlParam();
-    var pageType = urlParam.pageType;
-    if(!pageType){
-        pageType = 'home';
+    var page = urlParam.page;
+    var type = urlParam.type;
+    if(!page){
+        page = 'home';
     }
-    var $menu = $('a.menu-' + pageType);
+    var $menu = $('a.menu-' + page + type);
     var menuType = $menu.attr('menuType');
     if(menuType == 'sunMenu'){
         $menu.parent().parent().show();

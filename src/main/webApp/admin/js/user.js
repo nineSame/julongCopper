@@ -10,6 +10,7 @@ $(function(){
     getData();
     operateDataUser();//操作数据
     dictInit('xb',DICT.sex);
+    dictInit('zwdjpx',DICT.zwdj);
 });
 
 function operateDataUser(type) {
@@ -23,7 +24,7 @@ function operateDataUser(type) {
     //点击新增
     $('#addDataBtn').off('click').on('click',function () {
         $('#modalTitle').text('新增');
-        $("#dataForm")[0].reset();
+        //$("#dataForm")[0].reset();
         $('#dataModal').modal('show');
         $('#editId').val('');
         $('#imgView').prop('src','../images/no_pic.png');
@@ -82,15 +83,16 @@ function getData() {
         //表头信息添加
         columns: [
             {
-                field: 'zh',
-                title: '账号',
-                align: 'center'
-            },
-            {
                 field: 'xm',
                 title: '姓名',
                 align: 'center'
             },
+            {
+                field: 'zh',
+                title: '账号',
+                align: 'center'
+            },
+
             {
                 field: 'xb',
                 title: '性别',
@@ -110,13 +112,21 @@ function getData() {
                 align: 'center'
             },
             {
+                field: 'zwdjpx',
+                title: '职务等级',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    return DICT.zwdj[value];
+                }
+            },
+            {
                 title: "操作",
                 align: 'center',
                 width: 160, // 定义列的宽度，单位为像素px
                 formatter: function (value, row, index) {
                     var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
                     btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
-                    if(row.account == 'admin'){
+                    if(row.zh == 'admin'){
                         btn = '';
                     }
                     return btn;

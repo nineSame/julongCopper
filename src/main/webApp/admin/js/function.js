@@ -117,13 +117,15 @@ function tableBtn(dataId,type) {
         $('#dataModal').modal('show');
         $.post(urlConfig.show, {id:dataId},function (json) {
             if(json.resCode == 200){
-                console.log(json);
-                //$("#dataTable").bootstrapTable('refresh',{});
-                //$('#delModal').modal('hide');
                 var data = json.data;
                 for(var k in data){
                     var v = data[k];
-                    $('#' + k).val(v);
+                    if(k == 'zp'){
+                        var src = ServerUrl + v;
+                        $('#imgView').prop('src',src);
+                    }else{
+                        $('#' + k).val(v);
+                    }
                 }
                 //setFormParam("#dataForm",data)
             }else{
@@ -141,6 +143,16 @@ function setFormParam(formElement,data) {
         var name = $(this).attr('name');
         $(type+"[name='"+name+"']").val(data[''+name+'']);
     });
+}
+
+//表单取值
+function getFormParam(elem){
+    var formObj = {};
+    var formData = $(elem).serializeArray();
+    $.each(formData, function() {
+        formObj[this.name] = this.value;
+    });
+    return formObj;
 }
 
 function operateData() {
@@ -174,6 +186,56 @@ function operateData() {
         if(!file){
             formData.delete('tpfile');
         }
+        loading('正在保存数据');
+        $.ajax({
+            cache: false,
+            contentType: false,
+            processData: false,
+            url: url,
+            type: 'post',
+            data: formData,
+            dataType: 'json',
+            success: function (json) {
+                loading('close');
+                if(json.resCode == 200){
+                    $('#dataModal').modal('hide');
+                    $("#dataTable").bootstrapTable('refresh',{});
+                }else{
+                    alert(json.resMsg);
+                }
+
+            },
+            error: function () {
+                alert('服务器错误');
+            }
+        });
+
+    });
+}
+
+function operateData2() {
+    //点击新增
+    $('#addDataBtn').off('click').on('click',function () {
+        $('#modalTitle').text('新增');
+        $("#dataForm")[0].reset();
+        $('#dataModal').modal('show');
+        $('#editId').val('');
+    });
+    //点击保存
+    $('#saveDataBtn').off('click').on('click',function () {
+        var formData = new FormData($("#dataForm")[0]);
+        var dataId = $('#editId').val();
+        var url = urlConfig.addUrl;
+        if($('#fzlcsj').length){
+            formData.delete('fzlcsj');
+            formData.append('fzlcsj',$('#fzlcsj').val() + ' 00:00:00');
+        }
+
+        //编辑保存
+        if(dataId){
+            url = urlConfig.updateUrl;
+            formData.append('id',dataId);
+        }
         $.ajax({
             cache: false,
             contentType: false,
@@ -198,15 +260,7 @@ function operateData() {
 
     });
 }
-//表单取值
-function getFormParam(elem){
-    var formObj = {};
-    var formData = $(elem).serializeArray();
-    $.each(formData, function() {
-        formObj[this.name] = this.value;
-    });
-    return formObj;
-}
+
 //点击input预览图片
 function imgViewByInput(inputId,imgId) {
     //显示更新图片
@@ -228,4 +282,51 @@ function imgViewByInput(inputId,imgId) {
         }
     });
 }
+//时间控件处理
+function initTime(format) {
+    var format = format || 'yyyy-mm-dd hh:ii:ss';
+    $('.form-date').datetimepicker({
+        width: 240,
+        format: format,
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 1, //最小可以选择到
+        maxView: 4, //最大可以选择到
+        forceParse: 0,
+    });
+}
+
+//loading
+function loading(msg) {
+    if(msg == 'close'){
+        $('#loadingModal').modal('hide');
+    }
+    else{
+        msg = msg || '正在获取数据';
+        if($('#loadingModal').length == 0){
+            var html = '<!--loading-->\n' +
+                '<div class="modal fade" id="loadingModal" tabindex="100" role="dialog">\n' +
+                '    <div class="loading-box">\n' +
+                '        <span class="loading-text">\n' +
+                '            <i><span id="loadingMsg">'+msg+'</span>,请稍后... </i>\n' +
+                '            <i class="icon-spinner icon-spin"></i>\n' +
+                '        </span>\n' +
+                '    </div>\n' +
+                '</div>\n';
+            $('body').append(html);
+        }
+        $('#loadingMsg').text(msg);
+        $('#loadingModal').modal({
+            keyboard: false,
+            show: false,
+            backdrop: 'static'
+        });
+        $('#loadingModal').modal('show');
+    }
+}
+
 
