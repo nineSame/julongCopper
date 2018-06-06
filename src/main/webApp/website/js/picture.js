@@ -7,6 +7,8 @@ $(function () {
     setBannerData();
 })
 
+var mask1_ready = false;
+
 //显示图片hover的遮罩
 function setLiMask() {
 
@@ -40,6 +42,7 @@ function setLiMask() {
 
 //遮罩轮播层
 function setScreenMask() {
+
     $('#mask1').hide();
     $('#mask2').hide();
     $('#img_list li').click(function (ev) {
@@ -56,6 +59,10 @@ function setScreenMask() {
         else {
             $('#mask1').css("visibility", "visible");
             $('#mask1').slideDown();
+
+            setMask1();
+            mask1_ready = true;
+
             ev.preventDefault;
             $(document).bind('mousewheel', function(event, delta) { return false; });
         }
@@ -72,6 +79,15 @@ function setScreenMask() {
         $('html,body').removeClass('ovfHidden');
         $(".searchbox").hide();
     })
+}
+
+function setMask1() {
+    if (mask1_ready == false){
+        $('.pgwSlideshow').pgwSlideshow({
+            transitionEffect:'sliding',
+            autoSlide:false
+        });
+    }
 }
 
 
