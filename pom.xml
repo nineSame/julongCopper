@@ -6,7 +6,7 @@
 	<groupId>com.chiyun</groupId>
 	<artifactId>julong</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<!--<name>julong</name>
 	<description>julongtongye</description>-->
@@ -54,6 +54,13 @@
 			<!--<artifactId>spring-boot-starter-thymeleaf</artifactId>-->
 		<!--</dependency>-->
 
+		<!--因配置外部TOMCAT 而配置-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -63,6 +70,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+        <finalName>julong</finalName>
 	</build>
 
 

@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public interface developmentRepository extends CrudRepository<developmentEntity,Long> {
-    Page<developmentEntity> findAllByFzlcsj(Date fzlcsj, Pageable pageable);
+//    Page<developmentEntity> findAllByFzlcsj(Date fzlcsj, Pageable pageable);
 
     //developmentEntity findByFzlcbt(String title);
 
@@ -25,6 +25,7 @@ public interface developmentRepository extends CrudRepository<developmentEntity,
    @Modifying
    @Transactional
    List<developmentEntity> findAllBysj();*/
-    @Query(value ="select * from development order by time desc", nativeQuery = true)
-    List<developmentEntity> findAlldesc();
+    @Query(value ="select * from development order by time asc", nativeQuery = true)
+    List<developmentEntity> findAllasc();
+
 }

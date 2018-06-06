@@ -22,7 +22,7 @@ public class fileUtil {
         String fileName1=beforeName+f.format(new Date())+suffixName;
         System.out.print("拼接之后的名字：" + fileName1);
         // 文件上传后的路径
-        String filePath = "D:\\upload\\"+name+"\\";
+        String filePath = "C:\\upload\\"+name+"\\";
         System.out.print("上传的地址为：" + filePath);
         // 解决中文问题，liunx下中文路径，图片显示问题
         // fileName = UUID.randomUUID() + suffixName;
@@ -33,7 +33,7 @@ public class fileUtil {
         }
         try {
             file.transferTo(dest);
-            return filePath+fileName1;
+            return "/files/"+name+"/"+fileName1;
         } catch (IllegalStateException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -51,10 +51,8 @@ public class fileUtil {
       deleted successfully else it return false
        */
             if (file.delete()) {
-                System.out.println(file.getName() + "is deleted");
                 result=1;
             } else {
-                System.out.println("Delete failed.");
                 result=0;
             }
         } catch (Exception e) {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class developmentController {
     @RequestMapping("/development/display")
     public ApiResult<Object> display( HttpSession httpSession){
 
-        List<developmentEntity> list = developmentRepository.findAlldesc();
+        List<developmentEntity> list = developmentRepository.findAllasc();
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new
         return ApiResult.SUCCESS(list);
@@ -35,6 +36,7 @@ public class developmentController {
     @RequestMapping("/development/create")
     @AccessRequired(menue = 0, action = 1)
     public ApiResult<Object> create(developmentEntity developmentEntity, HttpSession httpSession) throws Exception {
+
 
         if(developmentEntity.getFzlcbt()==null||developmentEntity.getFzlcbt()==""||developmentEntity.getFzlcnr()==null||developmentEntity.getFzlcnr()==""||developmentEntity.getFzlcsj()==null){
             return ApiResult.FAILURE("数据为空");
