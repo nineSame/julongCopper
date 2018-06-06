@@ -117,9 +117,6 @@ function tableBtn(dataId,type) {
         $('#dataModal').modal('show');
         $.post(urlConfig.show, {id:dataId},function (json) {
             if(json.resCode == 200){
-                console.log(json);
-                //$("#dataTable").bootstrapTable('refresh',{});
-                //$('#delModal').modal('hide');
                 var data = json.data;
                 for(var k in data){
                     var v = data[k];
@@ -189,6 +186,7 @@ function operateData() {
         if(!file){
             formData.delete('tpfile');
         }
+        loading('正在保存数据');
         $.ajax({
             cache: false,
             contentType: false,
@@ -198,6 +196,7 @@ function operateData() {
             data: formData,
             dataType: 'json',
             success: function (json) {
+                loading('close');
                 if(json.resCode == 200){
                     $('#dataModal').modal('hide');
                     $("#dataTable").bootstrapTable('refresh',{});
@@ -227,6 +226,11 @@ function operateData2() {
         var formData = new FormData($("#dataForm")[0]);
         var dataId = $('#editId').val();
         var url = urlConfig.addUrl;
+        if($('#fzlcsj').length){
+            formData.delete('fzlcsj');
+            formData.append('fzlcsj',$('#fzlcsj').val() + ' 00:00:00');
+        }
+
         //编辑保存
         if(dataId){
             url = urlConfig.updateUrl;
@@ -295,4 +299,34 @@ function initTime(format) {
         forceParse: 0,
     });
 }
+
+//loading
+function loading(msg) {
+    if(msg == 'close'){
+        $('#loadingModal').modal('hide');
+    }
+    else{
+        msg = msg || '正在获取数据';
+        if($('#loadingModal').length == 0){
+            var html = '<!--loading-->\n' +
+                '<div class="modal fade" id="loadingModal" tabindex="100" role="dialog">\n' +
+                '    <div class="loading-box">\n' +
+                '        <span class="loading-text">\n' +
+                '            <i><span id="loadingMsg">'+msg+'</span>,请稍后... </i>\n' +
+                '            <i class="icon-spinner icon-spin"></i>\n' +
+                '        </span>\n' +
+                '    </div>\n' +
+                '</div>\n';
+            $('body').append(html);
+        }
+        $('#loadingMsg').text(msg);
+        $('#loadingModal').modal({
+            keyboard: false,
+            show: false,
+            backdrop: 'static'
+        });
+        $('#loadingModal').modal('show');
+    }
+}
+
 

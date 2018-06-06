@@ -71,7 +71,8 @@
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">发生时间</span>
-                            <input class="form-date" name="fzlcsj" id="fzlcsj" style="width:416px;">
+                            <input class="form-date"  id="fzlcsj" name="fzlcsj" style="width:416px;" readonly>
+                            <!--<input type="hidden" name="fzlcsj" id="fzlcsj"  style="width:416px;">-->
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">历程内容</span>
@@ -122,7 +123,7 @@
         operateData2();//操作数据
         $('#fzlcsj').datetimepicker({
             width: 240,
-            format: 'yyyy-mm-dd hh:ii:ss',
+            format: 'yyyy-mm-dd',
             language:  'zh-CN',
             weekStart: 1,
             todayBtn:  1,
@@ -147,7 +148,10 @@
                 {
                     field: 'fzlcsj',
                     title: '历程时间',
-                    align: 'center'
+                    align: 'center',
+                    formatter: function (value, row, index) {
+                        return value.substr(0,10);
+                    }
                 },
                 {
                     field: 'fzlcnr',
@@ -162,11 +166,14 @@
                     align: 'center',
                     width: 160, // 定义列的宽度，单位为像素px
                     formatter: function (value, row, index) {
-                        var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
+                        var btn = '<span ' +
+                            'fzlcbt="'+row.fzlcbt+'" ' +
+                            'fzlcsj="'+row.fzlcsj.substr(0,10)+'" ' +
+                            'fzlcnr="'+row.fzlcnr+'" ' +
+                            'dataId="'+row.id+'">';
+                        btn += '<button class="btn btn-primary btn-xs" onclick="tableBtn2(\'' + row.id + '\',\'edit\',this)">编辑</button> ';
                         btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
-                        if(row.account == 'admin'){
-                            btn = '';
-                        }
+                        btn += '</span>';
                         return btn;
                     }
                 }
@@ -179,6 +186,18 @@
                 };
             }
         });
+    }
+
+
+    function tableBtn2(id,type,thisObj) {
+        $("#dataForm")[0].reset();
+        $('#modalTitle').text('编辑');
+        $('#editId').val(id);
+        $('#dataModal').modal('show');
+        var $btn = $(thisObj).parent();
+        $('#fzlcbt').val($btn.attr('fzlcbt'));
+        $('#fzlcsj').val($btn.attr('fzlcsj'));
+        $('#fzlcnr').val($btn.attr('fzlcnr'));
     }
 </script>
 </html>

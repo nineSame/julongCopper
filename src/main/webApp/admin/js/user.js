@@ -10,6 +10,7 @@ $(function(){
     getData();
     operateDataUser();//操作数据
     dictInit('xb',DICT.sex);
+    dictInit('zwdjpx',DICT.zwdj);
 });
 
 function operateDataUser(type) {
@@ -109,6 +110,14 @@ function getData() {
                 field: 'zw',
                 title: '公司职务',
                 align: 'center'
+            },
+            {
+                field: 'zwdjpx',
+                title: '职务等级',
+                align: 'center',
+                formatter: function (value, row, index) {
+                    return DICT.zwdj[value];
+                }
             },
             {
                 title: "操作",

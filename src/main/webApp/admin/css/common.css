@@ -154,3 +154,25 @@ td .desc{
     margin:15px 0;
     font-size: 14px;
 }
+
+/*加载中样式*/
+.loading-box{
+    text-align:center;
+    color:#fff;
+    font-size:15px;
+    margin-top:10%;
+}
+
+.loading-box .loading-text{
+    background: #4c4c4c;
+    padding:20px;
+    border-radius: 3px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+.tips{
+    color: #337ab7;
+    font-size: 14px;
+    padding: 5px;
+}

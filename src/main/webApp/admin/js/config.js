@@ -7,24 +7,7 @@ var HomeMenu = [
     {
         name: '公司信息',
         icon: 'icon-home' ,
-        //page: 'home',
-        children: [
-            {
-                name: '公司简介',
-                icon: 'icon-home' ,
-                page: 'home'
-            },
-            {
-                name: '企业文化',
-                icon: 'icon-home' ,
-                page: 'qywh'
-            },
-            {
-                name: '联系方式',
-                icon: 'icon-home' ,
-                page: 'contact'
-            }
-        ]
+        page: 'home'
     },
     {
         name: '人员管理',
@@ -32,7 +15,7 @@ var HomeMenu = [
         page: 'user',
     },
     {
-        name: '资讯管理',
+        name: '新闻管理',
         icon: 'icon-file-alt' ,
         page:'news'
     },
@@ -49,16 +32,19 @@ var HomeMenu = [
                 name: '公司公告',
                 icon: 'icon-bullhorn' ,
                 page:'gonggao',
+                type: 1
             },
             {
                 name: '财务公告',
                 icon: 'icon-bullhorn' ,
-                page:'caiwu',
+                page:'gonggao',
+                type: 2
             },
             {
                 name: '股票信息',
                 icon: 'icon-bullhorn' ,
-                page:'gupiao',
+                page:'gonggao',
+                type: 3
             }
         ]
     },
@@ -100,4 +86,5 @@ var DICT = {
     //zwjb: {1:'董事长',2:'总经理',3: '普通职员'},//职务级别
     xwlx: {1:'公司信息',2:'一线传真',3:'行业动态',4:'专题活动'},
     gglx: {1:'公司公告',2:'财务公告'},
+    zwdj: {1:'高级职位',2:'中级职位',3:'初级职位'}
 };

@@ -4,6 +4,10 @@ $(function () {
     createHomeMenu();   //创建左边菜单
     leftMenuClass();    //左边菜单样式
     initDataTable();//初始化Table插件
+    $(document).ajaxError(function(e,e2,e3,e4){
+        var url = e3.url;
+        alert("请求错误,请求地址:" + url);
+    });
 });
 
 function setUserInfo() {

@@ -38,6 +38,9 @@
                     <button  class="btn btn-sm btn-primary" id="addDataBtn">
                         添加公告
                     </button>
+                    <span class="tips">
+                        温馨提示：为了方便预览，所有的公告请上传PDF格式文件！
+                    </span>
                 </div>
                 <div class="col-sm-4 text-left">
 
@@ -111,15 +114,17 @@
 
 <script>
     //接口地址
+    var pageParam = getUrlParam();
+    var type = pageParam.type;
     var urlConfig = {
-        displayUrl : ServerUrl + '/ann/page',
+        displayUrl : ServerUrl + '/ann/page?lx=' + type,
         addUrl : ServerUrl + '/ann/create',
         updateUrl: ServerUrl + '/ann/update',
         delUrl: ServerUrl + '/ann/del'
     };
     $(function(){
         getData();
-        operateData2();//操作数据
+        operateDataGonggao();//操作数据
         dictInit('lx',DICT.gglx);
     });
 
@@ -141,11 +146,6 @@
                     }
                 },
                 {
-                    field: 'ggdz',
-                    title: '公告地址',
-                    align: 'center'
-                },
-                {
                     field: 'gxsj',
                     title: '发布时间',
                     align: 'center'
@@ -155,23 +155,70 @@
                     align: 'center',
                     width: 160, // 定义列的宽度，单位为像素px
                     formatter: function (value, row, index) {
-                        var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
+                        var btn = '';
+                        btn += '<a href="'+row.ggdz+'" target="_blank" class="btn btn-primary btn-xs">查看</a> ';
+                        btn += '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
                         btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
-                        if(row.account == 'admin'){
-                            btn = '';
-                        }
+
                         return btn;
                     }
                 }
-            ],
-            queryParams: function(params) {   //设置查询参数
-                return {
-                    page: params.pageNumber,
-                    size: params.pageSize,
-                    lx: 1
-                }
-            },
+            ]
         });
     }
+
+    function operateDataGonggao() {
+        //点击新增
+        $('#addDataBtn').off('click').on('click',function () {
+            $('#modalTitle').text('新增');
+            $("#dataForm")[0].reset();
+            $('#dataModal').modal('show');
+            $('#editId').val('');
+        });
+        //点击保存
+        $('#saveDataBtn').off('click').on('click',function () {
+            var formData = new FormData($("#dataForm")[0]);
+            var dataId = $('#editId').val();
+            var url = urlConfig.addUrl;
+            var fileValue = $('#ggdzfile').val();
+            if(fileValue.indexOf('pdf') == -1){
+                alert('请添加PDF格式文件');
+                return false;
+            }
+            //编辑保存
+            if(dataId){
+                url = urlConfig.updateUrl;
+                formData.append('id',dataId);
+            }
+            $.ajax({
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: url,
+                type: 'post',
+                data: formData,
+                dataType: 'json',
+                success: function (json) {
+                    if(json.resCode == 200){
+                        $('#dataModal').modal('hide');
+                        $("#dataTable").bootstrapTable('refresh',{});
+                    }else{
+                        alert(json.resMsg);
+                    }
+
+                },
+                error: function () {
+                    alert('服务器错误');
+                }
+            });
+
+        });
+    }
+
+
+    function view(src) {
+
+    }
+
 </script>
 </html>
