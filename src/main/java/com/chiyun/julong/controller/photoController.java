@@ -76,7 +76,7 @@ public class photoController {
         }*/
         //判断上传文件是否为空
         if (tpfile==null||tpfile.getSize()==0){
-            System.out.print("文件为空");
+            return ApiResult.FAILURE("文件为空");
         }else {
             //判断文件上传大小
             if(tpfile.getSize()>10485760){
@@ -130,7 +130,7 @@ public class photoController {
 
         //判断文件是否为空
         if (tpfile==null||tpfile.getSize()==0){
-            System.out.print("文件为空");
+            return ApiResult.FAILURE("文件为空");
         }else {
             //判断文件上传大小
             if(tpfile.getSize()>10485760){
