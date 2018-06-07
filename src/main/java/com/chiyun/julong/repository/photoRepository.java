@@ -23,4 +23,8 @@ public interface photoRepository extends CrudRepository<photoEntity, Long> {
     @Modifying
     @Transactional
     int deleteOrderById(String id);
+
+
+    @Query(value ="select * from photo order by updatetime desc", nativeQuery = true)
+    List<photoEntity> findAllDesc();
 }

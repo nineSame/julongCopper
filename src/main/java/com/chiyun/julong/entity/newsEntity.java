@@ -13,6 +13,7 @@ public class newsEntity {
     private String xwbt;//新闻标题
     private String xwtp;//新闻图片
     private String xwnr;//新闻内容
+    private String xwlx;//新闻类型
     private Date cjsj;//创建时间
     private Date gxsj;//更新时间
 
@@ -68,6 +69,15 @@ public class newsEntity {
         this.xwnr = xwnr;
     }
 
+    @Basic
+    @Column(name = "type")
+    public String getXwlx() {
+        return xwlx;
+    }
+
+    public void setXwlx(String xwlx) {
+        this.xwlx = xwlx;
+    }
     @Basic
     @Column(name = "createtime")
     public Date getCjsj() {

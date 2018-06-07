@@ -175,12 +175,15 @@ public class newsController {
 
     @ResponseBody
     @RequestMapping("/news/page")
-    public ApiResult<Object> page(int page,int size, HttpSession httpSession){
+    public ApiResult<Object> page(int xwlx,int page,int size, HttpSession httpSession){
 //zh为关键字查询，新闻模块的关键字暂定
-        /*if(zh==null){
-            zh="%%";
-        }*/
-        Page<newsEntity> list = newsRepository.findAll(PageRequest.of(page-1,size, Sort.unsorted()));
+        Page<newsEntity> list;
+        if(xwlx==0){
+            list = newsRepository.findAll(PageRequest.of(page-1,size, Sort.by(new Sort.Order(Sort.Direction.DESC,"gxsj"))));
+        }else {
+
+          list = newsRepository.findAllByXwlx(xwlx,PageRequest.of(page-1,size, Sort.by(new Sort.Order(Sort.Direction.DESC,"gxsj"))));
+        }
 
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new

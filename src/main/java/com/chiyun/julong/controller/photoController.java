@@ -28,7 +28,7 @@ public class photoController {
     @ResponseBody
     @RequestMapping("/banner/display")
     public ApiResult<Object> lb(HttpSession httpSession) throws Exception {
-        ListPhoto = (List<photoEntity>) photoRepository.findAll();
+        ListPhoto = photoRepository.findAllDesc();
 
         return ApiResult.SUCCESS(ListPhoto);
     }

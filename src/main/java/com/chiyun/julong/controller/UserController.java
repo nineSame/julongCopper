@@ -88,7 +88,8 @@ public class UserController {
             return ApiResult.FAILURE("用户名或密码错误");
         }
         httpSession.setAttribute("id", userEntity.getId());
-        return ApiResult.SUCCESS("登录成功");
+        UserDisplay oneUser = userDisplayRepository.findById(userEntity.getId());
+        return ApiResult.SUCCESS(oneUser);
     }
 
     @ResponseBody
@@ -404,7 +405,7 @@ public class UserController {
             if(zh==null){
                 zh="%%";
                   }
-        Page<UserDisplay> list = userDisplayRepository.findAllByZhLike(zh,PageRequest.of(page-1,size, Sort.unsorted()));
+        Page<UserDisplay> list = userDisplayRepository.findAllByZhLike(zh,PageRequest.of(page-1,size, Sort.by(new Sort.Order(Sort.Direction.DESC,"gxsj"))));
 
         //httpSession.setAttribute("id", userEntity.getId());
         //ApiPageResult ApiPageResult = new

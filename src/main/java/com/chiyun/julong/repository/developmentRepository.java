@@ -18,6 +18,10 @@ public interface developmentRepository extends CrudRepository<developmentEntity,
 
     developmentEntity findById(String id);
 
+    //使用原生sql通过id删除用户
+    @Query(value = "delete from development where id=?1 ", nativeQuery = true)
+    @Modifying
+    @Transactional
     int deleteOrderById(String id);
 
     List<developmentEntity> findAll();

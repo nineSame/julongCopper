@@ -30,7 +30,7 @@ public class announcementController {
         /*if(zh==null){
             zh="%%";
         }*/
-        Page<announcementEntity> list = announcementRepository.findAllByLx(lx,PageRequest.of(page-1,size, Sort.unsorted()));
+        Page<announcementEntity> list = announcementRepository.findAllByLx(lx,PageRequest.of(page-1,size, Sort.by(new Sort.Order(Sort.Direction.DESC,"gxsj"))));
 
         return ApiResult.SUCCESS(list);
 
