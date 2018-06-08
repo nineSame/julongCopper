@@ -61,19 +61,19 @@ var HomeMenu = [
             {
                 name: '主营业务',
                 icon: 'icon-camera-retro' ,
-                page:'qjjl',
+                page:'view',
                 type:'1'
             },
             {
                 name: '设备展示',
                 icon: 'icon-camera-retro' ,
-                page:'qjjl',
+                page:'view',
                 type:'2'
             },
             {
                 name: '生产工艺',
                 icon: 'icon-camera-retro' ,
-                page:'qjjl',
+                page:'view',
                 type:'3'
             },
         ]
@@ -87,5 +87,6 @@ var DICT = {
     //zwjb: {1:'董事长',2:'总经理',3: '普通职员'},//职务级别
     xwlx: {1:'公司信息',2:'一线传真',3:'行业动态',4:'专题活动'},
     gglx: {1:'公司公告',2:'财务公告'},
-    zwdj: {1:'高级职位',2:'中级职位',3:'初级职位'}
+    zwdj: {1:'高级职位',2:'中级职位',3:'初级职位'},
+    ywlx: {1:'主营业务',2:'设备展示',3:'生产工艺'},
 };

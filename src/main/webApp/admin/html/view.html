@@ -32,11 +32,11 @@
     <!--右边内容-->
     <section id="main-content">
         <section class="wrapper" id="wrapper">
-            <h3 class="main-title" id="mainTitle">公司发展历程</h3>
+            <h3 class="main-title" id="mainTitle">全景巨龙</h3>
             <div>
                 <div class="col-sm-5 m-b-xs">
                     <button  class="btn btn-sm btn-primary" id="addDataBtn">
-                        添加历程
+                        添加业务
                     </button>
                 </div>
                 <div class="col-sm-4 text-left">
@@ -60,24 +60,30 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><span id="modalTitle">添加</span>公告信息</h4>
+                <h4 class="modal-title"><span id="modalTitle">添加</span>业务信息</h4>
             </div>
             <div class="modal-body">
                 <div  class="form-horizontal">
                     <div class="form-group clearfix modal-form">
                         <div class="form-item1 pull-left">
-                            <span class="pre">历程标题</span>
-                            <input name="fzlcbt" id="fzlcbt" style="width:416px;">
+                            <span class="pre">业务类型</span>
+                            <select name="ywlx" id="ywlx" style="width:416px;"></select>
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">发生时间</span>
-                            <input class="form-date"  id="fzlcsj" name="fzlcsj" style="width:416px;" readonly>
-                            <!--<input type="hidden" name="fzlcsj" id="fzlcsj"  style="width:416px;">-->
+                            <span class="pre">业务标题</span>
+                            <input type="text" style="width:416px;" name="ywbt" id="ywbt">
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">历程内容</span>
-                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="fzlcnr" id="fzlcnr"></textarea>
+                            <span class="pre">业务描述</span>
+                            <textarea type="text" style="width:416px;height:60px;resize: none;" name="ywms" id="ywms"></textarea>
                         </div>
+                        <div class="form-item1 pull-left">
+                            <span class="pre">业务图片</span>
+                            <input type="file" style="width:416px;display: inline"  name="ywtpfile" id="imgFile">
+                        </div>
+                    </div>
+                    <div class="text-center" style="height:200px;background:#f8f8f8;">
+                        <img src="../images/no_pic.png" style="max-width:100%;max-height: 100%" alt="图片预览区" id="imgView">
                     </div>
                     <input type="hidden" id="editId">
                 </div>
@@ -111,40 +117,52 @@
 <script src="../assets/bootstrap/scripts.js"></script>
 
 <script>
+    var pageType = getUrlParam().type;
     //接口地址
     var urlConfig = {
-        displayUrl : ServerUrl + '/development/display',
-        addUrl : ServerUrl + '/development/create',
-        updateUrl: ServerUrl + '/development/update',
-        delUrl: ServerUrl + '/development/del'
+        displayUrl : ServerUrl + '/business/page?ywlx=' + pageType,
+        addUrl : ServerUrl + '/business/create',
+        updateUrl: ServerUrl + '/business/update',
+        delUrl: ServerUrl + '/business/del'
     };
     $(function(){
+        dictInit('ywlx',DICT.ywlx);
         getData();
     });
 
     function getData() {
+        imgViewByInput('imgFile','imgView');//选择文件预览图片
         //点击新增
         $('#addDataBtn').off('click').on('click',function () {
             $('#modalTitle').text('新增');
             $("#dataForm")[0].reset();
+            $("#ywlx ").val(pageType);
             $('#dataModal').modal('show');
             $('#editId').val('');
+            $('#imgView').prop('src','../images/no_pic.png');
         });
         //点击保存
         $('#saveDataBtn').off('click').on('click',function () {
             var formData = new FormData($("#dataForm")[0]);
             var dataId = $('#editId').val();
+            var file = $('#imgFile').val();
             var url = urlConfig.addUrl;
-            if($('#fzlcsj').length){
-                formData.delete('fzlcsj');
-                formData.append('fzlcsj',$('#fzlcsj').val() + ' 00:00:00');
-            }
-
             //编辑保存
             if(dataId){
                 url = urlConfig.updateUrl;
                 formData.append('id',dataId);
             }
+            //新增
+            else{
+                if(!file){
+                    alert('请选择图片!');
+                    return false;
+                }
+            }
+            if(!file){
+                formData.delete('ywzpfile');
+            }
+            loading('正在保存数据');
             $.ajax({
                 cache: false,
                 contentType: false,
@@ -154,6 +172,7 @@
                 data: formData,
                 dataType: 'json',
                 success: function (json) {
+                    loading('close');
                     if(json.resCode == 200){
                         $('#dataModal').modal('hide');
                         $("#dataTable").bootstrapTable('refresh',{});
@@ -172,21 +191,21 @@
             //表头信息添加
             columns: [
                 {
-                    field: 'fzlcbt',
-                    title: '历程标题',
-                    align: 'center'
-                },
-                {
-                    field: 'fzlcsj',
-                    title: '历程时间',
+                    field: 'ywlx',
+                    title: '业务类型',
                     align: 'center',
                     formatter: function (value, row, index) {
-                        return value.substr(0,10);
+                        return DICT.ywlx[value];
                     }
                 },
                 {
-                    field: 'fzlcnr',
-                    title: '历程描述',
+                    field: 'ywbt',
+                    title: '业务标题',
+                    align: 'center'
+                },
+                {
+                    field: 'ywms',
+                    title: '业务描述',
                     align: 'center',
                     formatter: function (value, row, index) {
                         return '<p class="desc">'+value+'</p>'
@@ -195,54 +214,55 @@
                 {
                     title: "操作",
                     align: 'center',
-                    width: 160, // 定义列的宽度，单位为像素px
                     formatter: function (value, row, index) {
                         var btn = '<span ' +
-                            'fzlcbt="'+row.fzlcbt+'" ' +
-                            'fzlcsj="'+row.fzlcsj.substr(0,10)+'" ' +
-                            'fzlcnr="'+row.fzlcnr+'" ' +
-                            'dataId="'+row.id+'">';
-                        btn += '<button class="btn btn-primary btn-xs" onclick="tableBtnFzlc(\'' + row.id + '\',\'edit\',this)">编辑</button> ';
-                        btn += '<button class="btn btn-danger btn-xs" onclick="tableBtnFzlc(\'' + row.id + '\',\'del\')">删除</button>';
+                            'ywlx="'+row.ywlx+'" ' +
+                            'ywbt="'+row.ywbt+'" ' +
+                            'ywtp="'+row.ywtp+'" ' +
+                            'ywms="'+row.ywms+'" ' +
+                            'id="'+row.id+'">';
+                        btn += '<button class="btn btn-primary btn-xs" onclick="tableBtnView(this,\'edit\')">编辑查看</button> ';
+                        btn += '<button class="btn btn-danger btn-xs" onclick="tableBtnView(this,\'del\')">删除</button>';
                         btn += '</span>';
                         return btn;
                     }
                 }
-            ],
-            pagination: false,
-            responseHandler: function(res) {
-                return {
-                    //"total": res.data.totalElements,//总页数
-                    "rows": res.data
-                };
-            }
-        });
-
-        $('#fzlcsj').datetimepicker({
-            width: 240,
-            format: 'yyyy-mm-dd',
-            language:  'zh-CN',
-            weekStart: 1,
-            todayBtn:  1,
-            autoclose: 1,
-            todayHighlight: 1,
-            startView: 2,
-            minView: 2, //最小可以选择到
-            maxView: 4, //最大可以选择到
-            forceParse: 0,
+            ]
         });
     }
-
-
-    function tableBtnFzlc(id,type,thisObj) {
-        $("#dataForm")[0].reset();
-        $('#modalTitle').text('编辑');
-        $('#editId').val(id);
-        $('#dataModal').modal('show');
-        var $btn = $(thisObj).parent();
-        $('#fzlcbt').val($btn.attr('fzlcbt'));
-        $('#fzlcsj').val($btn.attr('fzlcsj'));
-        $('#fzlcnr').val($btn.attr('fzlcnr'));
+    //表格操作按钮
+    function tableBtnView(thisObj,type) {
+        var $this = $(thisObj).parent();
+        var dataid = $this.attr('id');
+        //编辑
+        if(type == 'edit'){
+            $("#dataForm")[0].reset();
+            $('#modalTitle').text('编辑');
+            $('#editId').val(dataid);
+            $('#dataModal').modal('show');
+            var ywbt = $this.attr('ywbt');
+            var ywlx = $this.attr('ywlx');
+            var ywms = $this.attr('ywms');
+            var ywtp = $this.attr('ywtp');
+            $('#ywbt').val(ywbt);
+            $('#ywlx').val(ywlx);
+            $('#ywms').val(ywms);
+            $('#imgView').prop('src',ywtp);
+        }
+        //删除
+        else if(type == 'del'){
+            $('#delModal').modal('show');
+            $('#delConfirm').off('click').on('click',function () {
+                $.post(urlConfig.delUrl, {id:dataid},function (res) {
+                    if(res.resCode == 200){
+                        $("#dataTable").bootstrapTable('refresh',{});
+                        $('#delModal').modal('hide');
+                    }else{
+                        alert(res.resMsg);
+                    }
+                },'json');
+            });
+        }
     }
 </script>
 </html>

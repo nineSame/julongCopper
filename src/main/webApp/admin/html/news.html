@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-item1 pull-left">
                             <span class="pre">新闻照片</span>
-                            <input type="file" style="width:416px;display: inline"  name="xwzpfile" id="imgFile">
+                            <input type="file" style="width:416px;display: inline"  name="xwtpfile" id="imgFile">
                         </div>
                     </div>
                     <div class="text-center" style="height:200px;background:#f8f8f8;">
@@ -131,7 +131,6 @@
     });
 
     function getData() {
-
         imgViewByInput('imgFile','imgView');//选择文件预览图片
         //点击新增
         $('#addDataBtn').off('click').on('click',function () {
@@ -214,7 +213,6 @@
                 {
                     title: "操作",
                     align: 'center',
-                    width: 160, // 定义列的宽度，单位为像素px
                     formatter: function (value, row, index) {
                         var btn = '<span ' +
                             'xwlx="'+row.xwlx+'" ' +
