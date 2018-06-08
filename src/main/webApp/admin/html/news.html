@@ -159,7 +159,7 @@
                 }
             }
             if(!file){
-                formData.delete('xwzpfile');
+                //formData.delete('xwzpfile');
             }
             loading('正在保存数据');
             $.ajax({
@@ -247,7 +247,7 @@
             $('#xwbt').val(xwbt);
             $('#xwlx').val(xwlx);
             $('#xwnr').val(xwnr);
-            $('#imgView').prop('src',xwtp);
+            $('#imgView').prop('src',ServerUrl + xwtp);
         }
         //删除
         else if(type == 'del'){

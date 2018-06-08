@@ -185,7 +185,7 @@
                 formData.append('mm',password);
             }
             if(!file){
-                formData.delete('zpfile');
+                //formData.delete('zpfile');
             }
             $.ajax({
                 cache: false,
@@ -293,8 +293,7 @@
                     for(var k in data){
                         var v = data[k];
                         if(k == 'zp'){
-                            var src = FileUrl + v;
-                            $('#imgView').prop('src',src);
+                            $('#imgView').prop('src', ServerUrl + v);
                         }else{
                             $('#' + k).val(v);
                         }

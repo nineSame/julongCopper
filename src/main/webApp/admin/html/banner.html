@@ -56,7 +56,7 @@
 <!-- 表单模态框 -->
 <div class="modal fade bs-example-modal-lg" id="dataModal" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg" role="document" style="width: 800px;">
+    <div class="modal-dialog modal-lg" role="document" style="width: 810px;">
         <form class="modal-content" id="dataForm">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -67,23 +67,23 @@
                 <div  class="form-horizontal">
                     <div class="form-group clearfix modal-form">
                         <div class="form-item1 pull-left">
-                            <span class="pre">图片标题</span>
+                            <span class="pre">轮播图片标题</span>
                             <input type="text" style="width:580px;" name="tpbt" id="tpbt">
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">图片路径</span>
-                            <input type="file" style="width:580px;display: inline" name="tpfile" id="imgFile">
-                            <span>1920*600</span>
+                            <span class="pre">轮播图片描述</span>
+                            <textarea type="text" style="width:580px;height:60px;resize: none;" name="tpms" id="tpms"></textarea>
                         </div>
                         <div class="form-item1 pull-left">
-                            <span class="pre">图片描述</span>
-                            <textarea type="text" style="width:580px;height:60px;resize: none;" name="tpms" id="tpms"></textarea>
+                            <span class="pre">轮播图片文件</span>
+                            <input type="file" style="width:580px;display: inline" name="tpfile" id="imgFile">
+                            <span>1920*600</span>
                         </div>
                     </div>
                     <div class="text-center" style="height:200px;background:#f8f8f8;">
                         <img src="../images/no_pic.png" style="max-width:100%;max-height: 100%" alt="图片预览区" id="imgView">
                     </div>
-                    <input type="hidden" name="id" id="editId">
+                    <input type="hidden" id="editId">
                 </div>
             </div>
             <div class="modal-footer">
@@ -110,7 +110,147 @@
 <script src="../js/config.js?v=1.0"></script>
 <script src="../js/function.js?v=1.0"></script>
 <script src="../js/common.js?v=1.0"></script>
-<script src="../js/banner.js?v=1.0"></script>
-<!--处理菜单搜索展开-->
 <script src="../assets/bootstrap/scripts.js"></script>
+<script>
+    //接口地址
+    var urlConfig = {
+        displayUrl : ServerUrl + '/banner/display',
+        show : ServerUrl + '/banner/display',
+        addUrl : ServerUrl + '/banner/create',
+        delUrl : ServerUrl + '/banner/del',
+        updateUrl : ServerUrl + '/banner/update'
+    };
+    $(function(){
+        getData();//获取数据
+    });
+
+
+
+    function getData() {
+        imgViewByInput('imgFile','imgView');//选择文件预览图片
+        //点击新增
+        $('#addDataBtn').off('click').on('click',function () {
+            $('#modalTitle').text('新增');
+            $("#dataForm")[0].reset();
+            $('#dataModal').modal('show');
+            $('#editId').val('');
+            $('#imgView').prop('src','../images/no_pic.png');
+        });
+        //点击保存
+        $('#saveDataBtn').off('click').on('click',function () {
+            var formData = new FormData($("#dataForm")[0]);
+            var dataId = $('#editId').val();
+            var file = $('#imgFile').val();
+            var url = urlConfig.addUrl;
+            //编辑保存
+            if(dataId){
+                url = urlConfig.updateUrl;
+                formData.append('id',dataId);
+            }
+            //新增
+            else{
+                if(!file){
+                    alert('请选择图片!');
+                    return false;
+                }
+            }
+            if(!file){
+                //formData.delete('tpfile');
+            }
+            $.ajax({
+                cache: false,
+                contentType: false,
+                processData: false,
+                url: url,
+                type: 'post',
+                data: formData,
+                dataType: 'json',
+                success: function (json) {
+                    if(json.resCode == 200){
+                        $('#dataModal').modal('hide');
+                        $("#dataTable").bootstrapTable('refresh',{});
+                    }else{
+                        alert(json.resMsg);
+                    }
+
+                }
+            });
+
+        });
+        $("#dataTable").dataTable({ // 对应table标签的id
+            //表头信息添加
+            columns: [
+                {
+                    field: 'tpbt',
+                    title: '名称',
+                    align: 'center'
+                },
+                {
+                    field: 'tpms',
+                    title: '图片描述',
+                    align: 'center',
+                    maxWidth: 200
+                },
+                {
+                    title: "操作",
+                    align: 'center',
+                    valign: 'middle',
+                    width: 160, // 定义列的宽度，单位为像素px
+                    formatter: function (value, row, index) {
+                        var btn = '<span ' +
+                            'tpbt="'+row.tpbt+'" ' +
+                            'tpms="'+row.tpms+'" ' +
+                            'tplj="'+row.tplj+'" ' +
+                            'id="'+row.id+'">';
+                        btn += '<button class="btn btn-primary btn-xs" onclick="tableBtnBanner(this,\'edit\')">编辑查看</button> ';
+                        btn += '<button class="btn btn-danger btn-xs" onclick="tableBtnBanner(this,\'del\')">删除</button>';
+                        btn += '</span>';
+                        return btn;
+                    }
+                }
+            ],
+            pagination: false,
+            responseHandler: function(res) {
+                return {
+                    "rows": res.data
+                };
+            }
+        });
+    }
+
+
+    //表格操作按钮
+    function tableBtnBanner(thisObj,type) {
+        var $this = $(thisObj).parent();
+        var dataid = $this.attr('id');
+        //编辑
+        if(type == 'edit'){
+            $("#dataForm")[0].reset();
+            $('#modalTitle').text('编辑');
+            $('#editId').val(dataid);
+            $('#dataModal').modal('show');
+            var tpms = $this.attr('tpms');
+            var tpbt = $this.attr('tpbt');
+            var tplj = $this.attr('tplj');
+            $('#tpms').val(tpms);
+            $('#tpbt').val(tpbt);
+            $('#imgView').prop('src',ServerUrl + tplj);
+        }
+        //删除
+        else if(type == 'del'){
+            $('#delModal').modal('show');
+            $('#delConfirm').off('click').on('click',function () {
+                $.post(urlConfig.delUrl, {id:dataid},function (res) {
+                    if(res.resCode == 200){
+                        $("#dataTable").bootstrapTable('refresh',{});
+                        $('#delModal').modal('hide');
+                    }else{
+                        alert(res.resMsg);
+                    }
+                },'json');
+            });
+        }
+    }
+
+</script>
 </html>
