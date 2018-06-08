@@ -124,8 +124,8 @@ function getData() {
                 align: 'center',
                 width: 160, // 定义列的宽度，单位为像素px
                 formatter: function (value, row, index) {
-                    var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtn(\'' + row.id + '\',\'edit\')">编辑</button> ';
-                    btn += '<button class="btn btn-danger btn-xs" onclick="tableBtn(\'' + row.id + '\',\'del\')">删除</button>';
+                    var btn = '<button class="btn btn-primary btn-xs" onclick="tableBtnUser(\'' + row.id + '\',\'edit\')">编辑</button> ';
+                    btn += '<button class="btn btn-danger btn-xs" onclick="tableBtnUser(\'' + row.id + '\',\'del\')">删除</button>';
                     if(row.zh == 'admin'){
                         btn = '';
                     }
@@ -134,4 +134,47 @@ function getData() {
             }
         ]
     });
+}
+
+//表格操作按钮
+function tableBtnUser(dataId,type) {
+    //删除
+    if(type == 'del'){
+        $('#delId').val(dataId);
+        $('#delModal').modal('show');
+        $('#delConfirm').off('click').on('click',function () {
+            $.post(urlConfig.delUrl, {id:dataId},function (res) {
+                if(res.resCode == 200){
+                    $("#dataTable").bootstrapTable('refresh',{});
+                    $('#delModal').modal('hide');
+                }else{
+                    alert(res.resMsg);
+                }
+            },'json');
+        });
+    }
+    //编辑
+    else if(type == 'edit'){
+        $("#dataForm")[0].reset();
+        $('#modalTitle').text('编辑');
+        $('#editId').val(dataId);
+        $('#dataModal').modal('show');
+        $.post(urlConfig.show, {id:dataId},function (json) {
+            if(json.resCode == 200){
+                var data = json.data;
+                for(var k in data){
+                    var v = data[k];
+                    if(k == 'zp'){
+                        var src = FileUrl + v;
+                        $('#imgView').prop('src',src);
+                    }else{
+                        $('#' + k).val(v);
+                    }
+                }
+                //setFormParam("#dataForm",data)
+            }else{
+                alert(res.resMsg);
+            }
+        },'json');
+    }
 }

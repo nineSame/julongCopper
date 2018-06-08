@@ -2,6 +2,7 @@
 var LoginUserInfo = JSON.parse(localStorage.getItem('loginUserInfo'));
 //服务器接口地址
 var ServerUrl = location.origin;
+var FileUrl = 'http://117.78.27.78:8080/';
 //左侧菜单
 var HomeMenu = [
     {
