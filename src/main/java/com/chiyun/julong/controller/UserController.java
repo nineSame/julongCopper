@@ -129,7 +129,7 @@ public class UserController {
 
 */
        //判断文件是否为空
-        if (zpfile==null||zpfile.getSize()==0){
+        if (zpfile.isEmpty()||zpfile.getSize()==0){
             System.out.print("文件为空");
         }else {
             //判断文件上传大小
@@ -222,7 +222,8 @@ public class UserController {
         userEntity.setMm(Md5Util.getMD5(password));*/
 
        //判断上传文件是否为空
-        if (zpfile==null||zpfile.getSize()==0){
+        if (zpfile.isEmpty()||zpfile.getSize()==0){
+            userEntity.setZp(userEntity1.getZp());
             System.out.print("文件为空");
         }else {
        //判断文件上传大小

@@ -75,7 +75,7 @@ public class photoController {
             photoEntity1.setTitle(photoEntity.getTitle());
         }*/
         //判断上传文件是否为空
-        if (tpfile==null||tpfile.getSize()==0){
+        if (tpfile.isEmpty()||tpfile.getSize()==0){
             return ApiResult.FAILURE("文件为空");
         }else {
             //判断文件上传大小
@@ -129,7 +129,7 @@ public class photoController {
         //由于图片标题和描述不一定需要，所以不需要判断传进来的两个参数是否为空，但是在下面必须判断图片路径是否为空
 
         //判断文件是否为空
-        if (tpfile==null||tpfile.getSize()==0){
+        if (tpfile.isEmpty()||tpfile.getSize()==0){
             return ApiResult.FAILURE("文件为空");
         }else {
             //判断文件上传大小

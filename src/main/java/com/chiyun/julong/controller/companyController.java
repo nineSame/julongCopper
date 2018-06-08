@@ -71,45 +71,81 @@ public class companyController {
         if(companyEntity1==null){
             return ApiResult.FAILURE("未找到该信息");
         }
-        if (gstbfile==null||gstbfile.getSize()==0||gsjstpfile==null||gsjstpfile.getSize()==0){
-            System.out.print("公司图标为空或公司介绍图片为空");
+        if (!gstbfile.isEmpty()||gstbfile.getSize()!=0){
+            //判断文件上传大小
+            if(gstbfile.getSize()>20971520){
+                return ApiResult.FAILURE("图片超出文件大小");
+            }
+            //判断数据库里面是否有图标地址
+            if(companyEntity1.getGstb()!=null&&companyEntity1.getGstb()!=""){
+                //如果有图标，删除原有图标
+                int isdel=fileUtil.fileDel(companyEntity1.getGstb(),"company");
+                //判断图标是否删除成功
+                if(isdel!=1){
+                    return ApiResult.FAILURE("公司图标删除失败");
+                }
+                //删除成功后将用户修改的图标上传
+                String filename=fileUtil.fileUpload(gstbfile,"company");
+                //判断上传方法返回回来的数据
+                if(filename==null){
+                    return ApiResult.FAILURE("公司图标上传失败");
+                }
+                //将文件名保存在数据库
+                companyEntity.setGstb(filename);
+            }else{
+                System.out.print("上传图片");
+                //如果没有，直接上传图标，保存图标名
+                String filename=fileUtil.fileUpload(gstbfile,"company");
+                //判断上传方法返回回来的数据
+                if(filename==null){
+                    return ApiResult.FAILURE("公司图标上传失败");
+                }
+                //将文件名保存在数据库
+                companyEntity.setGstb(filename);
+            }
+
         }else {
-        //判断文件上传大小
-        if(gstbfile.getSize()>20971520||gsjstpfile.getSize()>20971520){
-            return ApiResult.FAILURE("图片超出文件大小");
+            companyEntity.setGstb(companyEntity1.getGstb());
+            System.out.print("未上传公司图标");
         }
-        //判断数据库里面是否有图标地址
-        if(companyEntity1.getGstb()!=null&&companyEntity1.getGstb()!=""&&companyEntity1.getGsjstp()!=null&&companyEntity1.getGsjstp()!=""){
-            //如果有图标，删除原有图标
-            int isdel=fileUtil.fileDel(companyEntity1.getGstb(),"company");
-            int isdel2=fileUtil.fileDel(companyEntity1.getGsjstp(),"company");
-            //判断图标是否删除成功
-            if(isdel!=1&&isdel2!=1){
-                return ApiResult.FAILURE("公司图标或公司介绍图片删除失败");
+        if (!gsjstpfile.isEmpty()||gsjstpfile.getSize()!=0){
+            //判断文件上传大小
+            if(gsjstpfile.getSize()>20971520){
+                return ApiResult.FAILURE("图片超出文件大小");
             }
-            //删除成功后将用户修改的图标上传
-            String filename=fileUtil.fileUpload(gstbfile,"company");
-            String filename2=fileUtil.fileUpload(gsjstpfile,"company");
-            //判断上传方法返回回来的数据
-            if(filename==null||filename2==null){
-                return ApiResult.FAILURE("公司图标或公司介绍图片上传失败");
+            //判断数据库里面是否有图标地址
+            if(companyEntity1.getGsjstp()!=null&&companyEntity1.getGsjstp()!=""){
+                //如果有图标，删除原有图标
+                int isdel2=fileUtil.fileDel(companyEntity1.getGsjstp(),"company");
+                //判断图标是否删除成功
+                if(isdel2!=1){
+                    return ApiResult.FAILURE("公司介绍图片删除失败");
+                }
+                //删除成功后将用户修改的图标上传
+                String filename2=fileUtil.fileUpload(gsjstpfile,"company");
+                //判断上传方法返回回来的数据
+                if(filename2==null){
+                    return ApiResult.FAILURE("公司介绍图片上传失败");
+                }
+                //将文件名保存在数据库
+                companyEntity.setGsjstp(filename2);
+            }else{
+                System.out.print("上传图片");
+                //如果没有，直接上传图标，保存图标名
+                String filename2=fileUtil.fileUpload(gsjstpfile,"company");
+                //判断上传方法返回回来的数据
+                if(filename2==null){
+                    return ApiResult.FAILURE("公司介绍图片上传失败");
+                }
+                //将文件名保存在数据库
+                companyEntity.setGsjstp(filename2);
             }
-            //将文件名保存在数据库
-            companyEntity.setGstb(filename);
-            companyEntity.setGsjstp(filename2);
+
         }else{
-            //如果没有，直接上传图标，保存图标名
-            String filename=fileUtil.fileUpload(gstbfile,"company");
-            String filename2=fileUtil.fileUpload(gsjstpfile,"company");
-            //判断上传方法返回回来的数据
-            if(filename==null||filename2==null){
-                return ApiResult.FAILURE("公司图标或公司介绍图片上传失败");
-            }
-            //将文件名保存在数据库
-            companyEntity.setGstb(filename);
-            companyEntity.setGsjstp(filename2);
+            companyEntity.setGsjstp(companyEntity1.getGsjstp());
+            System.out.print("未上传公司图片");
         }
-        }
+
         //保存操作
         companyEntity entity = companyRepository.save(companyEntity);
         if (entity == null) {

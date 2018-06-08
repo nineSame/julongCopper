@@ -65,7 +65,7 @@ public class announcementController {
         }*/
 
         //判断传进的公告标题和公告文件是否为空
-        if(announcementEntity.getGgbt()==null||announcementEntity.getGgbt()==""||ggdzfile==null||ggdzfile.getSize()==0){
+        if(announcementEntity.getGgbt()==null||announcementEntity.getGgbt()==""||ggdzfile.isEmpty()||ggdzfile.getSize()==0){
             return ApiResult.FAILURE("公告标题或公告文件为空");
         }
         if(announcementRepository.findByGgbt(announcementEntity.getGgbt())!=null){
@@ -108,7 +108,7 @@ public class announcementController {
         //判断是否为管理员
 
         //判断传进的新闻标题和内容是否为空
-        if(announcementEntity.getGgbt()==null||announcementEntity.getGgbt()==""||ggdzfile==null||ggdzfile.getSize()==0){
+        if(announcementEntity.getGgbt()==null||announcementEntity.getGgbt()==""||ggdzfile.isEmpty()||ggdzfile.getSize()==0){
             return ApiResult.FAILURE("公告标题和文件为空");
         }
         //通过id查询是否有该公告
@@ -148,7 +148,7 @@ public class announcementController {
             }
 
         //保存更新时间
-        announcementEntity.setCjsj(announcementEntity.getCjsj());
+        announcementEntity.setCjsj(announcementEntity1.getCjsj());
         announcementEntity.setGxsj(new Date());
         //保存操作
         announcementEntity entity = announcementRepository.save(announcementEntity);

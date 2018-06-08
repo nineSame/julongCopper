@@ -67,7 +67,7 @@ public class businessController {
         }*/
         //判断是否为管理员
 
-        if(businessEntity.getYwbt()==null||businessEntity.getYwbt()==""||ywtpfile==null||ywtpfile.getSize()==0){
+        if(businessEntity.getYwbt()==null||businessEntity.getYwbt()==""||ywtpfile.isEmpty()||ywtpfile.getSize()==0){
             return ApiResult.FAILURE("图片为空或标题为空");
         }
         //通过id查询是否有该图片
@@ -125,7 +125,7 @@ public class businessController {
         /*if(name.isEmpty()){
             return ApiResult.FAILURE("姓名为空");
         }*/
-        if(businessEntity.getYwbt()==null||businessEntity.getYwbt()==""||ywtpfile==null||ywtpfile.getSize()==0){
+        if(businessEntity.getYwbt()==null||businessEntity.getYwbt()==""||ywtpfile.isEmpty()||ywtpfile.getSize()==0){
             return ApiResult.FAILURE("图片为空或标题为空");
         }
 

@@ -81,7 +81,8 @@ public class newsController {
             return ApiResult.FAILURE("未找到该新闻");
         }
         //判断上传文件是否为空
-        if (xwtpfile==null||xwtpfile.getSize()==0){
+        if (xwtpfile.isEmpty()||xwtpfile.getSize()==0){
+            newsEntity.setXwtp(newsEntity1.getXwtp());
             System.out.print("文件为空");
         }else {
             //判断文件上传大小
@@ -116,7 +117,7 @@ public class newsController {
             }
         }
         //保存更新时间
-        newsEntity.setCjsj(newsEntity.getCjsj());
+        newsEntity.setCjsj(newsEntity1.getCjsj());
         newsEntity.setGxsj(new Date());
         //保存操作
         newsEntity entity = newsRepository.save(newsEntity);
@@ -147,7 +148,7 @@ public class newsController {
         }*/
 
         //判断文件是否为空
-        if (xwtpfile==null||xwtpfile.getSize()==0){
+        if (xwtpfile.isEmpty()||xwtpfile.getSize()==0){
             System.out.print("文件为空");
         }else {
             //判断文件上传大小
