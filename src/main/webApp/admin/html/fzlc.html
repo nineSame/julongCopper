@@ -202,7 +202,7 @@
                             'fzlcsj="'+row.fzlcsj.substr(0,10)+'" ' +
                             'fzlcnr="'+row.fzlcnr+'" ' +
                             'dataId="'+row.id+'">';
-                        btn += '<button class="btn btn-primary btn-xs" onclick="tableBtnFzlc(\'' + row.id + '\',\'edit\',this)">编辑</button> ';
+                        btn += '<button class="btn btn-primary btn-xs" onclick="tableBtnFzlc(\'' + row.id + '\',\'edit\',this)">编辑查看</button> ';
                         btn += '<button class="btn btn-danger btn-xs" onclick="tableBtnFzlc(\'' + row.id + '\',\'del\')">删除</button>';
                         btn += '</span>';
                         return btn;
@@ -235,14 +235,30 @@
 
 
     function tableBtnFzlc(id,type,thisObj) {
-        $("#dataForm")[0].reset();
-        $('#modalTitle').text('编辑');
-        $('#editId').val(id);
-        $('#dataModal').modal('show');
-        var $btn = $(thisObj).parent();
-        $('#fzlcbt').val($btn.attr('fzlcbt'));
-        $('#fzlcsj').val($btn.attr('fzlcsj'));
-        $('#fzlcnr').val($btn.attr('fzlcnr'));
+        if(type == 'edit'){
+            $("#dataForm")[0].reset();
+            $('#modalTitle').text('编辑');
+            $('#editId').val(id);
+            $('#dataModal').modal('show');
+            var $btn = $(thisObj).parent();
+            $('#fzlcbt').val($btn.attr('fzlcbt'));
+            $('#fzlcsj').val($btn.attr('fzlcsj'));
+            $('#fzlcnr').val($btn.attr('fzlcnr'));
+        }
+        else if(type == 'del'){
+            $('#delId').val(id);
+            $('#delModal').modal('show');
+            $('#delConfirm').off('click').on('click',function () {
+                $.post(urlConfig.delUrl, {id:id},function (res) {
+                    if(res.resCode == 200){
+                        $("#dataTable").bootstrapTable('refresh',{});
+                        $('#delModal').modal('hide');
+                    }else{
+                        alert(res.resMsg);
+                    }
+                },'json');
+            });
+        }
     }
 </script>
 </html>
