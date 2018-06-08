@@ -253,7 +253,6 @@
         }
         //删除
         else if(type == 'del'){
-            $('#delId').val(dataId);
             $('#delModal').modal('show');
             $('#delConfirm').off('click').on('click',function () {
                 $.post(urlConfig.delUrl, {id:dataid},function (res) {
