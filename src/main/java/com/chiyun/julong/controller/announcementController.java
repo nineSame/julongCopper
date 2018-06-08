@@ -148,6 +148,7 @@ public class announcementController {
             }
 
         //保存更新时间
+        announcementEntity.setCjsj(announcementEntity.getCjsj());
         announcementEntity.setGxsj(new Date());
         //保存操作
         announcementEntity entity = announcementRepository.save(announcementEntity);

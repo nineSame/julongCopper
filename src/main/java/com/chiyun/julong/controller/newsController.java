@@ -116,6 +116,7 @@ public class newsController {
             }
         }
         //保存更新时间
+        newsEntity.setCjsj(newsEntity.getCjsj());
         newsEntity.setGxsj(new Date());
         //保存操作
         newsEntity entity = newsRepository.save(newsEntity);
