@@ -77,6 +77,18 @@
     color: #888;
 }
 
+.part2 .width_fix {
+    display: inline-block;
+    width: 20%;
+    vertical-align: top;
+}
+
+.part2 .width_fix1 {
+    display: inline-block;
+    width: 40%;
+    vertical-align: top;
+}
+
 .part2 .bottom .row a:hover {
     color: #bb9205;
 }

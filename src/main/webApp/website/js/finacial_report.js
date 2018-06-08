@@ -41,7 +41,7 @@ function setDownloadList() {
                     liHtml += '<li class="download_item"><a class="download_btn left" title="下载"></a><a href="'+item.ggdz+'" class="download_title left" title="" target="_blank"><h3 class="el">'+item.ggbt+'</h3></a><a href="#" class="download_date left"><div class="center_box"><span>'+year+'</span><strong>'+month_and_date+'</strong></div></a></li>';
                 }
 
-                console.log(liHtml)
+                // console.log(liHtml)
 
                 //插入html
                 $('#announce_list').append(liHtml);

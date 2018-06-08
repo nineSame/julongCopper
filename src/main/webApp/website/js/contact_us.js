@@ -5,6 +5,7 @@
 $(function(){
     setFrontLinks();
     setBaiduMap();
+    setPageValue();
 })
 
 function setFrontLinks(){
@@ -70,4 +71,45 @@ function setBaiduMap() {
 
 }
 
+function setPageValue() {
+    $.ajax({
+        //后台正式数据接口
+        url: ServerUrl + 'company/display',
+        type: 'get',
+        dataType: 'json',
+        success: function (json) {
+            //var data = json.data;
+            console.log("server",json);
+            if(json.resCode == 200){
+
+                var data = json.data[0];
+                console.log(data)
+
+                $('.company_addr').html(data.gsdz);
+                $('.company_postcode').html(data.gsyb);
+                $('.company_rp').html(data.gslxr);
+                $('.company_tel').html(data.gsdh);
+
+                $('#hr').html(data.rllxr);
+                $('#hr_tel').html(data.rllxdh);
+                $('#hr_email').html(data.rlzpyx);
+
+                $('#email_x').html(': ' + data.xyx);
+                $('#email_y').html(': ' + data.yyx);
+                $('#email_z').html(': ' + data.zyx);
+
+                $('#tenders_addr').html(data.zbdz);
+                $('#tenders_tel').html(data.zbdh);
+                $('#tech_tel').html(data.dh);
+
+
+            }else{
+                alert(json.resMsg);
+            }
+        },
+        error: function () {
+            alert('err')
+        }
+    });
+}
 
