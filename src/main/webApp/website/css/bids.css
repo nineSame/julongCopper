@@ -1,0 +1,33 @@
+
+.input_wrap {
+    margin: 50px 0;
+}
+.page_title {
+    font-size: 32px;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.contact_people,.contact_tel {
+    width: 50%;
+    float: left;
+    text-align: center;
+}
+
+.contact_message {
+    text-align: center;
+}
+
+.contact_message textarea {
+    width: 60%;
+    height: 350px;
+}
+
+.contact_people input, .contact_tel input {
+    width: 70%;
+}
+
+.submit_button {
+    text-align: center;
+    margin-top: 50px;
+}
