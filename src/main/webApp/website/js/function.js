@@ -8,22 +8,25 @@ function pageCommonLink() {
     //关于我们
     $('.down_ul').eq(0).find('li').eq(0).find('a').attr("href","./company_info.html");
     $('.down_ul').eq(0).find('li').eq(1).find('a').attr("href","./leaders.html");
-    $('.down_ul').eq(0).find('li').eq(2).find('a').attr("href","./event.html");
-    $('.down_ul').eq(0).find('li').eq(3).find('a').attr("href","./culture.html");
-    $('.down_ul').eq(0).find('li').eq(4).find('a').attr("href","./contact_us.html");
+    $('.down_ul').eq(0).find('li').eq(2).find('a').attr("href","./structure.html");
+    $('.down_ul').eq(0).find('li').eq(3).find('a').attr("href","./event.html");
+    $('.down_ul').eq(0).find('li').eq(4).find('a').attr("href","./declaration.html");
+    $('.down_ul').eq(0).find('li').eq(5).find('a').attr("href","./worker.html");
+    $('.down_ul').eq(0).find('li').eq(6).find('a').attr("href","");
+    $('.down_ul').eq(0).find('li').eq(7).find('a').attr("href","./contact_us.html");
+
 
     //全景巨龙
     $('.down_ul').eq(1).find('li').eq(0).find('a').attr("href","./pictures.html");
 
     //资讯中心
     $('.down_ul').eq(2).find('li').eq(0).find('a').attr("href","./news_list.html");
-    $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","./social_responsibility.html");
-    $('.down_ul').eq(2).find('li').eq(2).find('a').attr("href","./activities.html");
+    $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","");
+    $('.down_ul').eq(2).find('li').eq(2).find('a').attr("href","./social_responsibility.html");
+    $('.down_ul').eq(2).find('li').eq(3).find('a').attr("href","./activities.html");
 
     //投资者关系
     $('.down_ul').eq(3).find('li').eq(0).find('a').attr("href","./announce_list.html");
-    $('.down_ul').eq(3).find('li').eq(1).find('a').attr("href","./financial_report.html");
-    $('.down_ul').eq(3).find('li').eq(2).find('a').attr("href","./shares.html");
 
 
 
@@ -146,6 +149,11 @@ function autoHideSideNav() {
     $('.sidenav-menu>li a[href]').click(function () {
         $('#sidenav-toggle').click()
     })
+}
+
+function addHeader() {
+    var headerHtml = '<div class="header"><div class="header_content"><div class="logo left"><a><img src="img/logo-left.png"></a></div><div class="nav"><a class="left index">公司首页</a><ul class="header_ul left clearfix"><li class="left nav_item"><a>关于我们</a></li><li class="left nav_item"><a>全景巨龙</a></li><li class="left nav_item"><a>资讯中心</a></li><li class="left nav_item"><a>公告信息</a></li></ul><div class="header_down"><div class="down_wrap"><ul class="down_ul"><li class="down_item"><a href="company_info.html">公司简介</a></li><li class="down_item"><a>管理团队</a></li><li class="down_item"><a>组织架构</a></li><li class="down_item"><a>发展历程</a></li><li class="down_item"><a>事业宣言</a></li><li class="down_item"><a>巨龙人</a></li><li class="down_item"><a>业务介绍</a></li><li class="down_item"><a>联系我们</a></li></ul><img src="img/julong_bg.png" class="_full"><h3>这是标题</h3><p>这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容</p></div></div><div class="header_down"><div class="down_wrap"><ul class="down_ul"><li class="down_item"><a>全景巨龙</a></li></ul><img src="img/1ef55c7892664d619d9a73c93abe2532.jpg" class="_full"><h3>这是标题</h3><p>这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容</p></div></div><div class="header_down"><div class="down_wrap"><ul class="down_ul"><li class="down_item"><a>新闻中心</a></li><li class="down_item"><a>可持续发展</a></li><li class="down_item"><a>社会责任</a></li><li class="down_item"><a>专题活动</a></li></ul><img src="img/news-1172463_640.jpg" class="_full"><h3>这是标题</h3><p>这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容</p></div></div><div class="header_down"><div class="down_wrap"><ul class="down_ul"><li class="down_item"><a href="announce_list.html">公司公告</a></li></ul> <img src="img/laptop-3196481_640.jpg" class="_full"><h3>这是标题</h3><p>这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容这是内容</p></div></div></div></div></div>';
+    $('body').prepend(headerHtml);
 }
 
 function addFooter() {

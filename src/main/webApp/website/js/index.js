@@ -8,8 +8,36 @@ $(function () {
 
 //banner处理
 function banner() {
+    // //本地数据
+    // $.ajax({
+    //     url: ServerUrl + 'website/json/banner.json',
+    //     type: 'get',
+    //     dataType: 'json',
+    //     success: function (json) {
+    //         //var data = json.data;
+    //         console.log(1111,json);
+    //         if(json.resCode == 200){
+    //
+    //             var data = json.data;
+    //             var liHtml = '';
+    //             for(var i=0;i<data.length;i++){
+    //                 var item = data[i];
+    //                 liHtml += '<li><img src="'+ ServerUrl +'website/img/' +item.src+'"></li>'
+    //             }
+    //             console.log(liHtml);
+    //             $('#animation>ul').append(liHtml);
+    //             $('#animation').terseBanner({btn:true});
+    //         }else{
+    //             alert(json.resMsg);
+    //         }
+    //     },
+    //     error: function () {
+    //         alert('err')
+    //     }
+    // });
+
     $.ajax({
-        url: ServerUrl + 'website/json/banner.json',
+        url: ServerUrl + 'banner/display',
         type: 'get',
         dataType: 'json',
         success: function (json) {
@@ -21,7 +49,7 @@ function banner() {
                 var liHtml = '';
                 for(var i=0;i<data.length;i++){
                     var item = data[i];
-                    liHtml += '<li><img src="'+ ServerUrl +'website/img/' +item.src+'"></li>'
+                    liHtml += '<li><img src="'+'http://'+ remoteUrl +item.tplj+'"></li>'
                 }
                 console.log(liHtml);
                 $('#animation>ul').append(liHtml);
