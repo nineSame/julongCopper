@@ -1,0 +1,151 @@
+.page_title {
+    text-align: center;
+    font-size: 32px;
+}
+
+.event_left {
+    width: 45%;
+    position: relative;
+    height: 1200px;
+}
+
+.event_left .left_item {
+    transition: 0.8s;
+}
+
+.position1 .event_desc,.position2 .event_desc,.position4 .event_desc,.position5 .event_desc,.position6 .event_desc{
+    display: none;
+}
+
+.position1,.position5,.position6{
+    position: absolute;
+    width: 30%;
+    left: 70%;
+}
+
+.position2,.position4 {
+    position: absolute;
+    /*width: 45%;*/
+    left: 52%;
+    /*width: 500px;*/
+}
+
+.position2 .img_wrap,.position4 .img_wrap {
+    /*width: 121.5px;*/
+}
+
+.position3 {
+    position: absolute;
+    width: 78%;
+    left: 14%;
+}
+
+.position3 .event_desc {
+    display: block;
+    /*background: #deba28;*/
+    float: right;
+    width: 48%;
+    /*width: 203px;*/
+}
+
+.left_item .img_wrap {
+    width: 50%;
+    float: right;
+    transition: 0.3s;
+}
+
+.left_item .img_wrap:hover{
+    transform: scale(1.05);
+}
+
+.left_item .event_desc {
+    float: left;
+    margin-right: 5px;
+}
+
+.left_item .event_title {
+    font-size: 34px;
+    text-align: right;
+    color: #666;
+    font-weight: bold;
+    font-family: 'arial';
+    margin-top: 50px;
+
+}
+
+.left_item .desc {
+    -webkit-line-clamp: 4;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    line-height: 1.5;
+    height: 6em;
+    text-align: right;
+    color: #666;
+    margin-top: 3px;
+    font-size: 14px;
+    width: 202px;
+}
+
+.position6 {
+    display: none;
+    left: 67%;
+    top: 1.5%;
+    z-index: 6;
+}
+
+.img_wrap {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    padding-bottom: 50%;
+}
+
+.img_wrap img {
+    margin: 0;
+    width: 100%;
+    height: auto;
+}
+
+.position1 {
+    top: 0;
+    z-index: 1;
+}
+
+.position2 {
+    top: 100px;
+    z-index: 2;
+}
+
+.position3 {
+    top: 240px;
+    z-index: 3;
+}
+
+.position4 {
+    top: 470px;
+    z-index: 4;
+}
+
+.position5 {
+    top: 610px;
+    z-index: 5;
+}
+
+
+
+.event_right {
+    width: 50%;
+}
+
+
+
+.gray {
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+}

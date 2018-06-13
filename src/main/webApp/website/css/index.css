@@ -474,8 +474,8 @@
     position: relative;
 }
 
-.full_row>.span-3 {
-    width: 25%;
+.full_row>.span-4 {
+    width: 33.3%;
 }
 
 .full_row>[class*='span']{
@@ -611,13 +611,17 @@
 
     .part3 .wrap{
         width: 100%;
-        height: 180px;
+        height: 240px;
     }
 
-    .full_row>.span-3 {
-        width: 50%;
+    .full_row>.span-4 {
+        width: 100%;
         height: 65px;
-        padding: 20px 0;
+        padding: 10px 0;
+    }
+
+    .part3 .s_cont {
+        width: 30%;
     }
 
     .part3 .s_cont .title{

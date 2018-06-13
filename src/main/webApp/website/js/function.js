@@ -21,7 +21,7 @@ function pageCommonLink() {
 
     //资讯中心
     $('.down_ul').eq(2).find('li').eq(0).find('a').attr("href","./news_list.html");
-    $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","");
+    $('.down_ul').eq(2).find('li').eq(1).find('a').attr("href","environment_friendly.html");
     $('.down_ul').eq(2).find('li').eq(2).find('a').attr("href","./social_responsibility.html");
     $('.down_ul').eq(2).find('li').eq(3).find('a').attr("href","./activities.html");
 
