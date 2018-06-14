@@ -92,7 +92,7 @@ public class newsController {
             //判断该数据库里面是否有照片
             if(newsEntity1.getXwtp()!=null&&newsEntity1.getXwtp()!=""){
                 //如果有照片，删除原有照片
-                int isdel=fileUtil.fileDel(newsEntity1.getXwtp(),"news");
+                int isdel=fileUtil.fileDel("news");
                 //判断是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("图片删除失败");

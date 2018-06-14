@@ -12,6 +12,7 @@ public class developmentEntity {
     private String id;
     private String fzlcbt;//发展历程标题
     private String fzlcnr;//发展历程内容
+    private String fzlctp;//发展历程图片
     private Date fzlcsj;//发展历程时间
 
     @Id
@@ -44,6 +45,16 @@ public class developmentEntity {
 
     public void setFzlcnr(String fzlcnr) {
         this.fzlcnr = fzlcnr;
+    }
+
+    @Basic
+    @Column(name = "photo")
+    public String getFzlctp() {
+        return fzlctp;
+    }
+
+    public void setFzlctp(String fzlctp) {
+        this.fzlctp = fzlctp;
     }
 
     @Basic

@@ -82,7 +82,7 @@ public class RecruitmentController {
         recruitmentEntity1.setXlyq(recruitmentEntity.getXlyq());
         //上传附件
         //1 删除原附件
-        int result = fileUtil.fileDel(recruitmentEntity.getZpfj(),"recruitment");
+        int result = fileUtil.fileDel("recruitment");
         if(result!=1){
             return ApiResult.FAILURE("删除失败");
         }

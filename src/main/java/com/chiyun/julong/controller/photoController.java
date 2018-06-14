@@ -76,7 +76,8 @@ public class photoController {
         }*/
         //判断上传文件是否为空
         if (tpfile.isEmpty()||tpfile.getSize()==0){
-            return ApiResult.FAILURE("文件为空");
+            photoEntity.setTplj(photoEntity1.getTplj());
+            System.out.print("图片为空");
         }else {
             //判断文件上传大小
             if(tpfile.getSize()>10485760){
@@ -85,7 +86,7 @@ public class photoController {
             //判断该用户数据库里面是否有照片
             if(photoEntity1.getTplj()!=null&&photoEntity1.getTplj()!=""){
                 //如果有照片，删除原有照片
-                int isdel=fileUtil.fileDel(photoEntity1.getTplj(),"banner");
+                int isdel=fileUtil.fileDel("banner");
                 //判断是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("图片删除失败");

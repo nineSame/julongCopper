@@ -82,7 +82,7 @@ public class businessController {
             //判断该数据库里面是否有照片
             if(businessEntity1.getYwtp()!=null&&businessEntity1.getYwtp()!=""){
                 //如果有照片，删除原有照片
-                int isdel=fileUtil.fileDel(businessEntity1.getYwtp(),"business");
+                int isdel=fileUtil.fileDel("business");
                 //判断是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("图片删除失败");

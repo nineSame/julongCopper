@@ -233,7 +233,7 @@ public class UserController {
         //判断该用户数据库里面是否有照片
        if(userEntity1.getZp()!=null&&userEntity1.getZp()!=""){
             //如果有照片，删除原有照片
-            int isdel=fileUtil.fileDel(userEntity1.getZp(),"user");
+            int isdel=fileUtil.fileDel("user");
             //判断是否删除成功
             if(isdel!=1){
                 return ApiResult.FAILURE("图片删除失败");
