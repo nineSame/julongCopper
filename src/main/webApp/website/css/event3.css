@@ -1,8 +1,10 @@
 
 
-a:link, a:visited, a:active, a {
+a:link, a:visited, a:active, a{
     text-decoration: none;
+    outline: none;
 }
+
 
 img {
     vertical-align: top;
@@ -242,6 +244,10 @@ img {
     width: 40px;
     height: 40px;
     background: url(../img/lc_ri_on.png) no-repeat;
+}
+
+.t_left:focus, .t_right:focus {
+    outline: none;
 }
 
 .t_r_disabled {
