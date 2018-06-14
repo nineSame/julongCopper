@@ -13,8 +13,15 @@
     transition: 0.8s;
 }
 
+.event_desc {
+    position: absolute;
+}
+
 .position1 .event_desc,.position2 .event_desc,.position4 .event_desc,.position5 .event_desc,.position6 .event_desc{
     display: none;
+    top: -60px;
+    /*left: 50px;*/
+    right: 120px;
 }
 
 .position1,.position5,.position6{
@@ -25,13 +32,13 @@
 
 .position2,.position4 {
     position: absolute;
-    /*width: 45%;*/
+    width: 45%;
     left: 52%;
     /*width: 500px;*/
 }
 
 .position2 .img_wrap,.position4 .img_wrap {
-    /*width: 121.5px;*/
+    width: 121.5px;
 }
 
 .position3 {
@@ -87,6 +94,11 @@
     font-size: 14px;
     width: 202px;
 }
+
+/*.position1 .desc,.position2 .desc,.position4 .desc,.position5 .desc,.position6 .desc {*/
+    /*top: -100px;*/
+    /*left: 50px;*/
+/*}*/
 
 .position6 {
     display: none;

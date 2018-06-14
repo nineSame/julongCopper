@@ -9,7 +9,7 @@ function pageCommonLink() {
     $('.down_ul').eq(0).find('li').eq(0).find('a').attr("href","./company_info.html");
     $('.down_ul').eq(0).find('li').eq(1).find('a').attr("href","./leaders.html");
     $('.down_ul').eq(0).find('li').eq(2).find('a').attr("href","./structure.html");
-    $('.down_ul').eq(0).find('li').eq(3).find('a').attr("href","./event.html");
+    $('.down_ul').eq(0).find('li').eq(3).find('a').attr("href","./event3.html");
     $('.down_ul').eq(0).find('li').eq(4).find('a').attr("href","./declaration.html");
     $('.down_ul').eq(0).find('li').eq(5).find('a').attr("href","./worker.html");
     $('.down_ul').eq(0).find('li').eq(6).find('a').attr("href","");
