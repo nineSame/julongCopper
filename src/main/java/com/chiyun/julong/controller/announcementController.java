@@ -123,7 +123,7 @@ public class announcementController {
             //判断数据库里面是否有公告文件地址
             if(announcementEntity1.getGgdz()!=null&&announcementEntity1.getGgdz()!=""){
                 //如果有文件，删除原有文件
-                int isdel=fileUtil.fileDel(announcementEntity1.getGgdz(),"news");
+                int isdel=fileUtil.fileDel("news");
                 //判断是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("文件删除失败");

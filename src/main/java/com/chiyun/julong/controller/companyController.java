@@ -71,7 +71,11 @@ public class companyController {
         if(companyEntity1==null){
             return ApiResult.FAILURE("未找到该信息");
         }
-        if (!gstbfile.isEmpty()||gstbfile.getSize()!=0){
+        if (gstbfile==null||gstbfile.isEmpty()||gstbfile.getSize()==0){
+            companyEntity.setGstb(companyEntity1.getGstb());
+            System.out.print("未上传公司图标");
+        }else {
+
             //判断文件上传大小
             if(gstbfile.getSize()>20971520){
                 return ApiResult.FAILURE("图片超出文件大小");
@@ -79,7 +83,7 @@ public class companyController {
             //判断数据库里面是否有图标地址
             if(companyEntity1.getGstb()!=null&&companyEntity1.getGstb()!=""){
                 //如果有图标，删除原有图标
-                int isdel=fileUtil.fileDel(companyEntity1.getGstb(),"company");
+                int isdel=fileUtil.fileDel("company");
                 //判断图标是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("公司图标删除失败");
@@ -104,11 +108,12 @@ public class companyController {
                 companyEntity.setGstb(filename);
             }
 
-        }else {
-            companyEntity.setGstb(companyEntity1.getGstb());
-            System.out.print("未上传公司图标");
         }
-        if (!gsjstpfile.isEmpty()||gsjstpfile.getSize()!=0){
+
+        if (gsjstpfile==null||gsjstpfile.isEmpty()||gsjstpfile.getSize()==0){
+            companyEntity.setGsjstp(companyEntity1.getGsjstp());
+            System.out.print("未上传公司图片");
+        }else{
             //判断文件上传大小
             if(gsjstpfile.getSize()>20971520){
                 return ApiResult.FAILURE("图片超出文件大小");
@@ -116,7 +121,7 @@ public class companyController {
             //判断数据库里面是否有图标地址
             if(companyEntity1.getGsjstp()!=null&&companyEntity1.getGsjstp()!=""){
                 //如果有图标，删除原有图标
-                int isdel2=fileUtil.fileDel(companyEntity1.getGsjstp(),"company");
+                int isdel2=fileUtil.fileDel("company");
                 //判断图标是否删除成功
                 if(isdel2!=1){
                     return ApiResult.FAILURE("公司介绍图片删除失败");
@@ -140,10 +145,6 @@ public class companyController {
                 //将文件名保存在数据库
                 companyEntity.setGsjstp(filename2);
             }
-
-        }else{
-            companyEntity.setGsjstp(companyEntity1.getGsjstp());
-            System.out.print("未上传公司图片");
         }
 
         //保存操作

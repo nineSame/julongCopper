@@ -82,7 +82,7 @@ public class qjjlController {
             //判断该数据库里面是否有照片
             if(qjjlEntity1.getSnt()!=null&&qjjlEntity1.getSnt()!=""){
                 //如果有照片，删除原有照片
-                int isdel=fileUtil.fileDel(qjjlEntity1.getSnt(),"news");
+                int isdel=fileUtil.fileDel("news");
                 //判断是否删除成功
                 if(isdel!=1){
                     return ApiResult.FAILURE("缩略图删除失败");
@@ -152,3 +152,4 @@ public class qjjlController {
     }
 
 }
+

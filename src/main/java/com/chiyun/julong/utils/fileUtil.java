@@ -9,6 +9,7 @@ import java.util.Date;
 
 public class fileUtil {
     public static String fileUpload(MultipartFile file,String name) {
+
         SimpleDateFormat f = new SimpleDateFormat("yyyyMMddHHmmss");
         // 获取文件名
         String fileName = file.getOriginalFilename();
@@ -42,11 +43,11 @@ public class fileUtil {
         return null;
     }
 
-    public static int fileDel(String fileName,String name){
+    public static int fileDel(String name){
         int result=0;
         try {
             // Specify the file name and path
-            File file = new File(fileName);
+            File file = new File("C:\\upload\\"+name);
       /* the delete() method return true if the file
       deleted successfully else it return false
        */
