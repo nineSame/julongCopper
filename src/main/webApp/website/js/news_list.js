@@ -5,12 +5,17 @@
 
 $(function() {
     setFrontLinks(); //设置导航链接
-    setList();
+    // setList();
+    initBannerData();
     setSearchBox(); //设置模拟搜索框
     $('body').click(function(){bodyClicked();}); //添加点击其他位置收起搜索选项
-    document.addEventListener("touchstart",bodyClicked,false);
-    setBannerData();  //设置banner的数据
+    document.addEventListener("touchstart",bodyClicked,false);  //实现手机端触摸屏幕收起模拟搜索框下拉菜单
+    // setBannerData();  //设置banner的数据
     setBannerHover();//设置banner的hover效果
+
+
+
+    addTestLink();
 });
 
 function setList() {
@@ -135,8 +140,9 @@ function bodyClicked(ev) {
     //设置导航链接
 function setFrontLinks() {
         $('.guide_list li').eq(0).find('a').attr('href',"news_list.html");
-        $('.guide_list li').eq(1).find('a').attr('href',"social_responsibility.html");
-        $('.guide_list li').eq(2).find('a').attr('href',"activities.html");
+        $('.guide_list li').eq(1).find('a').attr('href',"environment_friendly.html");
+        $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
+        $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
 }
 
 
@@ -223,11 +229,11 @@ var oWrap = document.getElementsByClassName("banner_wrap")[0],
     aLi = $(".banner_wrap li");
 
     //模拟banner数据
-    arrImg = [];
-    arrTitle = [];
-    arrNews = [];
-    arrTimes = [];
-    arrRead = [];
+    arrImg = ['./img/news4.jpg','./img/news2.jpg'];
+    arrTitle = ['标题1','标题2'];
+    arrNews = ['新闻内容1,两个li切换数据实现多条数据滑动展示,添加数据量可生成多个banner滑动item','新闻内容2新闻内容2新闻内容2新闻内容2,添加数据量可生成多个banner滑动item'];
+    arrTimes = ['发布时间1','发布时间2'];
+    arrRead = ['阅读数1','阅读数2'];
     timer = null;
     num = 0;
 
@@ -360,6 +366,9 @@ function setNewsListHover() {
 
 
 
-setBannerData();
+// setBannerData();
 
+function addTestLink() {
+    $('.news_list a').attr('href','news_detail.html');
 
+}

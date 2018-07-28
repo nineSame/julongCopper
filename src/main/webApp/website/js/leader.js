@@ -4,7 +4,7 @@
 
 $(function () {
     setFrontLinks();
-    setUsersValue();
+    // setUsersValue();
     toggleItems();
 
 })
@@ -18,8 +18,7 @@ function setFrontLinks() {
     $('.guide_list li').eq(3).find('a').attr('href',"event3.html");
     $('.guide_list li').eq(4).find('a').attr('href',"declaration.html");
     $('.guide_list li').eq(5).find('a').attr('href',"worker.html");
-    $('.guide_list li').eq(6).find('a').attr('href',"");
-    $('.guide_list li').eq(7).find('a').attr('href',"contact_us.html");
+    $('.guide_list li').eq(6).find('a').attr('href',"contact_us.html");
 }
 
 

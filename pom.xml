@@ -70,7 +70,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
-        <finalName>julong</finalName>
+         <finalName>julong</finalName>
 	</build>
 
 

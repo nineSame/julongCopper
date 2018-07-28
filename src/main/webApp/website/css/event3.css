@@ -51,6 +51,7 @@ img {
     font-size: 32px;
     text-align: center;
     margin: 0;
+    margin-top: 30px;
 }
 
 .lc_area {
@@ -183,6 +184,10 @@ img {
     width: 100%;
     height: 20px;
     text-align: center;
+}
+
+.time_line li a:hover {
+    font-weight: bold;
 }
 
 .time_line li:nth-child(odd) span {

@@ -12,8 +12,9 @@ $(function () {
 function setFrontLinks() {
     //设置导航链接
     $('.guide_list li').eq(0).find('a').attr('href',"news_list.html");
-    $('.guide_list li').eq(1).find('a').attr('href',"social_responsibility.html");
-    $('.guide_list li').eq(2).find('a').attr('href',"activities.html");
+    $('.guide_list li').eq(1).find('a').attr('href',"environment_friendly.html");
+    $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
+    $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
 }
 
 

@@ -3,8 +3,9 @@
  */
 $(function () {
     setFrontLinks();
-    // operateEvent();
-    getEventData();
+    operateEvent();
+    // getEventData();
+
 })
 
 
@@ -101,7 +102,8 @@ function operateEvent() {
     $(".main .year .list").each(function(e, target){
         var $target=  $(target),
             $ul = $target.find("ul");
-        $target.height($ul.outerHeight()), $ul.css("position", "absolute");
+        $target.height($ul.outerHeight());
+        $ul.css("position", "absolute");
     });
     $(".main .year>h2>a").click(function(e){
         e.preventDefault();

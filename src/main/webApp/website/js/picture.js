@@ -4,7 +4,8 @@
 $(function () {
     setLiMask();
     setScreenMask();
-    setBannerData();
+    // setBannerData();
+    initBannerData();
 })
 
 var mask1_ready = false;
@@ -142,7 +143,7 @@ function setBannerData() {
             }
         },
         error: function () {
-            alert('err')
+            alert('数据库数据请求失败')
         }
     });
 }
@@ -167,8 +168,8 @@ var oWrap = document.getElementsByClassName("banner_wrap")[0],
 aLi = $(".banner_wrap li");
 
 //模拟banner数据
-arrImg = [];
-arrTitle = [];
+arrImg = ['img/news1.png','img/news2.jpg','img/news3.jpg','img/news4.jpg'];
+arrTitle = ['模拟数据-标题1','接入后台数据可实现多个图片滑动展示','标题3','标题4'];
 timer = null;
 num = 0;
 
@@ -269,6 +270,8 @@ function setBannerHover() {
     }
 }
 
+
+// 手机端遮罩滑动
 var oMask2 = document.getElementById('mask2');
 
 var downX,upX;

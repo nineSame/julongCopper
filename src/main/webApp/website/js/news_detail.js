@@ -3,6 +3,8 @@
  */
 
 $(function () {
+
+    setFrontLinks();
     adjustPage();   //调整页面右边新闻选项框
 
     //设置滚轮事件
@@ -24,6 +26,18 @@ oPage.style.position = 'fixed';
 oPage.style.top = oPage.offsetTop + 'px';
 var origin_top = oPage.offsetTop;
 oPage.style.left = oContent.offsetLeft + oContent.offsetWidth - oPage.offsetWidth + 'px';
+
+
+//设置导航链接
+function setFrontLinks() {
+    $('.guide_list li').eq(0).find('a').attr('href',"news_list.html");
+    $('.guide_list li').eq(1).find('a').attr('href',"environment_friendly.html");
+    $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
+    $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
+
+    $('.path a').last().attr('href','news_list.html');
+
+}
 
 
 //调整页面右边新闻选项框

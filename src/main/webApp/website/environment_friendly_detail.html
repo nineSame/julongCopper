@@ -33,17 +33,18 @@
         <div class="guide_bar">
             <div class="wrap clearfix">
                 <ul class="guide_list left">
-                    <li class="left"><a class="active">公司公告</a></li>
-                    <li class="left"><a>财务报告</a></li>
-                    <li class="left"><a>股票信息</a></li>
+                    <li class="left"><a>新闻中心</a></li>
+                    <li class="left"><a class="active">可持续发展</a></li>
+                    <li class="left"><a>社会责任</a></li>
+                    <li class="left"><a>专题活动</a></li>
 
                 </ul>
                 <div class="path right">
                     <span class="left"><a href="index.html"><i class="icon-home"></i></a></span>
                     <span class="left"><i class="icon-caret-right"></i></span>
-                    <span class="left"><a>公告信息</a></span>
+                    <span class="left"><a>资讯中心</a></span>
                     <span class="left"><i class="icon-caret-right"></i></span>
-                    <span class="left"><a>公司公告</a></span>
+                    <span class="left"><a>可持续发展</a></span>
                 </div>
             </div>
 
@@ -90,7 +91,12 @@
 
 <script src="../website/lib/side_nav/dist/sidenav.min.js"></script>
 
-
+<script>
+    $('.guide_list li').eq(0).find('a').attr('href',"news_list.html");
+    $('.guide_list li').eq(1).find('a').attr('href',"environment_friendly.html");
+    $('.guide_list li').eq(2).find('a').attr('href',"social_responsibility.html");
+    $('.guide_list li').eq(3).find('a').attr('href',"activities.html");
+</script>
 
 
 

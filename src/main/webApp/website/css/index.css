@@ -319,15 +319,21 @@
     cursor: pointer;
 }
 
-.part2 .part2_content .list1 .img_box .play  {
-    position: absolute;
-    background: url(../img/video_play.png);
-    width: 76px;
-    height: 75px;
-    top: 50%;
-    margin-top: -65px;
-    left: 50%;
-    margin-left: -37px;
+/*播放图标，此部分弃用*/
+/*.part2 .part2_content .list1 .img_box .play  {*/
+    /**/
+    /*position: absolute;*/
+    /*background: url(../img/video_play.png);*/
+    /*width: 76px;*/
+    /*height: 75px;*/
+    /*top: 50%;*/
+    /*margin-top: -65px;*/
+    /*left: 50%;*/
+    /*margin-left: -37px;*/
+/*}*/
+
+.part2 .part2_content .list1 .img_box{
+    border: 1px solid #ddd;
 }
 
 .part2 .part2_content .list1 .img_box .cont {
@@ -343,6 +349,11 @@
     font-size: 16px;
     color: #fff;
     padding-left: 15px;
+}
+
+.part2 .part2_content .list1 .img_box video{
+    width: 100%;
+    margin-top: 15%;
 }
 
 .list1 img {
@@ -593,6 +604,7 @@
         width: 100%;
     }
 
+
     .part2 .part2_content .list2{
         width: 100%;
     }
@@ -604,6 +616,7 @@
         padding-left: 0;
         width: 52%;
     }
+
 
     .part3{
         padding: 30px 0;
